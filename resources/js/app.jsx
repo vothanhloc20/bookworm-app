@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Welcome from './welcome';
+import {BrowserRouter} from 'react-router-dom';
+import App from './App.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-  <Welcome/>,
-  document.getElementById('root')
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>,
+    document.getElementById('root')
 );
