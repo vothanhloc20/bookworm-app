@@ -1,0 +1,13 @@
+.text-blue,
+.text-blue:hover {
+    color: var(--app-blue);
+}
+
+.text-black,
+.text-black:hover {
+    color: var(--app-black);
+}
+
+.bg-blue {
+    color: var(--app-blue);
+}

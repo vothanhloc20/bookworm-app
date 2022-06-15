@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Navbar, Nav, NavDropdown, Row, Col} from 'react-bootstrap';
+import {Navbar, Nav, Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import Menu from '../Menu/Menu.js';
 import Logo from '../../../assets/logo.png';
 
 class Header extends React.Component {
@@ -27,19 +28,7 @@ class Header extends React.Component {
                 <Navbar.Toggle aria-controls="navbar-nav"/>
                 <Navbar.Collapse id="navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link>
-                            <Link to="/">Home</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link to="/shop">Shop</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link to="/about">About</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link to="/cart">Cart (0)</Link>
-                        </Nav.Link>
-                        <Nav.Link>Login</Nav.Link>
+                        <Menu/>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
