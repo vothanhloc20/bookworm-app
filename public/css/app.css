@@ -79,3 +79,31 @@ input[type=number]:focus,
     border-radius: 4px;
 }
 
+.pagination .page-item {
+    color: var(--app-blue);
+}
+
+.pagination .page-link:focus {
+    box-shadow: none;
+}
+
+.pagination .active .page-link {
+    background-color: var(--app-blue);
+    border-color: var(--app-blue);
+    font-weight: var(--font-semi);
+}
+
+.pagination .active .page-link {
+    font-weight: var(--font-medium);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--app-grey);
+}
+
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1300px;
+    }
+}
+

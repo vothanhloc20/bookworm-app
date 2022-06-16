@@ -5,7 +5,14 @@ import {Container} from 'react-bootstrap';
 import '../../css/style.css';
 
 class Default extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+
         return (
             <>
                 <Header/>

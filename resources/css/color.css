@@ -18,8 +18,16 @@
     color: var(--app-grey);
 }
 
-.bg-blue {
-    color: var(--app-blue);
+.bg-blue-no-active {
+    transition: all 0.4s ease-in-out;
+}
+
+.bg-blue-active,
+.bg-blue-no-active:hover {
+    color: var(--app-white);
+    background-color: var(--app-blue);
+    border-color: var(--app-blue);
+    border-radius: 6px;
 }
 
 /* For Custom Bootstrap */

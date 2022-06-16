@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation, Autoplay} from 'swiper';
-import CardProduct from '../CardProduct/CartProduct.js';
+import CardProduct from '../CardProduct/CardProduct.js';
 import {booksData} from '../../../../assets/data/books.js';
 import {bookCoverData} from '../../../../assets/data/bookcover';
 import 'swiper/css';

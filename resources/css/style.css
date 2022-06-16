@@ -11,3 +11,10 @@
 /* CSS of components */
 @import 'components/card_product.css';
 
+.form-check-label:before {
+    background-color: red;
+}
+
+.form-check .form-check-input:checked ~ .form-check-label::before {
+    background-color: black;
+}

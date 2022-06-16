@@ -5,10 +5,14 @@ class CardProduct extends React.Component {
     render() {
         return (
             <Card id="app-card-product" className="h-100">
-                <Card.Img
-                    variant="top"
-                    src={this.props.productImage}
-                />
+                <div className="card-image">
+                    <a className="card-image-layout">
+                        <Card.Img
+                            variant="top"
+                            src={this.props.productImage}
+                        />
+                    </a>
+                </div>
                 <Card.Body>
                     <Card.Title className="font-weight-bold">
                         {this.props.productName}
