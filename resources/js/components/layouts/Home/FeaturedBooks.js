@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Row, Col, Button} from "react-bootstrap";
 import {booksData} from '../../../../assets/data/books.js';
-import CardProduct from "../../CardProduct/CartProduct.js";
-import {bookCoverData} from "../../../../assets/data/bookcover";
+import CardProduct from '../../base/CardProduct/CartProduct.js';
+import {bookCoverData} from '../../../../assets/data/bookcover';
 
 class FeaturedBooks extends React.Component {
     render() {

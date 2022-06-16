@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {Navbar, Nav, Row, Col} from 'react-bootstrap';
-import Logo64 from '../../../assets/logo_64_64.png';
+import {Navbar, Row, Col} from 'react-bootstrap';
+import Logo64 from '../../../../assets/logo_64_64.png';
 
 class Footer extends React.Component {
     render() {
         return (
-            <Navbar bg="light" sticky="top">
+            <Navbar bg="light">
                 <Navbar.Brand>
                     <Row className="align-items-center">
                         <Col>

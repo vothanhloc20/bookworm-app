@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {NavLink} from 'react-router-dom';
-import {menuData} from '../../../assets/data/menu.js';
+import {menuData} from '../../../../assets/data/menu.js';
 
 class Menu extends React.Component {
     render() {

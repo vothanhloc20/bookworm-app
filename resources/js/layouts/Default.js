@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import Header from '../components/base/Header/Header.js';
+import Footer from '../components/base/Footer/Footer.js';
 import {Container} from 'react-bootstrap';
 import '../../css/style.css';
 

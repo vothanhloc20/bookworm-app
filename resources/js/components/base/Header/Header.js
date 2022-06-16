@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Navbar, Nav, Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Menu from '../Menu/Menu.js';
-import Logo40 from '../../../assets/logo_40_40.png';
+import Logo40 from '../../../../assets/logo_40_40.png';
 
 class Header extends React.Component {
     render() {

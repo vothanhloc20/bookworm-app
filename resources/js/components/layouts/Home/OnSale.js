@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Button, Col, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronRight} from "@fortawesome/free-solid-svg-icons";
-import Slider from "../../Slider/Slider.js";
+import {Button, Col, Row} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import Slider from '../../base/Slider/Slider.js';
 
 class OnSale extends React.Component {
     render() {
