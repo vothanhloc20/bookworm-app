@@ -9,7 +9,7 @@ class Default extends React.Component {
         return (
             <>
                 <Header/>
-                <Container className="py-4">
+                <Container className="py-4 flex-grow-1">
                     {this.props.content}
                 </Container>
                 <Footer/>
