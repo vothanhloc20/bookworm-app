@@ -8,6 +8,33 @@
     color: var(--app-black);
 }
 
+.text-red,
+.text-red:hover {
+    color: var(--app-red);
+}
+
+.text-grey,
+.text-grey:hover {
+    color: var(--app-grey);
+}
+
 .bg-blue {
     color: var(--app-blue);
+}
+
+/* For Custom Bootstrap */
+.btn-blue {
+    color: var(--app-white);
+    background-color: var(--app-blue);
+    border-color: var(--app-blue);
+}
+
+.btn-link,
+.btn-link:hover {
+    color: var(--app-blue);
+    text-decoration: none;
+}
+
+.btn:hover.btn-blue {
+    color: var(--app-white);
 }

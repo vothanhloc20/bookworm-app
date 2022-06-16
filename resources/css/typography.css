@@ -25,3 +25,23 @@ a {
 .font-weight-bold {
     font-weight: var(--font-bold);
 }
+
+.font-12px {
+    font-size: var(--12px);
+}
+
+.font-14px {
+    font-size: var(--14px);
+}
+
+.font-16px {
+    font-size: var(--16px);
+}
+
+.font-18px {
+    font-size: var(--18px);
+}
+
+.font-20px {
+    font-size: var(--20px);
+}

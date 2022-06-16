@@ -11,15 +11,16 @@ class Menu extends React.Component {
                         <NavLink
                             key={index}
                             to={item.link}
-                            className={`text-black font-weight-bold mr-5 pa-4`}
-                            activeClassName="app-active-link"
+                            className={({isActive}) =>
+                                "text-black font-weight-bold mr-3 px-4 py-2" +
+                                (isActive ? " app-active-link" : "")}
                         >
                             {item.title}
                             {item.title === 'Cart' && <span>&nbsp;(0)</span>}
                         </NavLink>
                     )
                 })}
-                <a>Login</a>
+                <a className="text-black font-weight-bold mr-3 px-4 py-2">Login</a>
             </>
         )
     }

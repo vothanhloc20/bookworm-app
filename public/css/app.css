@@ -11,7 +11,7 @@ html {
 body {
     font-family: var(--font), sans-serif !important;
     font-weight: var(--font-regular) !important;
-    color: var(--app-black) !important;
+    color: var(--app-black);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
@@ -44,5 +44,8 @@ input[type=number]:focus,
 
 .app-active-link {
     background-color: var(--app-blue);
+    color: var(--app-white) !important;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
 }
 

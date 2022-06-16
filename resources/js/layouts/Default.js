@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import {Container} from 'react-bootstrap';
 import '../../css/style.css';
 
 class Default extends React.Component {
@@ -8,7 +9,9 @@ class Default extends React.Component {
         return (
             <>
                 <Header/>
-                {this.props.content}
+                <Container className="py-4">
+                    {this.props.content}
+                </Container>
                 <Footer/>
             </>
         )

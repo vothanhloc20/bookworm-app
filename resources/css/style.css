@@ -1,3 +1,6 @@
+/* Bootstrap */
+@import './bootstrap.min.css';
+
 /* Global CSS */
 @import './variable.css';
 @import './font.css';
@@ -6,4 +9,5 @@
 @import './typography.css';
 
 /* CSS of components */
-@import './components/header.css';
+@import 'components/card_product.css';
+

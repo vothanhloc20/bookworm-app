@@ -2,18 +2,18 @@ import * as React from 'react';
 import {Navbar, Nav, Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Menu from '../Menu/Menu.js';
-import Logo from '../../../assets/logo.png';
+import Logo40 from '../../../assets/logo_40_40.png';
 
 class Header extends React.Component {
     render() {
         return (
-            <Navbar id="app-header" bg="light">
+            <Navbar bg="light" sticky="top">
                 <Navbar.Brand>
                     <Link to="/">
                         <Row className="align-items-center">
                             <Col>
                                 <img
-                                    src={Logo}
+                                    src={Logo40}
                                     width="100%"
                                     height="100%"
                                     alt="Bookworm Logo"
