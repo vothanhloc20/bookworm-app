@@ -8,6 +8,10 @@ class Menu extends React.Component {
         super(props);
     }
 
+    handleModal = () => {
+        this.props.handleModal();
+    };
+
     render() {
         return (
             <>
@@ -28,7 +32,10 @@ class Menu extends React.Component {
                         </NavLink>
                     );
                 })}
-                <a className="text-black font-weight-bold mr-3 px-4 py-2">
+                <a
+                    className="text-black font-weight-bold mr-3 px-4 py-2"
+                    onClick={this.handleModal}
+                >
                     Login
                 </a>
             </>

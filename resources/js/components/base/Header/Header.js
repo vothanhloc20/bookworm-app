@@ -11,6 +11,10 @@ class Header extends React.Component {
         super(props);
     }
 
+    handleModal = () => {
+        this.props.handleModal();
+    };
+
     render() {
         return (
             <Navbar bg="light" sticky="top">
@@ -36,7 +40,7 @@ class Header extends React.Component {
                 <Navbar.Toggle aria-controls="navbar-nav" />
                 <Navbar.Collapse id="navbar-nav">
                     <Nav className="ml-auto">
-                        <Menu />
+                        <Menu handleModal={this.handleModal} />
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

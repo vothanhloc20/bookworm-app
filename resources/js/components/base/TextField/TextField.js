@@ -1,6 +1,8 @@
 import * as React from "react";
 
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
 
 class TextField extends React.Component {
@@ -14,6 +16,7 @@ class TextField extends React.Component {
             isClearable: props.isClearable,
             options: props.options,
             mandatory: props.mandatory,
+            icon: props.icon,
         };
     }
 
@@ -34,7 +37,21 @@ class TextField extends React.Component {
                         options={this.state.options}
                     />
                 ) : (
-                    <Form.Control as={this.state.kind} type={this.state.type} />
+                    <InputGroup>
+                        {this.state.icon ? (
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon={this.state.icon} />
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                        ) : (
+                            ""
+                        )}
+                        <Form.Control
+                            as={this.state.kind}
+                            type={this.state.type}
+                        />
+                    </InputGroup>
                 )}
             </Form.Group>
         );

@@ -12,9 +12,9 @@ class CustomerReviews extends React.Component {
         super(props);
     }
 
-    handlePageChange(pageNumber) {
+    handlePageChange = (pageNumber) => {
         console.log(`active page is ${pageNumber}`);
-    }
+    };
 
     render() {
         return (
@@ -109,7 +109,7 @@ class CustomerReviews extends React.Component {
                             nextPageText="Next"
                             itemClass="page-item"
                             linkClass="page-link"
-                            onChange={this.handlePageChange.bind(this)}
+                            onChange={this.handlePageChange}
                         />
                     </div>
                 </div>
