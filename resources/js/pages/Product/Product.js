@@ -1,12 +1,42 @@
 import * as React from "react";
 
+import { Col, Row } from "react-bootstrap";
+
+import AddToCart from "../../components/layouts/Product/AddToCart.js";
+import CustomerReviews from "../../components/layouts/Product/CustomerReviews.js";
+import FormReview from "../../components/layouts/Product/FormReview.js";
+import ProductInformation from "../../components/layouts/Product/ProductInformation.js";
+
 class Product extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        return <p>Tui là productpage nè các ông</p>;
+        return (
+            <main>
+                <section>
+                    <h4 className="font-weight-semi">Category Name</h4>
+                    <div className="app-divide mt-4 mb-5"></div>
+                    <Row className="mb-4">
+                        <Col md={8}>
+                            <ProductInformation />
+                        </Col>
+                        <Col md={4}>
+                            <AddToCart />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8}>
+                            <CustomerReviews />
+                        </Col>
+                        <Col md={4}>
+                            <FormReview />
+                        </Col>
+                    </Row>
+                </section>
+            </main>
+        );
     }
 }
 

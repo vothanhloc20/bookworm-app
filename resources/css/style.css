@@ -12,11 +12,5 @@
 @import "components/card_product.css";
 @import "components/cart_list.css";
 @import "components/control_quantity.css";
-
-.form-check-label:before {
-    background-color: red;
-}
-
-.form-check .form-check-input:checked ~ .form-check-label::before {
-    background-color: black;
-}
+@import "components/product_information.css";
+@import "components/text_field.css";
