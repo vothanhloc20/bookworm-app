@@ -1,8 +1,10 @@
-import * as React from 'react';
-import {Navbar, Nav, Row, Col} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-import Menu from '../Menu/Menu.js';
-import Logo40 from '../../../../assets/logo_40_40.png';
+import * as React from "react";
+
+import { Col, Nav, Navbar, Row } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
+import Logo40 from "../../../../assets/logo_40_40.png";
+import Menu from "../Menu/Menu.js";
 
 class Header extends React.Component {
     render() {
@@ -20,19 +22,21 @@ class Header extends React.Component {
                                 />
                             </Col>
                             <Col className="px-0">
-                                <h4 className="text-blue font-weight-bold">BOOKWORM</h4>
+                                <h4 className="text-blue font-weight-bold">
+                                    BOOKWORM
+                                </h4>
                             </Col>
                         </Row>
                     </Link>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-nav"/>
+                <Navbar.Toggle aria-controls="navbar-nav" />
                 <Navbar.Collapse id="navbar-nav">
                     <Nav className="ml-auto">
-                        <Menu/>
+                        <Menu />
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        )
+        );
     }
 }
 

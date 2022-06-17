@@ -1,8 +1,10 @@
-import * as React from 'react';
-import {booksData} from "../../../../assets/data/books";
-import {Row, Col} from "react-bootstrap";
+import * as React from "react";
+
+import { Col, Row } from "react-bootstrap";
+
 import CardProduct from "../CardProduct/CardProduct";
-import {bookCoverData} from "../../../../assets/data/bookcover";
+import { bookCoverData } from "../../../../assets/data/bookcover";
+import { booksData } from "../../../../assets/data/books";
 
 class ListProduct extends React.Component {
     render() {
@@ -23,10 +25,10 @@ class ListProduct extends React.Component {
                                 productFinalPrice={item.final_price}
                             />
                         </Col>
-                    )
+                    );
                 })}
             </Row>
-        )
+        );
     }
 }
 

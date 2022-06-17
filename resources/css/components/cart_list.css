@@ -1,0 +1,39 @@
+table#app-cart-list {
+    border-collapse: inherit;
+    border-spacing: 0;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+}
+
+#app-cart-list thead tr th {
+    background-color: var(--app-blue);
+}
+
+#app-cart-list thead tr th:first-child {
+    border-top-left-radius: 4px;
+}
+
+#app-cart-list thead tr th:last-child {
+    border-top-right-radius: 4px;
+}
+
+#app-cart-list tbody tr td {
+    vertical-align: middle;
+}
+
+#app-cart-list tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+tbody {
+    display: block;
+    height: 286px;
+    overflow: auto;
+}
+
+thead,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}

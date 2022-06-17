@@ -1,14 +1,16 @@
-import * as React from 'react';
-import {Row, Col} from 'react-bootstrap';
-import Dropdown from '../../components/base/Dropdown/Dropdown.js';
-import FilterBy from '../../components/layouts/Shop/FilterBy.js';
-import {sortData} from '../../../assets/data/sort.js';
-import {showData} from "../../../assets/data/show.js";
-import {filterData} from '../../../assets/data/filter.js';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFilter} from '@fortawesome/free-solid-svg-icons';
-import ListProduct from '../../components/base/ListProduct/ListProduct.js';
+import * as React from "react";
+
+import { Col, Row } from "react-bootstrap";
+
+import Dropdown from "../../components/base/Dropdown/Dropdown.js";
+import FilterBy from "../../components/layouts/Shop/FilterBy.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ListProduct from "../../components/base/ListProduct/ListProduct.js";
 import Pagination from "react-js-pagination";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { filterData } from "../../../assets/data/filter.js";
+import { showData } from "../../../assets/data/show.js";
+import { sortData } from "../../../assets/data/sort.js";
 
 class Shop extends React.Component {
     render() {
@@ -20,10 +22,12 @@ class Shop extends React.Component {
                     <Row>
                         <Col md={3}>
                             <p className="mb-4 text-blue d-flex align-items-center">
-                                <FontAwesomeIcon icon={faFilter}/>
-                                <span className="flex-grow-1 font-weight-semi ml-2">Filter By</span>
+                                <FontAwesomeIcon icon={faFilter} />
+                                <span className="flex-grow-1 font-weight-semi ml-2">
+                                    Filter By
+                                </span>
                             </p>
-                            <FilterBy data={filterData}/>
+                            <FilterBy data={filterData} />
                         </Col>
                         <Col md={9}>
                             <Row className="align-items-center mb-2">
@@ -35,16 +39,18 @@ class Shop extends React.Component {
                                         variant="blue"
                                         currentSelect="Sort by on sale"
                                         selectData={sortData}
+                                        size="sm"
                                         customClass="mr-4"
                                     />
                                     <Dropdown
                                         variant="blue"
                                         currentSelect="Show 5"
+                                        size="sm"
                                         selectData={showData}
                                     />
                                 </Col>
                             </Row>
-                            <ListProduct customClass="p-2 align-items-stretch"/>
+                            <ListProduct customClass="p-2 align-items-stretch" />
                             <Row className="pt-4 mt-4">
                                 <Col className="d-flex justify-content-center">
                                     <Pagination
@@ -63,7 +69,7 @@ class Shop extends React.Component {
                     </Row>
                 </section>
             </main>
-        )
+        );
     }
 }
 

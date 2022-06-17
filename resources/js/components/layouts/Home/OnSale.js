@@ -1,8 +1,10 @@
-import * as React from 'react';
-import {Button, Col, Row} from 'react-bootstrap';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import Slider from '../../base/Slider/Slider.js';
+import * as React from "react";
+
+import { Button, Col, Row } from "react-bootstrap";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Slider from "../../base/Slider/Slider.js";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 class OnSale extends React.Component {
     render() {
@@ -15,7 +17,7 @@ class OnSale extends React.Component {
                     <Col className="d-flex justify-content-end">
                         <Button variant="blue" className="font-weight-semi">
                             View All &nbsp;
-                            <FontAwesomeIcon icon={faChevronRight}/>
+                            <FontAwesomeIcon icon={faChevronRight} />
                         </Button>
                     </Col>
                 </Row>
@@ -26,11 +28,11 @@ class OnSale extends React.Component {
                     loop={true}
                     autoPlay={{
                         delay: 5000,
-                        disableOnInteraction: false
+                        disableOnInteraction: false,
                     }}
                 />
             </>
-        )
+        );
     }
 }
 

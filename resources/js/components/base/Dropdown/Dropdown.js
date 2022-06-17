@@ -1,11 +1,15 @@
-import * as React from 'react';
-import {Dropdown as BootstrapDropdown} from 'react-bootstrap';
+import * as React from "react";
+
+import { Dropdown as BootstrapDropdown } from "react-bootstrap";
 
 class Dropdown extends React.Component {
     render() {
         return (
             <BootstrapDropdown className={this.props.customClass}>
-                <BootstrapDropdown.Toggle variant={this.props.variant} size="sm">
+                <BootstrapDropdown.Toggle
+                    variant={this.props.variant}
+                    size={this.props.size}
+                >
                     {this.props.currentSelect}
                 </BootstrapDropdown.Toggle>
                 <BootstrapDropdown.Menu>
@@ -14,11 +18,11 @@ class Dropdown extends React.Component {
                             <BootstrapDropdown.Item key={index}>
                                 {item.title}
                             </BootstrapDropdown.Item>
-                        )
+                        );
                     })}
                 </BootstrapDropdown.Menu>
             </BootstrapDropdown>
-        )
+        );
     }
 }
 

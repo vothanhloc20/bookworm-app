@@ -1,5 +1,5 @@
 :root {
-    --font: 'Quicksand';
+    --font: "Quicksand";
     --font-light: 300;
     --font-regular: 400;
     --font-medium: 500;
@@ -11,6 +11,7 @@
     --app-white: #ffffff;
     --app-grey: #787a7f;
     --app-light-grey: #c0c3ca;
+    --app-light-grey-2: #e8ebef;
     --12px: 0.75rem;
     --14px: 0.875rem;
     --16px: 1rem;

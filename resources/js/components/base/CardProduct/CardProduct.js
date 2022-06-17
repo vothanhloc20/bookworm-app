@@ -1,5 +1,6 @@
-import * as React from 'react';
-import {Card} from 'react-bootstrap';
+import * as React from "react";
+
+import { Card } from "react-bootstrap";
 
 class CardProduct extends React.Component {
     render() {
@@ -7,10 +8,7 @@ class CardProduct extends React.Component {
             <Card id="app-card-product" className="h-100">
                 <div className="card-image">
                     <a className="card-image-layout">
-                        <Card.Img
-                            variant="top"
-                            src={this.props.productImage}
-                        />
+                        <Card.Img variant="top" src={this.props.productImage} />
                     </a>
                 </div>
                 <Card.Body>
@@ -20,19 +18,20 @@ class CardProduct extends React.Component {
                     <Card.Text>{this.props.productAuthor}</Card.Text>
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    {this.props.productDiscountPrice > 0 &&
+                    {this.props.productDiscountPrice > 0 && (
                         <strike>
                             <span className="text-grey font-weight-medium">
                                 {this.props.productFinalPrice}
                             </span>
                         </strike>
-                    }&nbsp;
+                    )}
+                    &nbsp;
                     <span className="text-red font-weight-bold font-20px">
                         ${this.props.productDiscountPrice}
                     </span>
                 </Card.Footer>
             </Card>
-        )
+        );
     }
 }
 

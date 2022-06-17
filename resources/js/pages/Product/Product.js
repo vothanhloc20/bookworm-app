@@ -1,10 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
 class Product extends React.Component {
     render() {
-        return (
-            <p>Tui là productpage nè các ông</p>
-        )
+        return <p>Tui là productpage nè các ông</p>;
     }
 }
 

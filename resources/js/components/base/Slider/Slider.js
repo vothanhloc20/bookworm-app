@@ -1,11 +1,14 @@
-import * as React from 'react';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Navigation, Autoplay} from 'swiper';
-import CardProduct from '../CardProduct/CardProduct.js';
-import {booksData} from '../../../../assets/data/books.js';
-import {bookCoverData} from '../../../../assets/data/bookcover';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/navigation";
+
+import * as React from "react";
+
+import { Autoplay, Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import CardProduct from "../CardProduct/CardProduct.js";
+import { bookCoverData } from "../../../../assets/data/bookcover";
+import { booksData } from "../../../../assets/data/books.js";
 
 class Slider extends React.Component {
     render() {
@@ -29,10 +32,10 @@ class Slider extends React.Component {
                                 productFinalPrice={item.final_price}
                             />
                         </SwiperSlide>
-                    )
+                    );
                 })}
             </Swiper>
-        )
+        );
     }
 }
 

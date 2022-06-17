@@ -1,6 +1,8 @@
-import * as React from 'react';
-import {Navbar, Row, Col} from 'react-bootstrap';
-import Logo64 from '../../../../assets/logo_64_64.png';
+import * as React from "react";
+
+import { Col, Navbar, Row } from "react-bootstrap";
+
+import Logo64 from "../../../../assets/logo_64_64.png";
 
 class Footer extends React.Component {
     render() {
@@ -17,15 +19,21 @@ class Footer extends React.Component {
                             />
                         </Col>
                         <Col className="px-0">
-                            <h4 className="text-blue font-weight-bold">BOOKWORM</h4>
-                            <p className="text-blue font-weight-semi font-14px">444/24 Cach Mang Thang 8 Str, Ward 11,
-                                District 3, Ho Chi Minh City</p>
-                            <p className="text-blue font-weight-semi font-14px">0903784019</p>
+                            <h4 className="text-blue font-weight-bold">
+                                BOOKWORM
+                            </h4>
+                            <p className="text-blue font-weight-semi font-14px">
+                                444/24 Cach Mang Thang 8 Str, Ward 11, District
+                                3, Ho Chi Minh City
+                            </p>
+                            <p className="text-blue font-weight-semi font-14px">
+                                0903784019
+                            </p>
                         </Col>
                     </Row>
                 </Navbar.Brand>
             </Navbar>
-        )
+        );
     }
 }
 
