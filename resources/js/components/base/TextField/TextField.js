@@ -8,7 +8,6 @@ class TextField extends React.Component {
         super(props);
         this.state = {
             label: props.label,
-            name: props.name,
             type: props.type,
             select: props.select,
             kind: props.kind,
@@ -20,11 +19,7 @@ class TextField extends React.Component {
 
     render() {
         return (
-            <Form.Group
-                id="app-text-field"
-                controlId={this.state.name}
-                className="mb-4"
-            >
+            <Form.Group id="app-text-field" className="mb-4">
                 <Form.Label className="font-weight-semi">
                     {this.state.label}
                     {this.state.mandatory ? (

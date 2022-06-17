@@ -22,21 +22,18 @@ class FormReview extends React.Component {
                     <Form>
                         <TextField
                             label="Add a title"
-                            name="title"
                             type="text"
                             mandatory={true}
                             select={false}
                         />
                         <TextField
                             label="Details please! Your review helps other shoppers"
-                            name="details"
                             type="text"
                             kind="textarea"
                             select={false}
                         />
                         <TextField
                             label="Select a rating star"
-                            name="ratingStar"
                             type="text"
                             select={true}
                             mandatory={true}
