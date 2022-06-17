@@ -7,6 +7,10 @@ import CartTotals from "../../components/layouts/Cart/CartTotals.js";
 import { booksData } from "../../../assets/data/books.js";
 
 class Cart extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <main>

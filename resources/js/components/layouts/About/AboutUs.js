@@ -3,6 +3,10 @@ import * as React from "react";
 import { Col, Row } from "react-bootstrap";
 
 class AboutUs extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>

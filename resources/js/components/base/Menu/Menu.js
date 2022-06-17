@@ -4,6 +4,10 @@ import { NavLink } from "react-router-dom";
 import { menuData } from "../../../../assets/data/menu.js";
 
 class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>
@@ -14,7 +18,9 @@ class Menu extends React.Component {
                             to={item.link}
                             className={({ isActive }) =>
                                 "text-black font-weight-bold mr-3 px-4 py-2" +
-                                (isActive ? " app-active-link" : "")
+                                (isActive
+                                    ? " app-active-link"
+                                    : " app-not-active-link")
                             }
                         >
                             {item.title}

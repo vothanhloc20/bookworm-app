@@ -5,6 +5,10 @@ import { Accordion, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class FilterBy extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>

@@ -7,6 +7,10 @@ import Logo40 from "../../../../assets/logo_40_40.png";
 import Menu from "../Menu/Menu.js";
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Navbar bg="light" sticky="top">

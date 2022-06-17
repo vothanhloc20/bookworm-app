@@ -7,6 +7,10 @@ import { bookCoverData } from "../../../../assets/data/bookcover";
 import { booksData } from "../../../../assets/data/books";
 
 class ListProduct extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Row>

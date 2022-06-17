@@ -11,6 +11,10 @@ import { bookCoverData } from "../../../../assets/data/bookcover";
 import { booksData } from "../../../../assets/data/books.js";
 
 class Slider extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Swiper

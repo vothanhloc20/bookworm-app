@@ -7,6 +7,10 @@ import Slider from "../../base/Slider/Slider.js";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 class OnSale extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>

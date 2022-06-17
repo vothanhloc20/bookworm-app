@@ -13,6 +13,10 @@ import { showData } from "../../../assets/data/show.js";
 import { sortData } from "../../../assets/data/sort.js";
 
 class Shop extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <main>

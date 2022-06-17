@@ -6,6 +6,10 @@ import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ControlQuantity extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div

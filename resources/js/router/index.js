@@ -9,13 +9,17 @@ import Product from "../pages/Product/Product.js";
 import Shop from "../pages/Shop/Shop.js";
 
 class Router extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
+                <Route path="/shop/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/product" element={<Product />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         );

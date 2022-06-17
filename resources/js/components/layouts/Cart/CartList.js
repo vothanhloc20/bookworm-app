@@ -5,6 +5,10 @@ import ControlQuantity from "../../../components/base/ControlQuantity/ControlQua
 import { Table } from "react-bootstrap";
 
 class CartList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Table borderless={true} id="app-cart-list">

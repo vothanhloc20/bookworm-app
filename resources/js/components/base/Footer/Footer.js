@@ -5,6 +5,10 @@ import { Col, Navbar, Row } from "react-bootstrap";
 import Logo64 from "../../../../assets/logo_64_64.png";
 
 class Footer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Navbar bg="light">

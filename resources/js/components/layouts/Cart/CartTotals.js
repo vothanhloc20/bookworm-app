@@ -3,6 +3,10 @@ import * as React from "react";
 import { Button, Card } from "react-bootstrap";
 
 class CartTotals extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Card>

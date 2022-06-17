@@ -1,15 +1,20 @@
 import * as React from "react";
 
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class CardProduct extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <Card id="app-card-product" className="h-100">
                 <div className="card-image">
-                    <a className="card-image-layout">
+                    <Link to="/shop/1" className="card-image-layout">
                         <Card.Img variant="top" src={this.props.productImage} />
-                    </a>
+                    </Link>
                 </div>
                 <Card.Body>
                     <Card.Title className="font-weight-bold">

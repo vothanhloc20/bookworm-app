@@ -4,6 +4,10 @@ import FeaturedBooks from "../../components/layouts/Home/FeaturedBooks.js";
 import OnSale from "../../components/layouts/Home/OnSale.js";
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <main>

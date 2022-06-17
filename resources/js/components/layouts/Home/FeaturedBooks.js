@@ -4,6 +4,10 @@ import { Button } from "react-bootstrap";
 import ListProduct from "../../base/ListProduct/ListProduct.js";
 
 class FeaturedBooks extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>

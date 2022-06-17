@@ -18507,10 +18507,10 @@ var App = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(App);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(App, [{
@@ -18566,6 +18566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -18594,15 +18595,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var CardProduct = /*#__PURE__*/function (_React$Component) {
   _inherits(CardProduct, _React$Component);
 
   var _super = _createSuper(CardProduct);
 
-  function CardProduct() {
+  function CardProduct(props) {
     _classCallCheck(this, CardProduct);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(CardProduct, [{
@@ -18613,7 +18615,8 @@ var CardProduct = /*#__PURE__*/function (_React$Component) {
         className: "h-100",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "card-image",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+            to: "/shop/1",
             className: "card-image-layout",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default.Img, {
               variant: "top",
@@ -18700,10 +18703,10 @@ var ControlQuantity = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ControlQuantity);
 
-  function ControlQuantity() {
+  function ControlQuantity(props) {
     _classCallCheck(this, ControlQuantity);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(ControlQuantity, [{
@@ -18785,10 +18788,10 @@ var Dropdown = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Dropdown);
 
-  function Dropdown() {
+  function Dropdown(props) {
     _classCallCheck(this, Dropdown);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Dropdown, [{
@@ -18868,10 +18871,10 @@ var Footer = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Footer);
 
-  function Footer() {
+  function Footer(props) {
     _classCallCheck(this, Footer);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Footer, [{
@@ -18970,10 +18973,10 @@ var Header = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Header);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Header, [{
@@ -19075,10 +19078,10 @@ var ListProduct = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ListProduct);
 
-  function ListProduct() {
+  function ListProduct(props) {
     _classCallCheck(this, ListProduct);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(ListProduct, [{
@@ -19160,10 +19163,10 @@ var Menu = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Menu);
 
-  function Menu() {
+  function Menu(props) {
     _classCallCheck(this, Menu);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Menu, [{
@@ -19175,7 +19178,7 @@ var Menu = /*#__PURE__*/function (_React$Component) {
             to: item.link,
             className: function className(_ref) {
               var isActive = _ref.isActive;
-              return "text-black font-weight-bold mr-3 px-4 py-2" + (isActive ? " app-active-link" : "");
+              return "text-black font-weight-bold mr-3 px-4 py-2" + (isActive ? " app-active-link" : " app-not-active-link");
             },
             children: [item.title, item.title === "Cart" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
               children: "\xA0(0)"
@@ -19253,10 +19256,10 @@ var Slider = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Slider);
 
-  function Slider() {
+  function Slider(props) {
     _classCallCheck(this, Slider);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Slider, [{
@@ -19339,10 +19342,10 @@ var AboutUs = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(AboutUs);
 
-  function AboutUs() {
+  function AboutUs(props) {
     _classCallCheck(this, AboutUs);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(AboutUs, [{
@@ -19441,10 +19444,10 @@ var CartList = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(CartList);
 
-  function CartList() {
+  function CartList(props) {
     _classCallCheck(this, CartList);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(CartList, [{
@@ -19583,10 +19586,10 @@ var CartTotals = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(CartTotals);
 
-  function CartTotals() {
+  function CartTotals(props) {
     _classCallCheck(this, CartTotals);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(CartTotals, [{
@@ -19673,10 +19676,10 @@ var FeaturedBooks = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(FeaturedBooks);
 
-  function FeaturedBooks() {
+  function FeaturedBooks(props) {
     _classCallCheck(this, FeaturedBooks);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(FeaturedBooks, [{
@@ -19766,10 +19769,10 @@ var OnSale = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(OnSale);
 
-  function OnSale() {
+  function OnSale(props) {
     _classCallCheck(this, OnSale);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(OnSale, [{
@@ -19864,10 +19867,10 @@ var FilterBy = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(FilterBy);
 
-  function FilterBy() {
+  function FilterBy(props) {
     _classCallCheck(this, FilterBy);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(FilterBy, [{
@@ -20047,10 +20050,10 @@ var About = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(About);
 
-  function About() {
+  function About(props) {
     _classCallCheck(this, About);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(About, [{
@@ -20132,10 +20135,10 @@ var Cart = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Cart);
 
-  function Cart() {
+  function Cart(props) {
     _classCallCheck(this, Cart);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Cart, [{
@@ -20219,10 +20222,10 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Home);
 
-  function Home() {
+  function Home(props) {
     _classCallCheck(this, Home);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Home, [{
@@ -20289,10 +20292,10 @@ var Product = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Product);
 
-  function Product() {
+  function Product(props) {
     _classCallCheck(this, Product);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Product, [{
@@ -20376,10 +20379,10 @@ var Shop = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Shop);
 
-  function Shop() {
+  function Shop(props) {
     _classCallCheck(this, Shop);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Shop, [{
@@ -20517,10 +20520,10 @@ var Router = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Router);
 
-  function Router() {
+  function Router(props) {
     _classCallCheck(this, Router);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(Router, [{
@@ -20534,11 +20537,11 @@ var Router = /*#__PURE__*/function (_React$Component) {
           path: "/shop",
           element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Shop_Shop_js__WEBPACK_IMPORTED_MODULE_5__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          path: "/shop/:id",
+          element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Product_Product_js__WEBPACK_IMPORTED_MODULE_4__.default, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
           path: "/cart",
           element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Cart_Cart_js__WEBPACK_IMPORTED_MODULE_2__.default, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-          path: "/product",
-          element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Product_Product_js__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
           path: "/about",
           element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_About_About_js__WEBPACK_IMPORTED_MODULE_1__.default, {})
@@ -20737,7 +20740,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n*::-webkit-scrollbar {\n    height: 8px;\n    width: 8px;\n}\n\n*::-webkit-scrollbar-track {\n    border-radius: 10px;\n    background-color: var(--app-white);\n}\n\n*::-webkit-scrollbar-thumb {\n    background-color: var(--app-blue);\n    border-radius: 10px;\n    border: 2px solid #ffffff;\n}\n\nhtml {\n    scroll-behavior: smooth;\n}\n\nbody {\n    font-family: var(--font), sans-serif !important;\n    font-weight: var(--font-regular) !important;\n    color: var(--app-black);\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    scroll-behavior: smooth;\n    min-height: 100vh;\n}\n\n#root {\n    min-height: 100vh;\n    display: flex;\n    flex-direction: column;\n}\n\nul,\nli {\n    text-decoration: none;\n    list-style: none;\n    margin: 0;\n    padding: 0;\n}\n\n.btn:focus,\ntextarea:focus,\ntextarea.form-control:focus,\ninput.form-control:focus,\ninput[type=\"text\"]:focus,\ninput[type=\"password\"]:focus,\ninput[type=\"email\"]:focus,\ninput[type=\"number\"]:focus,\n[type=\"text\"].form-control:focus,\n[type=\"password\"].form-control:focus,\n[type=\"email\"].form-control:focus,\n[type=\"tel\"].form-control:focus,\n[contenteditable].form-control:focus {\n    outline: none !important;\n    box-shadow: none !important;\n}\n\n.app-active-link {\n    background-color: var(--app-blue);\n    color: var(--app-white) !important;\n    border-radius: 6px;\n    transition: all 0.3s ease-in-out;\n}\n\n.app-divide {\n    width: 100%;\n    height: 3px;\n    background-color: var(--app-light-grey);\n    border-radius: 4px;\n}\n\n.pagination .page-item {\n    color: var(--app-blue);\n}\n\n.pagination .page-link:focus {\n    box-shadow: none;\n}\n\n.pagination .active .page-link {\n    background-color: var(--app-blue);\n    border-color: var(--app-blue);\n    font-weight: var(--font-semi);\n}\n\n.pagination .active .page-link {\n    font-weight: var(--font-medium);\n}\n\n.pagination .page-item.disabled .page-link {\n    color: var(--app-grey);\n}\n\n/* Border Radius */\n.app-border-8px {\n    border-radius: 8px;\n}\n\n@media (min-width: 1200px) {\n    .container,\n    .container-lg,\n    .container-md,\n    .container-sm,\n    .container-xl {\n        max-width: 1300px;\n    }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n*::-webkit-scrollbar {\n    height: 8px;\n    width: 8px;\n}\n\n*::-webkit-scrollbar-track {\n    border-radius: 10px;\n    background-color: var(--app-white);\n}\n\n*::-webkit-scrollbar-thumb {\n    background-color: var(--app-blue);\n    border-radius: 10px;\n    border: 2px solid #ffffff;\n}\n\nhtml {\n    scroll-behavior: smooth;\n}\n\nbody {\n    font-family: var(--font), sans-serif !important;\n    font-weight: var(--font-regular) !important;\n    color: var(--app-black);\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    scroll-behavior: smooth;\n    min-height: 100vh;\n}\n\n#root {\n    min-height: 100vh;\n    display: flex;\n    flex-direction: column;\n}\n\nul,\nli {\n    text-decoration: none;\n    list-style: none;\n    margin: 0;\n    padding: 0;\n}\n\n.btn:focus,\ntextarea:focus,\ntextarea.form-control:focus,\ninput.form-control:focus,\ninput[type=\"text\"]:focus,\ninput[type=\"password\"]:focus,\ninput[type=\"email\"]:focus,\ninput[type=\"number\"]:focus,\n[type=\"text\"].form-control:focus,\n[type=\"password\"].form-control:focus,\n[type=\"email\"].form-control:focus,\n[type=\"tel\"].form-control:focus,\n[contenteditable].form-control:focus {\n    outline: none !important;\n    box-shadow: none !important;\n}\n\n.app-active-link {\n    background-color: var(--app-blue);\n    color: var(--app-white) !important;\n    border-radius: 6px;\n    transition: all 0.3s ease-in-out;\n}\n\n.app-not-active-link {\n    transition: all 0.3s ease-in-out;\n}\n\n.app-not-active-link:hover {\n    background-color: var(--app-blue);\n    color: var(--app-white) !important;\n    border-radius: 6px;\n}\n\n.app-divide {\n    width: 100%;\n    height: 3px;\n    background-color: var(--app-light-grey);\n    border-radius: 4px;\n}\n\n.pagination .page-item {\n    color: var(--app-blue);\n}\n\n.pagination .page-link:focus {\n    box-shadow: none;\n}\n\n.pagination .active .page-link {\n    background-color: var(--app-blue);\n    border-color: var(--app-blue);\n    font-weight: var(--font-semi);\n}\n\n.pagination .active .page-link {\n    font-weight: var(--font-medium);\n}\n\n.pagination .page-item.disabled .page-link {\n    color: var(--app-grey);\n}\n\n/* Border Radius */\n.app-border-8px {\n    border-radius: 8px;\n}\n\n@media (min-width: 1200px) {\n    .container,\n    .container-lg,\n    .container-md,\n    .container-sm,\n    .container-xl {\n        max-width: 1300px;\n    }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

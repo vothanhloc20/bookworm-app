@@ -3,6 +3,10 @@ import * as React from "react";
 import { Dropdown as BootstrapDropdown } from "react-bootstrap";
 
 class Dropdown extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <BootstrapDropdown className={this.props.customClass}>
