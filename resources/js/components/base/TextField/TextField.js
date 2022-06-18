@@ -10,7 +10,6 @@ class TextField extends React.Component {
         super(props);
         this.state = {
             label: props.label,
-            type: props.type,
             select: props.select,
             kind: props.kind,
             isClearable: props.isClearable,
@@ -49,7 +48,7 @@ class TextField extends React.Component {
                         )}
                         <Form.Control
                             as={this.state.kind}
-                            type={this.state.type}
+                            type={this.props.type}
                         />
                     </InputGroup>
                 )}

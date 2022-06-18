@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 
 import LoginForm from "../LoginForm/LoginForm.js";
 
@@ -26,12 +26,16 @@ class AuthenticateModal extends React.Component {
                         Login
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <LoginForm />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button>Close</Button>
-                </Modal.Footer>
+                <Form>
+                    <Modal.Body>
+                        <LoginForm />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="blue" className="font-weight-semi">
+                            Login
+                        </Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         );
     }
