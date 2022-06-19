@@ -10,29 +10,17 @@ import Header from "../components/base/Header/Header.js";
 class Default extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showModal: false,
-        };
     }
-
-    handleModal = () => {
-        this.setState((prevState) => ({
-            showModal: !prevState.showModal,
-        }));
-    };
 
     render() {
         return (
             <>
-                <Header handleModal={this.handleModal} />
+                <Header />
                 <Container className="py-4 flex-grow-1">
                     {this.props.content}
                 </Container>
                 <Footer />
-                <AuthenticateModal
-                    show={this.state.showModal}
-                    hideModal={this.handleModal}
-                />
+                <AuthenticateModal />
             </>
         );
     }

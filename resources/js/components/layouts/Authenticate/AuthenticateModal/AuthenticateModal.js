@@ -3,6 +3,8 @@ import * as React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 import LoginForm from "../LoginForm/LoginForm.js";
+import { connect } from "react-redux";
+import { mapStateToProps } from "../../../../utils/useSelector.js";
 
 class AuthenticateModal extends React.Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class AuthenticateModal extends React.Component {
     render() {
         return (
             <Modal
-                show={this.props.show}
+                show={this.props.modal.status}
                 onHide={this.hideModal}
                 size="md"
                 centered
@@ -41,4 +43,4 @@ class AuthenticateModal extends React.Component {
     }
 }
 
-export default AuthenticateModal;
+export default connect(mapStateToProps, null)(AuthenticateModal);

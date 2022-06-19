@@ -6,11 +6,25 @@ import AddToCart from "../../components/layouts/Product/AddToCart.js";
 import CustomerReviews from "../../components/layouts/Product/CustomerReviews.js";
 import FormReview from "../../components/layouts/Product/FormReview.js";
 import ProductInformation from "../../components/layouts/Product/ProductInformation.js";
+import bookApi from "../../api/bookApi";
 
 class Product extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    componentDidMount() {
+        this.getAllCategories();
+    }
+
+    getAllCategories = async () => {
+        try {
+            const response = await bookApi.getAllCategories();
+            console.log(response);
+        } catch (error) {
+            console.log("Server error!");
+        }
+    };
 
     render() {
         return (

@@ -5,6 +5,8 @@ import { Col, Nav, Navbar, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Logo40 from "../../../../assets/logo_40_40.png";
 import Menu from "../Menu/Menu.js";
+import { connect } from "react-redux";
+import { modal_OPEN_MODAL } from "../../../redux/types/modal.type.js";
 
 class Header extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class Header extends React.Component {
     }
 
     handleModal = () => {
-        this.props.handleModal();
+        this.props.showModal();
     };
 
     render() {
@@ -48,4 +50,10 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showModal: () => dispatch({ type: modal_OPEN_MODAL }),
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Header);

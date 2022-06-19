@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 const axiosClient = axios.create({
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.MIX_APP_URL,
     headers: {
         "content-type": "application/json",
     },
@@ -15,7 +15,7 @@ axiosClient.interceptors.request.use(async (config) => {
 
 axiosClient.interceptors.response.use(
     (response) => {
-        if (response & response.data) {
+        if (response && response.data) {
             return response.data;
         }
         return response;
