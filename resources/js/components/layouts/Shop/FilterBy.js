@@ -3,6 +3,8 @@ import * as React from "react";
 import { Accordion, Card } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
+import { mapStateToProps } from "../../../utils/useSelector.js";
 
 class FilterBy extends React.Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class FilterBy extends React.Component {
                     return (
                         <Accordion
                             key={index}
-                            defaultActiveKey={item.id}
+                            defaultActiveKey={index + 1}
                             className={`${
                                 index < this.props.data.length - 1 ? "mb-4" : ""
                             }`}
@@ -24,7 +26,7 @@ class FilterBy extends React.Component {
                             <Card>
                                 <Accordion.Toggle
                                     as={Card.Header}
-                                    eventKey={item.id}
+                                    eventKey={index + 1}
                                 >
                                     <p className="text-blue d-flex align-items-center">
                                         <FontAwesomeIcon icon={item.icon} />
@@ -33,7 +35,7 @@ class FilterBy extends React.Component {
                                         </span>
                                     </p>
                                 </Accordion.Toggle>
-                                <Accordion.Collapse eventKey={item.id}>
+                                <Accordion.Collapse eventKey={index + 1}>
                                     <Card.Body>
                                         <ul className="h-100 d-flex flex-column justify-content-center">
                                             {item.data.map((itemList, idx) => {
@@ -72,4 +74,4 @@ class FilterBy extends React.Component {
     }
 }
 
-export default FilterBy;
+export default connect(mapStateToProps, null)(FilterBy);

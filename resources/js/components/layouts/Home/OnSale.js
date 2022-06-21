@@ -1,10 +1,13 @@
+import "swiper/css";
+import "swiper/css/navigation";
+
 import * as React from "react";
 
-import { Button, Col, Row } from "react-bootstrap";
+import { Autoplay, Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Slider from "../../base/Slider/Slider.js";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import CardProduct from "../../../components/base/CardProduct/CardProduct.js";
+import { bookCoverData } from "../../../../assets/data/bookcover.js";
 
 class OnSale extends React.Component {
     constructor(props) {
@@ -13,29 +16,33 @@ class OnSale extends React.Component {
 
     render() {
         return (
-            <>
-                <Row className="align-items-center mb-4">
-                    <Col>
-                        <h4 className="font-weight-semi">On Sale</h4>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                        <Button variant="blue" className="font-weight-semi">
-                            View All &nbsp;
-                            <FontAwesomeIcon icon={faChevronRight} />
-                        </Button>
-                    </Col>
-                </Row>
-                <Slider
-                    spaceBetween={30}
-                    slidesPerView={4}
-                    navigation={false}
-                    loop={true}
-                    autoPlay={{
-                        delay: 5000,
-                        disableOnInteraction: false,
-                    }}
-                />
-            </>
+            <Swiper
+                spaceBetween={30}
+                slidesPerView={4}
+                navigation={false}
+                loop={true}
+                modules={[Autoplay, Navigation]}
+                autoPlay={{
+                    delay: 500000,
+                    disableOnInteraction: false,
+                }}
+            >
+                {this.props.data.map((item, index) => {
+                    return (
+                        <SwiperSlide key={index}>
+                            <CardProduct
+                                productImage={
+                                    bookCoverData[item.book_cover_photo]
+                                }
+                                productName={item.book_title}
+                                productAuthor={item.author_name}
+                                productDiscountPrice={item.discount_price}
+                                productFinalPrice={item.book_price}
+                            />
+                        </SwiperSlide>
+                    );
+                })}
+            </Swiper>
         );
     }
 }

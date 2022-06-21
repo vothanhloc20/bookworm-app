@@ -7,35 +7,46 @@ class CardProduct extends React.Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
-            <Card id="app-card-product" className="h-100">
-                <div className="card-image">
-                    <Link to="/shop/1" className="card-image-layout">
-                        <Card.Img variant="top" src={this.props.productImage} />
-                    </Link>
-                </div>
-                <Card.Body>
-                    <Card.Title className="font-weight-bold">
-                        {this.props.productName}
-                    </Card.Title>
-                    <Card.Text>{this.props.productAuthor}</Card.Text>
-                </Card.Body>
-                <Card.Footer className="text-muted">
-                    {this.props.productDiscountPrice > 0 && (
-                        <strike>
-                            <span className="text-grey font-weight-medium">
-                                {this.props.productFinalPrice}
+            <Link to="/shop/1">
+                <Card id="app-card-product" className="h-100">
+                    <div className="card-image">
+                        <div className="card-image-layout">
+                            <Card.Img
+                                variant="top"
+                                src={this.props.productImage}
+                            />
+                        </div>
+                    </div>
+                    <Card.Body className="d-flex flex-column text-black">
+                        <Card.Title className="font-weight-bold card-title mb-auto">
+                            {this.props.productName}
+                        </Card.Title>
+                        <br />
+                        <Card.Text>{this.props.productAuthor}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">
+                        {this.props.productDiscountPrice === null ? (
+                            <span className="text-red font-weight-bold font-20px">
+                                ${this.props.productFinalPrice}
                             </span>
-                        </strike>
-                    )}
-                    &nbsp;
-                    <span className="text-red font-weight-bold font-20px">
-                        ${this.props.productDiscountPrice}
-                    </span>
-                </Card.Footer>
-            </Card>
+                        ) : (
+                            <>
+                                <strike>
+                                    <span className="text-grey font-weight-medium">
+                                        {this.props.productFinalPrice}
+                                    </span>
+                                </strike>
+                                &nbsp;
+                                <span className="text-red font-weight-bold font-20px">
+                                    ${this.props.productDiscountPrice}
+                                </span>
+                            </>
+                        )}
+                    </Card.Footer>
+                </Card>
+            </Link>
         );
     }
 }
