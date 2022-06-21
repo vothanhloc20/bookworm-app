@@ -7,8 +7,11 @@ import FilterBy from "../../components/layouts/Shop/FilterBy.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ListProduct from "../../components/base/ListProduct/ListProduct.js";
 import Pagination from "react-js-pagination";
+import { connect } from "react-redux";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { filterData } from "../../../assets/data/filter.js";
+import { mapStateToProps } from "../../utils/useSelector.js";
+import { setDataFilter } from "../../redux/actions/filter.action.js";
+import shopAdapter from "../../adapters/ShopAdapter/ShopAdapter.js";
 import { showData } from "../../../assets/data/show.js";
 import { sortData } from "../../../assets/data/sort.js";
 
@@ -16,6 +19,19 @@ class Shop extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    componentDidMount() {
+        this.getDataFilter();
+    }
+
+    getDataFilter = async () => {
+        const dataFilter = await shopAdapter.getDataFilter();
+        this.props.setDataFilter(dataFilter);
+    };
+
+    handlePageChange = (pageNumber) => {
+        console.log(`active page is ${pageNumber}`);
+    };
 
     render() {
         return (
@@ -31,7 +47,7 @@ class Shop extends React.Component {
                                     Filter By
                                 </span>
                             </p>
-                            <FilterBy data={filterData} />
+                            <FilterBy data={this.props.filter.filters} />
                         </Col>
                         <Col md={9}>
                             <Row className="align-items-center mb-2">
@@ -61,11 +77,12 @@ class Shop extends React.Component {
                                         activePage={1}
                                         itemsCountPerPage={5}
                                         totalItemsCount={450}
-                                        pageRangeDisplayed={6}
+                                        pageRangeDisplayed={3}
                                         prevPageText="Previous"
                                         nextPageText="Next"
                                         itemClass="page-item"
                                         linkClass="page-link"
+                                        onChange={this.handlePageChange}
                                     />
                                 </Col>
                             </Row>
@@ -77,4 +94,10 @@ class Shop extends React.Component {
     }
 }
 
-export default Shop;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setDataFilter: (data) => dispatch(setDataFilter(data)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
