@@ -144,6 +144,11 @@ select:focus,
     border-radius: 8px;
 }
 
+/* Custom Swiper Slider */
+.swiper-slide {
+    height: auto !important;
+}
+
 @media (min-width: 1200px) {
     .container,
     .container-lg,
