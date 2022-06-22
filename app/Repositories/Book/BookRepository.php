@@ -10,13 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class BookRepository implements BookInterface
 {
-    public $currentDate;
-
-    public function __construct(Book $bookModel)
-    {
-        $this->currentDate = date('Y-m-d');
-    }
-
     // Get top ten on sale books
     public function getTopTenOnSaleBooks(): JsonResponse
     {
@@ -44,10 +37,8 @@ class BookRepository implements BookInterface
         ]);
     }
 
-
-
     // Get recommended book
-    public function getRecommendedBook(): JsonResponse
+    public function getRecommendedBooks(): JsonResponse
     {
         $data = Book::BaseBook()
             ->withAvg('review', 'rating_star')
@@ -65,17 +56,21 @@ class BookRepository implements BookInterface
     }
 
     // Get popular book
-    public function getPopularBook(): JsonResponse
+    public function getPopularBooks(): JsonResponse
     {
-//        $data = Book::query()
-//            ->join('author', 'author.id', '=', 'book.author_id')
-//            ->join('review', 'review.book_id', '=', 'book.id')
-//            ->select('book.id',
-//                'book.book_title',
-//                'book.book_price',
-//                'book.book_cover_photo',
-//                'author.author_name');
-//            ->selectRaw()
+        $data = Book::BaseBook()
+            ->withCount('review')
+            ->distinct()
+            ->orderBy('review_count', 'desc')
+            ->orderBy('final_price', 'asc')
+            ->limit(10)
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+            'message' => 'Get Data Successfully'
+        ]);
     }
 
     // Get all categories

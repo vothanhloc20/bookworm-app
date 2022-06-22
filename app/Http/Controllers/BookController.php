@@ -18,9 +18,14 @@ class BookController extends Controller
         return $this->bookRepository->getTopTenOnSaleBooks();
     }
 
-    public function getRecommendedBook()
+    public function getRecommendedBooks()
     {
-        return $this->bookRepository->getRecommendedBook();
+        return $this->bookRepository->getRecommendedBooks();
+    }
+
+    public function getPopularBooks()
+    {
+        return $this->bookRepository->getPopularBooks();
     }
 
     public function getAllCategories()
