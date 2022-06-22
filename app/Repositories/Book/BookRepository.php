@@ -44,31 +44,12 @@ class BookRepository implements BookInterface
         ]);
     }
 
+
+
     // Get recommended book
     public function getRecommendedBook(): JsonResponse
     {
-        $data = Book::query()
-            ->join('author', 'author.id', '=', 'book.author_id')
-            ->join('review', 'review.book_id', '=', 'book.id')
-            ->select('book.id',
-                'book.book_title',
-                'book.book_price',
-                'book.book_cover_photo',
-                'author.author_name')
-            ->selectRaw("(CASE WHEN EXISTS (
-                        SELECT book_id
-                        FROM discount
-                        WHERE book.id = book_id
-                    ) THEN (
-                        SELECT discount_price
-                        FROM discount
-                        WHERE book_id = book.id
-                        AND discount_start_date <= '2022-06-21'
-                        AND (discount_end_date >= '2022-06-21' OR discount_end_date is NULL)
-                    ) ELSE
-                        book.book_price
-                    END )
-                as final_price")
+        $data = Book::BaseBook()
             ->withAvg('review', 'rating_star')
             ->distinct()
             ->orderBy('review_avg_rating_star', 'desc')
@@ -81,6 +62,20 @@ class BookRepository implements BookInterface
             'data' => $data,
             'message' => 'Get Data Successfully'
         ]);
+    }
+
+    // Get popular book
+    public function getPopularBook(): JsonResponse
+    {
+//        $data = Book::query()
+//            ->join('author', 'author.id', '=', 'book.author_id')
+//            ->join('review', 'review.book_id', '=', 'book.id')
+//            ->select('book.id',
+//                'book.book_title',
+//                'book.book_price',
+//                'book.book_cover_photo',
+//                'author.author_name');
+//            ->selectRaw()
     }
 
     // Get all categories
