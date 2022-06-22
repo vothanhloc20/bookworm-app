@@ -23,8 +23,8 @@ class BookRepository implements BookInterface
                 'author.author_name',
                 'discount.discount_price')
             ->selectRaw('book.book_price - discount.discount_price AS sub_price')
-            ->whereDate('discount.discount_start_date', '<=', $this->currentDate)
-            ->whereDate('discount.discount_end_date', '>=', $this->currentDate)
+//            ->whereDate('discount.discount_start_date', '<=', $this->currentDate)
+//            ->whereDate('discount.discount_end_date', '>=', $this->currentDate)
             ->orWhereNull('discount.discount_end_date')
             ->orderBy('sub_price', 'desc')
             ->limit(10)
@@ -45,7 +45,7 @@ class BookRepository implements BookInterface
             ->distinct()
             ->orderBy('review_avg_rating_star', 'desc')
             ->orderBy('final_price', 'asc')
-            ->limit(10)
+            ->limit(8)
             ->get();
 
         return response()->json([
@@ -63,7 +63,7 @@ class BookRepository implements BookInterface
             ->distinct()
             ->orderBy('review_count', 'desc')
             ->orderBy('final_price', 'asc')
-            ->limit(10)
+            ->limit(8)
             ->get();
 
         return response()->json([
