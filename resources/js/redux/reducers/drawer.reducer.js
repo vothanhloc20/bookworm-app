@@ -2,18 +2,16 @@ import * as Type from "../types/mainTypes.js";
 
 const initState = {
     status: false,
-    headingTitle: "Login",
-    contentButton: "Login",
 };
 
-const modal = (state = initState, action) => {
+const drawer = (state = initState, action) => {
     switch (action.type) {
-        case Type.modal_OPEN_MODAL:
+        case Type.drawer_OPEN_DRAWER:
             return {
                 ...state,
                 status: true,
             };
-        case Type.modal_CLOSE_MODAL:
+        case Type.drawer_CLOSE_DRAWER:
             return {
                 ...state,
                 status: false,
@@ -23,4 +21,4 @@ const modal = (state = initState, action) => {
     }
 };
 
-export default modal;
+export default drawer;

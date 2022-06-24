@@ -4,6 +4,7 @@ const initState = {
     topTenOnSaleBooks: [],
     recommendedBooks: [],
     popularBooks: [],
+    tagFeaturedBooks: [],
 };
 
 const home = (state = initState, action) => {
@@ -22,6 +23,11 @@ const home = (state = initState, action) => {
             return {
                 ...state,
                 popularBooks: [...action.payload],
+            };
+        case Type.home_SET_TAG_FEATURED_BOOKS:
+            return {
+                ...state,
+                tagFeaturedBooks: [...action.payload],
             };
         default:
             return state;

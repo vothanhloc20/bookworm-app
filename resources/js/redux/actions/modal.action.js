@@ -5,3 +5,8 @@ export const showModal = () => {
         type: Type.modal_OPEN_MODAL,
     };
 };
+export const hideModal = () => {
+    return {
+        type: Type.modal_CLOSE_MODAL,
+    };
+};
