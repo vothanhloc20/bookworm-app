@@ -24,6 +24,10 @@ html {
     scroll-behavior: smooth;
 }
 
+html .app-overlay .app-overlay-scope {
+    overflow: hidden;
+}
+
 body {
     font-family: var(--font), sans-serif !important;
     font-weight: var(--font-regular) !important;
@@ -139,6 +143,11 @@ select:focus,
     color: var(--app-grey);
 }
 
+/* Cursor */
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /* Border Radius */
 .app-border-8px {
     border-radius: 8px;
@@ -156,6 +165,26 @@ select:focus,
     .container-sm,
     .container-xl {
         max-width: 1300px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #app-hamburger-button {
+        display: none;
+    }
+
+    #app-menu-header {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #app-hamburger-button {
+        display: block;
+    }
+
+    #app-menu-header {
+        display: none;
     }
 }
 
