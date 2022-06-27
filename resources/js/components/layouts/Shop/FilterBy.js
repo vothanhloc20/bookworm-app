@@ -2,14 +2,54 @@ import * as React from "react";
 
 import { Accordion, Card } from "react-bootstrap";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
+import { mapDispatchToProps } from "../../../adapters/ShopAdapter/ShopAdapter.js";
 import { mapStateToProps } from "../../../utils/useSelector.js";
 
 class FilterBy extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    findItemFilter = (title) => {
+        return this.props.shop.current_filter.findIndex(
+            (item) => item.title === title
+        );
+    };
+
+    checkActive = (value) => {
+        if (value && this.props.shop.current_filter.length > 0) {
+            const index = this.props.shop.current_filter.findIndex(
+                (item) => item.item === value
+            );
+            return index !== -1
+                ? this.props.shop.current_filter[index].item
+                : "";
+        }
+    };
+
+    handleFilter = async (title, item) => {
+        const index = this.findItemFilter(title);
+
+        if (index === -1) {
+            await this.props.setCurrentFilter({
+                title,
+                item,
+            });
+        } else {
+            const check = this.props.shop.current_filter[index].item === item;
+            if (check) {
+                await this.props.removeCurrentFilter(index);
+            } else {
+                await this.props.editCurrentFilter({
+                    index,
+                    item,
+                });
+            }
+        }
+
+        this.props.getFilterBooks();
+    };
 
     render() {
         return (
@@ -27,9 +67,10 @@ class FilterBy extends React.Component {
                                 <Accordion.Toggle
                                     as={Card.Header}
                                     eventKey={index + 1}
+                                    className="cursor-pointer"
                                 >
                                     <p className="text-blue d-flex align-items-center">
-                                        <FontAwesomeIcon icon={item.icon} />
+                                        {item.icon}
                                         <span className="flex-grow-1 font-weight-semi ml-2">
                                             {item.title}
                                         </span>
@@ -42,10 +83,12 @@ class FilterBy extends React.Component {
                                                 return (
                                                     <li
                                                         key={idx}
-                                                        className={`font-weight-semi px-2 py-1
+                                                        className={`font-weight-semi cursor-pointer px-2 py-1
                                                             ${
                                                                 itemList ===
-                                                                "Fiction"
+                                                                this.checkActive(
+                                                                    itemList
+                                                                )
                                                                     ? "bg-blue-active"
                                                                     : "bg-blue-no-active"
                                                             }
@@ -57,6 +100,12 @@ class FilterBy extends React.Component {
                                                                     ? "mb-2"
                                                                     : ""
                                                             }`}
+                                                        onClick={() =>
+                                                            this.handleFilter(
+                                                                item.title,
+                                                                itemList
+                                                            )
+                                                        }
                                                     >
                                                         {itemList}
                                                     </li>
@@ -74,4 +123,4 @@ class FilterBy extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(FilterBy);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBy);

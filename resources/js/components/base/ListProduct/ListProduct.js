@@ -4,7 +4,6 @@ import { Col, Row } from "react-bootstrap";
 
 import CardProduct from "../CardProduct/CardProduct";
 import { bookCoverData } from "../../../../assets/data/bookcover";
-import { booksData } from "../../../../assets/data/books";
 
 class ListProduct extends React.Component {
     constructor(props) {
@@ -14,19 +13,24 @@ class ListProduct extends React.Component {
     render() {
         return (
             <Row>
-                {booksData.map((item, index) => {
+                {this.props.data.map((item, index) => {
                     return (
                         <Col
                             key={index}
-                            md={3}
+                            xl={this.props.xl}
+                            lg={this.props.lg}
+                            md={this.props.md}
+                            sm={this.props.sm}
                             className={this.props.customClass}
                         >
                             <CardProduct
-                                productImage={bookCoverData[item.image]}
-                                productName={item.name}
-                                productAuthor={item.author}
+                                productImage={
+                                    bookCoverData[item.book_cover_photo]
+                                }
+                                productName={item.book_title}
+                                productAuthor={item.author_name}
                                 productDiscountPrice={item.discount_price}
-                                productFinalPrice={item.final_price}
+                                productFinalPrice={item.book_price}
                             />
                         </Col>
                     );
