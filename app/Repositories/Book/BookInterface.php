@@ -4,9 +4,13 @@ namespace App\Repositories\Book;
 
 interface BookInterface
 {
+    public function getAllBooks();
+
     public function getTopTenOnSaleBooks();
 
-    public function getRecommendedBook();
+    public function getRecommendedBooks();
+
+    public function getPopularBooks();
 
     public function getAllCategories();
 

@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/books/getAllBooks', [BookController::class, 'getAllBooks']);
 Route::get('/books/getTopTenOnSaleBooks', [BookController::class, 'getTopTenOnSaleBooks']);
 Route::get('/books/getRecommendedBooks', [BookController::class, 'getRecommendedBooks']);
 Route::get('/books/getPopularBooks', [BookController::class, 'getPopularBooks']);

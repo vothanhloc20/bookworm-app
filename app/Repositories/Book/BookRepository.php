@@ -10,23 +10,65 @@ use Illuminate\Http\JsonResponse;
 
 class BookRepository implements BookInterface
 {
+
+    public $currentDate;
+
+    public function __construct(Book $bookModel)
+    {
+        $this->currentDate = date('Y-m-d');
+    }
+
+    // Get all books with pagination as long as filter and sort
+    public function getAllBooks()
+    {
+        $data = Book::query();
+
+        // Per page - Default 5
+        $per_page = request()->per_page ? request()->per_page : 5;
+
+        // Category - Default null
+        $category = request()->category ? request()->category : null;
+
+        // Author - Default null
+        $author = request()->author ? request()->author : null;
+
+        // Sort = Default on sale
+        $sort = request()->sort ? request()->sort : 'on_sale';
+
+        if ($category) {
+            $data = $data->join('category', 'book.category_id', '=', 'category.id')
+                ->where('category.category_name', '=', $category);
+        }
+
+        if ($author) {
+            $data = $data->where('author_name', '=', $author);
+        }
+
+        switch ($sort) {
+            case 'on_sale':
+                $data = $data->OnSaleBook()
+                    ->paginate($per_page);
+
+                return response()->json([
+                    'status' => 200,
+                    'data' => $data,
+                    'message' => 'Get Data Successfully'
+                ]);
+
+            default:
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Server Error!!!'
+                ]);
+        }
+
+
+    }
+
     // Get top ten on sale books
     public function getTopTenOnSaleBooks(): JsonResponse
     {
-        $data = Book::query()
-            ->join('discount', 'discount.book_id', '=', 'book.id')
-            ->join('author', 'author.id', '=', 'book.author_id')
-            ->select('book.id',
-                'book.book_title',
-                'book.book_price',
-                'book.book_cover_photo',
-                'author.author_name',
-                'discount.discount_price')
-            ->selectRaw('book.book_price - discount.discount_price AS sub_price')
-//            ->whereDate('discount.discount_start_date', '<=', $this->currentDate)
-//            ->whereDate('discount.discount_end_date', '>=', $this->currentDate)
-            ->orWhereNull('discount.discount_end_date')
-            ->orderBy('sub_price', 'desc')
+        $data = Book::OnSaleBook()
             ->limit(10)
             ->get();
 
