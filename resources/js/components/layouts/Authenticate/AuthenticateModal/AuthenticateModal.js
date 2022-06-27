@@ -4,6 +4,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 
 import LoginForm from "../LoginForm/LoginForm.js";
 import { connect } from "react-redux";
+import { hideModal } from "../../../../redux/actions/modal.action.js";
 import { mapStateToProps } from "../../../../utils/useSelector.js";
 
 class AuthenticateModal extends React.Component {
@@ -43,4 +44,10 @@ class AuthenticateModal extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(AuthenticateModal);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        hideModal: () => dispatch(hideModal()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthenticateModal);
