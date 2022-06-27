@@ -1,16 +1,18 @@
 import * as React from "react";
 
 import { Button, Col, Row } from "react-bootstrap";
+import {
+    getPopularBooks,
+    getRecommendedBooks,
+    getTopTenOnSaleBooks,
+    mapDispatchToProps,
+} from "../../adapters/HomeAdapter/HomeAdapter.js";
 
-import FeaturedBooks from "../../components/layouts/Home/FeaturedBooks.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GridSkeleton from "../../components/base/Skeleton/GridSkeleton.js";
-import OnSale from "../../components/layouts/Home/OnSale.js";
+import { FaAngleRight } from "react-icons/fa";
+import RenderOnFeatured from "../../components/layouts/Home/Common/RenderOnFeatured.js";
+import RenderOnSale from "../../components/layouts/Home/Common/RenderOnSale.js";
 import { connect } from "react-redux";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import homeAdapter from "../../adapters/HomeAdapter/HomeAdapter.js";
 import { mapStateToProps } from "../../utils/useSelector.js";
-import { setTopTenOnSaleBooks } from "../../redux/actions/home.action.js";
 
 class Home extends React.Component {
     constructor(props) {
@@ -18,12 +20,37 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.getTopTenOnSaleBooks();
+        this.getHomeBooksData();
     }
 
-    getTopTenOnSaleBooks = async () => {
-        const { data } = await homeAdapter.getTopTenOnSaleBooks();
-        this.props.setTopTenOnSaleBooks(data);
+    getHomeBooksData = () => {
+        getTopTenOnSaleBooks().then((result) => {
+            this.props.setTopTenOnSaleBooks(result.data);
+        });
+        getRecommendedBooks().then((result) => {
+            this.props.setRecommendedBooks(result.data);
+            this.props.setTagFeaturedBooks(result.data);
+        });
+    };
+
+    getPopularBooks = async () => {
+        const { data } = await getPopularBooks();
+        this.props.setPopularBooks(data);
+        this.props.setTagFeaturedBooks(data);
+    };
+
+    handleTags = (tag) => {
+        this.props.setIsRecommended(!this.props.home.isRecommended);
+        if (tag === "recommended") {
+            this.props.setTagFeaturedBooks(this.props.home.recommendedBooks);
+        } else if (tag === "popular") {
+            if (this.props.home.popularBooks.length === 0) {
+                this.props.setTagFeaturedBooks([]);
+                this.getPopularBooks();
+            } else {
+                this.props.setTagFeaturedBooks(this.props.home.popularBooks);
+            }
+        }
     };
 
     render() {
@@ -35,29 +62,49 @@ class Home extends React.Component {
                             <h4 className="font-weight-semi">On Sale</h4>
                         </Col>
                         <Col className="d-flex justify-content-end">
-                            <Button variant="blue" className="font-weight-semi">
-                                View All &nbsp;
-                                <FontAwesomeIcon icon={faChevronRight} />
+                            <Button
+                                variant="blue"
+                                className="font-weight-semi d-flex align-items-center"
+                            >
+                                <span className="flex-grow-1">View All</span>
+                                &nbsp;
+                                <FaAngleRight />
                             </Button>
                         </Col>
                     </Row>
-                    {this.props.home.topTenOnSaleBooks.length === 0 && (
-                        <GridSkeleton columns={3} quantity={4} />
-                    )}
-                    {this.props.home.topTenOnSaleBooks.length > 0 && (
-                        <OnSale data={this.props.home.topTenOnSaleBooks} />
-                    )}
+                    <RenderOnSale />
                 </section>
-                <section>{/* <FeaturedBooks /> */}</section>
+                <section>
+                    <div className="text-center mb-4">
+                        <h4 className="font-weight-semi mb-4">
+                            Featured Books
+                        </h4>
+                        <Button
+                            variant={
+                                this.props.home.isRecommended ? "blue" : "link"
+                            }
+                            className="font-weight-semi"
+                            disabled={this.props.home.isRecommended}
+                            onClick={() => this.handleTags("recommended")}
+                        >
+                            Recommended
+                        </Button>
+                        <Button
+                            variant={
+                                this.props.home.isRecommended ? "link" : "blue"
+                            }
+                            disabled={!this.props.home.isRecommended}
+                            className="font-weight-semi"
+                            onClick={() => this.handleTags("popular")}
+                        >
+                            Popular
+                        </Button>
+                    </div>
+                    <RenderOnFeatured />
+                </section>
             </main>
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setTopTenOnSaleBooks: (data) => dispatch(setTopTenOnSaleBooks(data)),
-    };
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

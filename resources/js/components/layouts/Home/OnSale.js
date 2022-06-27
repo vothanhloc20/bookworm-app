@@ -23,8 +23,25 @@ class OnSale extends React.Component {
                 loop={true}
                 modules={[Autoplay, Navigation]}
                 autoPlay={{
-                    delay: 500000,
+                    delay: 5000,
                     disableOnInteraction: false,
+                }}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 1,
+                    },
+                    // breakpoint >= 768px
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    // breakpoint >= 992px
+                    992: {
+                        slidesPerView: 3,
+                    },
+                    // breakpoint >= 1200
+                    1200: {
+                        slidesPerView: 4,
+                    },
                 }}
             >
                 {this.props.data.map((item, index) => {
