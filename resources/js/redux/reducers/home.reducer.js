@@ -5,6 +5,7 @@ const initState = {
     recommendedBooks: [],
     popularBooks: [],
     tagFeaturedBooks: [],
+    isRecommended: true,
 };
 
 const home = (state = initState, action) => {
@@ -28,6 +29,11 @@ const home = (state = initState, action) => {
             return {
                 ...state,
                 tagFeaturedBooks: [...action.payload],
+            };
+        case Type.home_SET_IS_RECOMMENDED:
+            return {
+                ...state,
+                isRecommended: action.payload,
             };
         default:
             return state;

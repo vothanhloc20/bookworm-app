@@ -27,3 +27,10 @@ export const setTagFeaturedBooks = (data) => {
         payload: data,
     };
 };
+
+export const setIsRecommended = (data) => {
+    return {
+        type: Type.home_SET_IS_RECOMMENDED,
+        payload: data,
+    };
+};

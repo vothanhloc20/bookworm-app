@@ -5,5 +5,6 @@ export const mapStateToProps = (state) => {
         filter: state.filter,
         home: state.home,
         drawer: state.drawer,
+        shop: state.shop,
     };
 };
