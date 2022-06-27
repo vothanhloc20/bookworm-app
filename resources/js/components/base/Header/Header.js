@@ -1,12 +1,14 @@
 import * as React from "react";
 
-import { Col, Nav, Navbar, Row } from "react-bootstrap";
+import { Button, Col, Nav, Navbar, Row } from "react-bootstrap";
 
+import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Logo40 from "../../../../assets/logo_40_40.png";
 import Menu from "../Menu/Menu.js";
 import { connect } from "react-redux";
 import { modal_OPEN_MODAL } from "../../../redux/types/modal.type.js";
+import { openDrawer } from "../../../redux/actions/drawer.action.js";
 
 class Header extends React.Component {
     constructor(props) {
@@ -15,6 +17,10 @@ class Header extends React.Component {
 
     handleModal = () => {
         this.props.showModal();
+    };
+
+    handleDrawer = () => {
+        this.props.openDrawer();
     };
 
     render() {
@@ -39,12 +45,17 @@ class Header extends React.Component {
                         </Row>
                     </Link>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-nav" />
-                <Navbar.Collapse id="navbar-nav">
-                    <Nav className="ml-auto">
-                        <Menu handleModal={this.handleModal} />
-                    </Nav>
-                </Navbar.Collapse>
+                <Button
+                    id="app-hamburger-button"
+                    variant="blue"
+                    className="py-2 ml-auto"
+                    onClick={this.handleDrawer}
+                >
+                    <FaBars className="text-white mb-1" />
+                </Button>
+                <Nav id="app-menu-header" className="ml-auto">
+                    <Menu handleModal={this.handleModal} />
+                </Nav>
             </Navbar>
         );
     }
@@ -53,6 +64,7 @@ class Header extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         showModal: () => dispatch({ type: modal_OPEN_MODAL }),
+        openDrawer: () => dispatch(openDrawer()),
     };
 };
 
