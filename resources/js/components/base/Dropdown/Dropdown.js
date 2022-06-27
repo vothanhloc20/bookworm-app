@@ -7,9 +7,16 @@ class Dropdown extends React.Component {
         super(props);
     }
 
+    handleCurrentItem = (e) => {
+        this.props.handleCurrentItem(e);
+    };
+
     render() {
         return (
-            <BootstrapDropdown className={this.props.customClass}>
+            <BootstrapDropdown
+                onSelect={this.handleCurrentItem}
+                className={this.props.customClass}
+            >
                 <BootstrapDropdown.Toggle
                     variant={this.props.variant}
                     size={this.props.size}
@@ -19,7 +26,10 @@ class Dropdown extends React.Component {
                 <BootstrapDropdown.Menu>
                     {this.props.selectData.map((item, index) => {
                         return (
-                            <BootstrapDropdown.Item key={index}>
+                            <BootstrapDropdown.Item
+                                eventKey={item.title}
+                                key={index}
+                            >
                                 {item.title}
                             </BootstrapDropdown.Item>
                         );
