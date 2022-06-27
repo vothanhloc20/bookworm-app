@@ -10,12 +10,17 @@ class GridSkeleton extends React.Component {
     }
 
     render() {
-        console.log(this.props.columns);
-
         return (
             <Row>
                 {[...Array(this.props.quantity)].map((item, index) => (
-                    <Col md={this.props.columns} key={index}>
+                    <Col
+                        xl={this.props.xl}
+                        lg={this.props.lg}
+                        md={this.props.md}
+                        sm={this.props.sm}
+                        key={index}
+                        className={this.props.customClass}
+                    >
                         <Skeleton />
                     </Col>
                 ))}

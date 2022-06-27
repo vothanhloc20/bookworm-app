@@ -1,9 +1,9 @@
-#app-skeleton .skeleton-image {
+.app-skeleton .skeleton-image {
     position: relative;
     overflow: hidden;
 }
 
-#app-skeleton .skeleton-image .skeleton-image-layout {
+.app-skeleton .skeleton-image .skeleton-image-layout {
     max-width: 100%;
     padding-top: 130%;
     display: block;
@@ -13,7 +13,7 @@
     background-color: transparent;
 }
 
-#app-skeleton .skeleton-image .skeleton-image-layout::before {
+.app-skeleton .skeleton-image .skeleton-image-layout::before {
     content: "";
     top: 0;
     left: 0;
@@ -23,7 +23,7 @@
     position: absolute;
 }
 
-#app-skeleton
+.app-skeleton
     .skeleton-image
     .skeleton-image-layout
     .skeleton-image-layout-image {
@@ -41,25 +41,25 @@
     vertical-align: middle;
 }
 
-#app-skeleton .skeleton-main-title {
+.app-skeleton .skeleton-main-title {
     border-radius: 6px;
     height: 18px;
     width: 100%;
 }
 
-#app-skeleton .skeleton-title {
+.app-skeleton .skeleton-title {
     border-radius: 6px;
     height: 18px;
     width: 70%;
 }
 
-#app-skeleton .skeleton-subtitle {
+.app-skeleton .skeleton-subtitle {
     border-radius: 6px;
     height: 18px;
     width: 50%;
 }
 
-#app-skeleton .skeleton-animation {
+.app-skeleton .skeleton-animation {
     background: linear-gradient(
         90deg,
         hsl(210, 15%, 88%),

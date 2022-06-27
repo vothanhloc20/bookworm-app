@@ -9,7 +9,7 @@ class Skeleton extends React.Component {
 
     render() {
         return (
-            <Card id="app-skeleton">
+            <Card className="app-skeleton">
                 <div className="skeleton-image">
                     <div className="skeleton-image-layout">
                         <div className="skeleton-image-layout-image skeleton-animation"></div>
