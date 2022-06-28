@@ -6,6 +6,7 @@ import {
     getShopData,
 } from "../../adapters/ShopAdapter/ShopAdapter.js";
 
+import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import Dropdown from "../../components/base/Dropdown/Dropdown.js";
 import { FaFilter } from "react-icons/fa";
 import RenderBookData from "../../components/layouts/Shop/Common/RenderBookData.js";
@@ -21,6 +22,9 @@ import { sortData } from "../../../assets/data/sort.js";
 class Shop extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: [],
+        };
     }
 
     componentDidMount() {
@@ -31,41 +35,23 @@ class Shop extends React.Component {
         const { data, books } = await getShopData();
         this.props.setDataFilter(data);
         this.setBooks(books);
+        this.props.setFirstLoading(false);
     };
 
     handlePerPage = async (event) => {
         this.handleStateData(1);
-        this.props.setCurrentPerPage(event);
-        const response = await getBooks({ perPage: event });
+        await this.props.setCurrentPerPage(event);
+        const { category, author, perPage } = this.handleStateAdvanced();
+        const response = await getBooks({
+            perPage,
+            category,
+            author,
+        });
         this.setBooks(response);
     };
 
     getFilterBooks = async () => {
-        let category;
-        let author;
-        let perPage;
-
-        const filterStateArray = [...this.props.shop.current_filter];
-
-        const categoryIndex = filterStateArray.findIndex(
-            (item) => item.title === "Category"
-        );
-        const authorIndex = filterStateArray.findIndex(
-            (item) => item.title === "Author"
-        );
-
-        if (categoryIndex !== -1) {
-            category = filterStateArray[categoryIndex].item;
-        }
-
-        if (authorIndex !== -1) {
-            author = filterStateArray[authorIndex].item;
-        }
-
-        if (this.props.shop.per_page !== 5) {
-            perPage = this.props.shop.per_page;
-        }
-
+        const { category, author, perPage } = this.handleStateAdvanced();
         this.handleStateData(1);
         const response = await getBooks({
             perPage,
@@ -76,16 +62,50 @@ class Shop extends React.Component {
     };
 
     handleStateData = (pageNumber) => {
+        this.props.setLoading(true);
         this.props.setBooks([]);
         this.props.setCurrentPage(pageNumber);
+    };
+
+    handleStateAdvanced = () => {
+        let category;
+        let author;
+        let perPage;
+        const filterStateArray = [...this.props.shop.current_filter];
+        const categoryIndex = filterStateArray.findIndex(
+            (item) => item.title === "Category"
+        );
+        const authorIndex = filterStateArray.findIndex(
+            (item) => item.title === "Author"
+        );
+        if (categoryIndex !== -1) {
+            category = filterStateArray[categoryIndex].item;
+        }
+        if (authorIndex !== -1) {
+            author = filterStateArray[authorIndex].item;
+        }
+        if (this.props.shop.per_page !== 5) {
+            perPage = this.props.shop.per_page;
+        }
+        return {
+            category,
+            author,
+            perPage,
+        };
     };
 
     setBooks = (payload) => {
         const { data, total, last_page, from, to } = payload.data;
         this.props.setBooks(data);
-        this.props.setTotalPage(last_page);
-        this.props.setIndexItem({ from, to });
+        if (data.length > 0) {
+            this.props.setIndexItem({ from, to });
+            this.props.setTotalPage(last_page);
+        } else {
+            this.props.setIndexItem({ from: 0, to: 0 });
+            this.props.setTotalPage(0);
+        }
         this.props.setItemsTotal(total);
+        this.props.setLoading(false);
     };
 
     render() {
@@ -129,24 +149,37 @@ class Shop extends React.Component {
                                     </p>
                                 </Col>
                                 <Col className="d-flex justify-content-end">
-                                    <Dropdown
-                                        variant="blue"
-                                        currentSelect="Sort by on sale"
-                                        selectData={sortData}
-                                        size="sm"
-                                        customClass="mr-4"
-                                    />
-                                    <Dropdown
-                                        variant="blue"
-                                        currentSelect={`Show ${this.props.shop.per_page}`}
-                                        size="sm"
-                                        selectData={showData}
-                                        handleCurrentItem={this.handlePerPage}
-                                    />
+                                    {this.props.shop.first_loading ? (
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <ButtonSkeleton />
+                                            <span className="mx-2"></span>
+                                            <ButtonSkeleton />
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <Dropdown
+                                                variant="blue"
+                                                currentSelect="Sort by on sale"
+                                                selectData={sortData}
+                                                size="sm"
+                                                customClass="mr-4"
+                                            />
+                                            <Dropdown
+                                                variant="blue"
+                                                currentSelect={`Show ${this.props.shop.per_page}`}
+                                                size="sm"
+                                                selectData={showData}
+                                                handleCurrentItem={
+                                                    this.handlePerPage
+                                                }
+                                            />
+                                        </>
+                                    )}
                                 </Col>
                             </Row>
                             <RenderBookData />
                             <RenderPagination
+                                handleStateAdvanced={this.handleStateAdvanced}
                                 handleStateData={this.handleStateData}
                                 setBooks={this.setBooks}
                             />

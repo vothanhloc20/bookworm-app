@@ -19,7 +19,7 @@ class RenderOnFeatured extends React.Component {
                     md={6}
                     sm={12}
                     quantity={8}
-                    customClass="pb-1 mb-4 align-items-stretch"
+                    customClass="p-2 align-items-stretch"
                 />
             ) : (
                 <FeaturedBooks data={this.props.home.tagFeaturedBooks} />

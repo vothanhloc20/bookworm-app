@@ -13,18 +13,17 @@ class RenderPagination extends React.Component {
     }
 
     handlePageChange = async (pageNumber) => {
-        let perPage;
         this.props.handleStateData(pageNumber);
         window.scrollTo({
             top: 0,
             behavior: "smooth",
         });
-        if (this.props.shop.per_page !== 5) {
-            perPage = this.props.shop.per_page;
-        }
+        const { category, author, perPage } = this.props.handleStateAdvanced();
         const response = await getBooks({
             page: pageNumber,
             perPage,
+            category,
+            author,
         });
         this.props.setBooks(response);
     };

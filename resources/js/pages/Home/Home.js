@@ -8,6 +8,7 @@ import {
     mapDispatchToProps,
 } from "../../adapters/HomeAdapter/HomeAdapter.js";
 
+import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import { FaAngleRight } from "react-icons/fa";
 import RenderOnFeatured from "../../components/layouts/Home/Common/RenderOnFeatured.js";
 import RenderOnSale from "../../components/layouts/Home/Common/RenderOnSale.js";
@@ -62,14 +63,20 @@ class Home extends React.Component {
                             <h4 className="font-weight-semi">On Sale</h4>
                         </Col>
                         <Col className="d-flex justify-content-end">
-                            <Button
-                                variant="blue"
-                                className="font-weight-semi d-flex align-items-center"
-                            >
-                                <span className="flex-grow-1">View All</span>
-                                &nbsp;
-                                <FaAngleRight />
-                            </Button>
+                            {this.props.home.topTenOnSaleBooks.length > 0 ? (
+                                <Button
+                                    variant="blue"
+                                    className="font-weight-semi d-flex align-items-center"
+                                >
+                                    <span className="flex-grow-1">
+                                        View All
+                                    </span>
+                                    &nbsp;
+                                    <FaAngleRight />
+                                </Button>
+                            ) : (
+                                <ButtonSkeleton />
+                            )}
                         </Col>
                     </Row>
                     <RenderOnSale />
@@ -79,26 +86,42 @@ class Home extends React.Component {
                         <h4 className="font-weight-semi mb-4">
                             Featured Books
                         </h4>
-                        <Button
-                            variant={
-                                this.props.home.isRecommended ? "blue" : "link"
-                            }
-                            className="font-weight-semi"
-                            disabled={this.props.home.isRecommended}
-                            onClick={() => this.handleTags("recommended")}
-                        >
-                            Recommended
-                        </Button>
-                        <Button
-                            variant={
-                                this.props.home.isRecommended ? "link" : "blue"
-                            }
-                            disabled={!this.props.home.isRecommended}
-                            className="font-weight-semi"
-                            onClick={() => this.handleTags("popular")}
-                        >
-                            Popular
-                        </Button>
+                        {this.props.home.tagFeaturedBooks.length > 0 ? (
+                            <>
+                                <Button
+                                    variant={
+                                        this.props.home.isRecommended
+                                            ? "blue"
+                                            : "link"
+                                    }
+                                    className="font-weight-semi"
+                                    disabled={this.props.home.isRecommended}
+                                    onClick={() =>
+                                        this.handleTags("recommended")
+                                    }
+                                >
+                                    Recommended
+                                </Button>
+                                <Button
+                                    variant={
+                                        this.props.home.isRecommended
+                                            ? "link"
+                                            : "blue"
+                                    }
+                                    disabled={!this.props.home.isRecommended}
+                                    className="font-weight-semi"
+                                    onClick={() => this.handleTags("popular")}
+                                >
+                                    Popular
+                                </Button>
+                            </>
+                        ) : (
+                            <div className="d-flex align-items-center justify-content-center">
+                                <ButtonSkeleton />
+                                <span className="mx-2"></span>
+                                <ButtonSkeleton />
+                            </div>
+                        )}
                     </div>
                     <RenderOnFeatured />
                 </section>

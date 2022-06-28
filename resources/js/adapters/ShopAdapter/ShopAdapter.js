@@ -6,8 +6,10 @@ import {
     setCurrentFilter,
     setCurrentPage,
     setCurrentPerPage,
+    setFirstLoading,
     setIndexItem,
     setItemsTotal,
+    setLoading,
     setTotalPage,
 } from "../../redux/actions/shop.action.js";
 
@@ -88,5 +90,7 @@ export const mapDispatchToProps = (dispatch) => {
         setCurrentFilter: (data) => dispatch(setCurrentFilter(data)),
         editCurrentFilter: (data) => dispatch(editCurrentFilter(data)),
         removeCurrentFilter: (data) => dispatch(removeCurrentFilter(data)),
+        setLoading: (data) => dispatch(setLoading(data)),
+        setFirstLoading: (data) => dispatch(setFirstLoading(data)),
     };
 };

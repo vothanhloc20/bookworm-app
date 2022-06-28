@@ -62,3 +62,17 @@ export const removeCurrentFilter = (data) => {
         payload: data,
     };
 };
+
+export const setLoading = (data) => {
+    return {
+        type: Type.shop_SET_LOADING,
+        payload: data,
+    };
+};
+
+export const setFirstLoading = (data) => {
+    return {
+        type: Type.shop_SET_FIRST_LOADING,
+        payload: data,
+    };
+};

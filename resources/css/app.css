@@ -168,6 +168,21 @@ select:focus,
     }
 }
 
+/* @media (min-width: 768px) {
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 100%;
+    }
+} */
+
+/* @media (max-width: 576px) {
+    .container,
+    .container-sm {
+        max-width: 100%;
+    }
+} */
+
 @media only screen and (min-width: 992px) {
     #app-hamburger-button {
         display: none;

@@ -41,6 +41,12 @@
     vertical-align: middle;
 }
 
+.app-skeleton .skeleton-button {
+    height: 32px;
+    padding: 0 54px;
+    border-radius: 6px;
+}
+
 .app-skeleton .skeleton-main-title {
     border-radius: 6px;
     height: 18px;

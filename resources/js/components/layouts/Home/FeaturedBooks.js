@@ -15,7 +15,7 @@ class FeaturedBooks extends React.Component {
                 lg={4}
                 md={6}
                 sm={12}
-                customClass="pb-1 mb-4 align-items-stretch"
+                customClass="p-2 align-items-stretch"
             />
         );
     }

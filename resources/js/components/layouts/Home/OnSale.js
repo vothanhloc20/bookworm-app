@@ -17,7 +17,7 @@ class OnSale extends React.Component {
     render() {
         return (
             <Swiper
-                spaceBetween={30}
+                spaceBetween={16}
                 slidesPerView={4}
                 navigation={false}
                 loop={true}
@@ -30,15 +30,12 @@ class OnSale extends React.Component {
                     0: {
                         slidesPerView: 1,
                     },
-                    // breakpoint >= 768px
-                    768: {
+                    576: {
                         slidesPerView: 2,
                     },
-                    // breakpoint >= 992px
-                    992: {
+                    768: {
                         slidesPerView: 3,
                     },
-                    // breakpoint >= 1200
                     1200: {
                         slidesPerView: 4,
                     },

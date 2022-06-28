@@ -1,6 +1,8 @@
 import * as Type from "../types/mainTypes.js";
 
 const initState = {
+    first_loading: true,
+    loading: true,
     total_page: 0,
     current_page: 1,
     per_page: 5,
@@ -67,6 +69,16 @@ const shop = (state = initState, action) => {
                 current_filter: state.current_filter
                     .slice(0, action.payload)
                     .concat(state.current_filter.slice(action.payload + 1)),
+            };
+        case Type.shop_SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload,
+            };
+        case Type.shop_SET_FIRST_LOADING:
+            return {
+                ...state,
+                first_loading: action.payload,
             };
         default:
             return state;
