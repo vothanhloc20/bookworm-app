@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Book\BookRepository;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -13,9 +14,9 @@ class BookController extends Controller
         $this->bookRepository = $bookRepository;
     }
 
-    public function getAllBooks()
+    public function getAllBooks(Request $request)
     {
-        return $this->bookRepository->getAllBooks();
+        return $this->bookRepository->getAllBooks($request);
     }
 
     public function getTopTenOnSaleBooks()
@@ -33,18 +34,8 @@ class BookController extends Controller
         return $this->bookRepository->getPopularBooks();
     }
 
-    public function getAllCategories()
+    public function getBookById($id)
     {
-        return $this->bookRepository->getAllCategories();
-    }
-
-    public function getAllAuthors()
-    {
-        return $this->bookRepository->getAllAuthors();
-    }
-
-    public function getAllRatingStars()
-    {
-        return $this->bookRepository->getAllRatingStars();
+        return $this->bookRepository->getBookById($id);
     }
 }
