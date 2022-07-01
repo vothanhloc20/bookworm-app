@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,11 +22,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/books/getAllBooks', [BookController::class, 'getAllBooks']);
-Route::get('/books/getTopTenOnSaleBooks', [BookController::class, 'getTopTenOnSaleBooks']);
-Route::get('/books/getRecommendedBooks', [BookController::class, 'getRecommendedBooks']);
-Route::get('/books/getPopularBooks', [BookController::class, 'getPopularBooks']);
-Route::get('/books/getAllCategories', [BookController::class, 'getAllCategories']);
-Route::get('/books/getAllAuthors', [BookController::class, 'getAllAuthors']);
-Route::get('/books/getAllRatingStars', [BookController::class, 'getAllRatingStars']);
+Route::prefix('books')->group(function () {
+    Route::get('/getAllBooks', [BookController::class, 'getAllBooks']);
+    Route::get('/getTopTenOnSaleBooks', [BookController::class, 'getTopTenOnSaleBooks']);
+    Route::get('/getRecommendedBooks', [BookController::class, 'getRecommendedBooks']);
+    Route::get('/getPopularBooks', [BookController::class, 'getPopularBooks']);
+    Route::get('/{id}', [BookController::class, 'getBookById']);
+});
+
+Route::prefix('categories')->group(function () {
+    Route::get('/getAllCategories', [CategoryController::class, 'getAllCategories']);
+});
+
+Route::prefix('authors')->group(function () {
+    Route::get('/getAllAuthors', [AuthorController::class, 'getAllAuthors']);
+});
+
+Route::prefix('reviews')->group(function () {
+    Route::post('/create', [ReviewController::class, 'createNewReview']);
+    Route::get('/getAllRatingStars', [ReviewController::class, 'getAllRatingStars']);
+    Route::get('/getReviewsByBookId/{id}', [ReviewController::class, 'getReviewsByBookId']);
+});
 
