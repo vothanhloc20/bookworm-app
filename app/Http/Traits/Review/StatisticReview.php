@@ -3,13 +3,13 @@
 namespace App\Http\Traits\Review;
 
 use App\Models\Review;
-use App\Http\Traits\AverageRatingStar;
+use Illuminate\Database\Eloquent\Builder;
 
 trait StatisticReview
 {
     use AverageRatingStar;
 
-    public function getTotalReviewRatingById($id)
+    public function getTotalReviewRatingById($id): Builder
     {
         return Review::query()
             ->where('review.book_id', $id)
@@ -20,7 +20,7 @@ trait StatisticReview
             ->groupBy('review.book_id', 'book_avg_rating.total_review', 'book_avg_rating.total_rating');
     }
 
-    public function countRatingStar($id)
+    public function countRatingStar($id): Builder
     {
         return Review::query()
             ->select('review.rating_star')

@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponse
 {
-    public function index($data = [], $status = null, $message = null): JsonResponse
+    public function apiResponse($data = [], $status = null, $message = null): JsonResponse
     {
         return response()->json([
             'status' => $status,

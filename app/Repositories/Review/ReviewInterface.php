@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 interface ReviewInterface
 {
-    public function getAllRatingStars();
+    public function getRecords(Request $request);
 
     public function getReviewsByBookId($id, Request $request);
 

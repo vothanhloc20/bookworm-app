@@ -22,25 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('books')->group(function () {
-    Route::get('/getAllBooks', [BookController::class, 'getAllBooks']);
-    Route::get('/getTopTenOnSaleBooks', [BookController::class, 'getTopTenOnSaleBooks']);
-    Route::get('/getRecommendedBooks', [BookController::class, 'getRecommendedBooks']);
-    Route::get('/getPopularBooks', [BookController::class, 'getPopularBooks']);
-    Route::get('/{id}', [BookController::class, 'getBookById']);
-});
-
-Route::prefix('categories')->group(function () {
-    Route::get('/getAllCategories', [CategoryController::class, 'getAllCategories']);
-});
-
-Route::prefix('authors')->group(function () {
-    Route::get('/getAllAuthors', [AuthorController::class, 'getAllAuthors']);
-});
-
-Route::prefix('reviews')->group(function () {
-    Route::post('/create', [ReviewController::class, 'createNewReview']);
-    Route::get('/getAllRatingStars', [ReviewController::class, 'getAllRatingStars']);
-    Route::get('/getReviewsByBookId/{id}', [ReviewController::class, 'getReviewsByBookId']);
-});
-
+Route::resource('authors', AuthorController::class)->only(['index']);
+Route::resource('categories', CategoryController::class)->only(['index']);
+Route::resource('reviews', ReviewController::class)->only(['index', 'show', 'store']);
+Route::resource('books', BookController::class)->only(['index', 'show']);

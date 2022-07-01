@@ -12,48 +12,41 @@ class BookRepository implements BookInterface
 {
     use ApiResponse;
 
-    public function getAllBooks(Request $request): JsonResponse
+    public function getRecords(Request $request): JsonResponse
     {
-        $per_page = $request->query('per_page') ? $request->query('per_page') : config('app.per_page');
+        $dataPaginate = [];
 
-        $data = BookResource::collection(Book::query()
+        $paginate = $request->get('mode');
+
+        $per_page = $request->query('per_page') ?
+            $request->query('per_page') : config('app.per_page');
+
+        $limit = $request->query('limit') ?
+            $request->query('limit') : null;
+
+        $data = Book::query()
             ->FilterBase($request)
-            ->SortBase($request)
-            ->paginate($per_page))->response()->getData();
+            ->SortBase($request);
 
-        return $this->index($data, 'success', 'Get Data Successfully');
-    }
+        if($paginate) {
+            foreach ($paginate as $key => $value) {
+                if ($key === 'paginate' && $value === 'on') {
+                    $dataPaginate = $data->paginate($per_page);
+                }
+            }
+        }
 
-    public function getTopTenOnSaleBooks(): JsonResponse
-    {
-        $data = BookResource::collection(Book::query()
-            ->OnSaleBooks()
-            ->limit(10)
-            ->get());
+        if (!is_null($limit)) {
+            $data = $data->limit($limit);
+        }
 
-        return $this->index($data, 'success', 'Get Data Successfully');
-    }
-
-    public function getRecommendedBooks(): JsonResponse
-    {
-        $data = BookResource::collection(Book::RecommendedBooks()
-            ->withAvg('review', 'rating_star')
-            ->distinct()
-            ->orderBy('review_avg_rating_star', 'desc')
-            ->orderBy('final_price', 'asc')
-            ->limit(8)
-            ->get());
-
-        return $this->index($data, 'success', 'Get Data Successfully');
-    }
-
-    public function getPopularBooks(): JsonResponse
-    {
-        $data = BookResource::collection(Book::PopularBooks()
-            ->limit(8)
-            ->get());
-
-        return $this->index($data, 'success', 'Get Data Successfully');
+        if (!empty($dataPaginate)) {
+            $dataPaginate = BookResource::collection($dataPaginate)->response()->getData();
+            return $this->apiResponse($dataPaginate, 'success', 'Get Data Successfully');
+        } else {
+            $data = BookResource::collection($data->get());
+            return $this->apiResponse($data, 'success', 'Get Data Successfully');
+        }
     }
 
     public function getBookById($id)
@@ -74,7 +67,7 @@ class BookRepository implements BookInterface
         if ($data->isEmpty()) {
             abort(404);
         } else {
-            return $this->index($data, 'success', 'Get Data Successfully');
+            return $this->apiResponse($data, 'success', 'Get Data Successfully');
         }
     }
 }
