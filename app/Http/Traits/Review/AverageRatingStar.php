@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\Http\Traits\Review;
 
 use App\Models\Book;
+use Illuminate\Database\Eloquent\Builder;
 
 trait AverageRatingStar
 {
-    public function getAverageRatingStar()
+    public function getAverageRatingStar(): Builder
     {
         $bookQuery = Book::query();
 

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-    use ScopeReview;
 
     public $timestamps = false;
     protected $table = 'review';
@@ -18,5 +17,37 @@ class Review extends Model
     public function Book()
     {
         return $this->belongsTo(Book::class);
+    }
+
+    public function scopeFilterBase($query, $request)
+    {
+        return $query
+            ->when($request->has('filter.rating_star'), function ($query) use ($request) {
+                $rating_star = $request->query('filter')['rating_star'];
+
+                $query
+                    ->where('review.rating_star', $rating_star);
+            });
+    }
+
+    public function scopeSortBase($query, $request)
+    {
+        $query
+            ->when($request->has('sort'), function ($query) use ($request) {
+                $sortBy = '';
+                $sortValue = '';
+
+                foreach ($request->get('sort') as $key => $value) {
+                    $sortBy = $key;
+                    $sortValue = $value;
+                }
+
+                $query
+                    ->when($sortBy === 'review_date', function ($query) use ($sortValue) {
+                        $query->orderBy('review.review_date', $sortValue);
+                    });
+            });
+
+        return $query;
     }
 }

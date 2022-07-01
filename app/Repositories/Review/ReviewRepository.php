@@ -8,26 +8,51 @@ use App\Http\Traits\Review\StatisticReview;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 
 class ReviewRepository implements ReviewInterface
 {
     use ApiResponse;
     use StatisticReview;
 
-    public function getAllRatingStars()
-    {
-        $data = Review::query()
-            ->select('rating_star')
-            ->groupBy('rating_star')
-            ->orderBy('rating_star')
-            ->get();
+    private Builder $query;
 
-        return $this->index($data, 'success', 'Get Data Successfully');
+    public function __construct()
+    {
+        $this->query = Review::query();
     }
 
-    public function getReviewsByBookId($id, Request $request)
+    public function getRecords(Request $request): JsonResponse
     {
-        $per_page = $request->query('per_page') ? $request->query('per_page') : config('app.per_page');
+        $conditions = $request->get('mode');
+
+        $data = null;
+
+        if ($conditions) {
+            foreach ($conditions as $key => $value) {
+                $data = match ($key) {
+                    'rating_star' => $this->query
+                        ->select($key)
+                        ->orderBy($key, $value)
+                        ->groupBy('rating_star')
+                        ->get(),
+                    default => null,
+                };
+            }
+        }
+
+        if (!$conditions) {
+            $data = $this->query->get();
+        }
+
+        return $this->apiResponse($data, 'success', 'Get Data Successfully');
+    }
+
+    public function getReviewsByBookId($id, Request $request): JsonResponse
+    {
+        $per_page = $request->query('per_page')
+            ? $request->query('per_page') : config('app.per_page');
 
         $data = Review::query()
             ->FilterBase($request)
@@ -43,10 +68,12 @@ class ReviewRepository implements ReviewInterface
             'count_rating_star' => $countRatingStar,
         ]);
 
-        return $addDataPaginate->merge($data);
+        $final = $addDataPaginate->merge($data);
+
+        return $this->apiResponse($final, 'success', 'Get Data Successfully');
     }
 
-    public function createNewReview(ReviewRequest $request)
+    public function createNewReview(ReviewRequest $request): JsonResponse
     {
         $body = [
             'book_id' => $request->book_id,
@@ -58,6 +85,6 @@ class ReviewRepository implements ReviewInterface
 
         $newProduct = Review::create($body);
 
-        return $this->index($newProduct,'success', 'Create Review Successfully');
+        return $this->apiResponse($newProduct, 'success', 'Create Review Successfully');
     }
 }
