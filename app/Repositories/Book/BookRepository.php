@@ -4,7 +4,6 @@ namespace App\Repositories\Book;
 
 use App\Http\Resources\BookResource;
 use App\Http\Traits\ApiResponse;
-use App\Http\Traits\Book\ScopeBook;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,12 +14,12 @@ class BookRepository implements BookInterface
 
     public function getAllBooks(Request $request): JsonResponse
     {
-        $per_page = $request->query('per_page') ? $request->query('per_page') : 5;
+        $per_page = $request->query('per_page') ? $request->query('per_page') : config('app.per_page');
 
         $data = BookResource::collection(Book::query()
             ->FilterBase($request)
             ->SortBase($request)
-            ->paginate($per_page));
+            ->paginate($per_page))->response()->getData();
 
         return $this->index($data, 'success', 'Get Data Successfully');
     }
@@ -37,7 +36,7 @@ class BookRepository implements BookInterface
 
     public function getRecommendedBooks(): JsonResponse
     {
-        $data = BookResource::collection(Book::BaseBooks()
+        $data = BookResource::collection(Book::RecommendedBooks()
             ->withAvg('review', 'rating_star')
             ->distinct()
             ->orderBy('review_avg_rating_star', 'desc')
@@ -60,7 +59,7 @@ class BookRepository implements BookInterface
     public function getBookById($id)
     {
         $data = Book::query()
-            ->BaseBooks()
+            ->JoinWithBooks()
             ->where('book.id', '=', $id)
             ->groupBy('book.id',
                 'book.book_title',
@@ -72,7 +71,11 @@ class BookRepository implements BookInterface
                 'check_discount.final_price')
             ->get();
 
-        return $this->index($data, 'success', 'Get Data Successfully');
+        if ($data->isEmpty()) {
+            abort(404);
+        } else {
+            return $this->index($data, 'success', 'Get Data Successfully');
+        }
     }
 }
 

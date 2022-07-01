@@ -2,9 +2,11 @@
 
 namespace App\Repositories\Book;
 
+use Illuminate\Http\Request;
+
 interface BookInterface
 {
-    public function getAllBooks();
+    public function getAllBooks(Request $request);
 
     public function getTopTenOnSaleBooks();
 
@@ -12,9 +14,5 @@ interface BookInterface
 
     public function getPopularBooks();
 
-    public function getAllCategories();
-
-    public function getAllAuthors();
-
-    public function getAllRatingStars();
+    public function getBookById($id);
 }
