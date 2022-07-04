@@ -51,7 +51,8 @@ class BookRepository implements BookInterface
 
     public function getBookById($id)
     {
-        $data = Book::query()
+        $data = BookResource::collection(
+            Book::query()
             ->JoinWithBooks()
             ->where('book.id', '=', $id)
             ->groupBy('book.id',
@@ -62,7 +63,8 @@ class BookRepository implements BookInterface
                 'book.book_summary',
                 'check_discount.discount_price',
                 'check_discount.final_price')
-            ->get();
+            ->get()
+        );
 
         if ($data->isEmpty()) {
             abort(404);

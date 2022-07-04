@@ -31,14 +31,13 @@ class ReviewRepository implements ReviewInterface
 
         if ($conditions) {
             foreach ($conditions as $key => $value) {
-                $data = match ($key) {
-                    'rating_star' => $this->query
-                        ->select($key)
-                        ->orderBy($key, $value)
-                        ->groupBy('rating_star')
-                        ->get(),
-                    default => null,
-                };
+                if ($key === 'rating_star' && $value === 'on') {
+                    $data = $this->query
+                    ->select($key)
+                    ->orderBy($key)
+                    ->groupBy('rating_star')
+                    ->get();
+                }
             }
         }
 
