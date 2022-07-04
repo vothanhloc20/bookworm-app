@@ -7,20 +7,6 @@ export const setTopTenOnSaleBooks = (data) => {
     };
 };
 
-export const setRecommendedBooks = (data) => {
-    return {
-        type: Type.home_SET_RECOMMENDED_BOOKS,
-        payload: data,
-    };
-};
-
-export const setPopularBooks = (data) => {
-    return {
-        type: Type.home_SET_POPULAR_BOOKS,
-        payload: data,
-    };
-};
-
 export const setTagFeaturedBooks = (data) => {
     return {
         type: Type.home_SET_TAG_FEATURED_BOOKS,
@@ -31,6 +17,13 @@ export const setTagFeaturedBooks = (data) => {
 export const setIsRecommended = (data) => {
     return {
         type: Type.home_SET_IS_RECOMMENDED,
+        payload: data,
+    };
+};
+
+export const setFirstLoading = (data) => {
+    return {
+        type: Type.home_SET_FIRST_LOADING,
         payload: data,
     };
 };

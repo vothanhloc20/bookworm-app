@@ -21,7 +21,7 @@ class TextField extends React.Component {
 
     render() {
         return (
-            <Form.Group id="app-text-field" className="mb-4">
+            <Form.Group className="app-text-field mb-4">
                 <Form.Label className="font-weight-semi">
                     {this.state.label}
                     {this.state.mandatory ? (

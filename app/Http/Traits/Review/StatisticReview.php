@@ -16,8 +16,8 @@ trait StatisticReview
             ->joinSub($this->getAverageRatingStar(), 'book_avg_rating', function ($join) use ($id) {
                 $join->on('review.book_id', '=', 'book_avg_rating.id');
             })
-            ->select('book_avg_rating.total_review', 'book_avg_rating.total_rating')
-            ->groupBy('review.book_id', 'book_avg_rating.total_review', 'book_avg_rating.total_rating');
+            ->select('book_avg_rating.total_review', 'book_avg_rating.total_rating', 'book_avg_rating.average_rating_star')
+            ->groupBy('review.book_id', 'book_avg_rating.total_review', 'book_avg_rating.total_rating', 'book_avg_rating.average_rating_star');
     }
 
     public function countRatingStar($id): Builder

@@ -41,6 +41,13 @@
     vertical-align: middle;
 }
 
+.app-skeleton
+    .skeleton-image
+    .skeleton-image-layout
+    .skeleton-image-layout-image.skeleton-product-image {
+    border-bottom-right-radius: 6px;
+}
+
 .app-skeleton .skeleton-button {
     height: 32px;
     padding: 0 54px;
@@ -63,6 +70,12 @@
     border-radius: 6px;
     height: 18px;
     width: 50%;
+}
+
+.app-skeleton .skeleton-subtitle-2 {
+    border-radius: 6px;
+    height: 18px;
+    width: 30%;
 }
 
 .app-skeleton .skeleton-animation {

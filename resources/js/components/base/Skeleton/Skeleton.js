@@ -12,16 +12,16 @@ class Skeleton extends React.Component {
             <Card className="app-skeleton">
                 <div className="skeleton-image">
                     <div className="skeleton-image-layout">
-                        <div className="skeleton-image-layout-image skeleton-animation"></div>
+                        <div className="skeleton-image-layout-image skeleton-animation" />
                     </div>
                 </div>
                 <Card.Body>
-                    <div className="skeleton-main-title skeleton-animation mb-3"></div>
-                    <div className="skeleton-title skeleton-animation mb-5"></div>
-                    <div className="skeleton-subtitle skeleton-animation"></div>
+                    <div className="skeleton-main-title skeleton-animation mb-3" />
+                    <div className="skeleton-title skeleton-animation mb-5" />
+                    <div className="skeleton-subtitle skeleton-animation" />
                 </Card.Body>
                 <Card.Footer>
-                    <div className="skeleton-title skeleton-animation"></div>
+                    <div className="skeleton-title skeleton-animation" />
                 </Card.Footer>
             </Card>
         );

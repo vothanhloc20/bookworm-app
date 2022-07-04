@@ -76,3 +76,10 @@ export const setFirstLoading = (data) => {
         payload: data,
     };
 };
+
+export const setCurrentSort = (data) => {
+    return {
+        type: Type.shop_SET_CURRENT_SORT,
+        payload: data,
+    };
+};

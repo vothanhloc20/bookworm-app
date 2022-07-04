@@ -6,6 +6,7 @@ import {
     setCurrentFilter,
     setCurrentPage,
     setCurrentPerPage,
+    setCurrentSort,
     setFirstLoading,
     setIndexItem,
     setItemsTotal,
@@ -14,18 +15,19 @@ import {
 } from "../../redux/actions/shop.action.js";
 
 import bookApi from "../../api/bookApi.js";
+import filterDataApi from "../../api/filterDataApi.js";
 import { setDataFilter } from "../../redux/actions/filter.action.js";
 
 export const getAllCategories = () => {
-    return bookApi.getAllCategories();
+    return filterDataApi.getAllCategories();
 };
 
 export const getAllAuthors = () => {
-    return bookApi.getAllAuthors();
+    return filterDataApi.getAllAuthors();
 };
 
 export const getAllRatingStars = () => {
-    return bookApi.getAllRatingStars();
+    return filterDataApi.getAllRatingStars();
 };
 
 export const getBooks = ({
@@ -33,12 +35,19 @@ export const getBooks = ({
     perPage = undefined,
     category = undefined,
     author = undefined,
+    ratingStar = undefined,
+    sortValue = undefined,
+    sortKey = undefined,
 } = {}) => {
     return bookApi.getBooks({
         page,
         perPage,
         category,
         author,
+        ratingStar,
+        sortKey,
+        sortValue,
+        paginate: true,
     });
 };
 
@@ -92,5 +101,6 @@ export const mapDispatchToProps = (dispatch) => {
         removeCurrentFilter: (data) => dispatch(removeCurrentFilter(data)),
         setLoading: (data) => dispatch(setLoading(data)),
         setFirstLoading: (data) => dispatch(setFirstLoading(data)),
+        setCurrentSort: (data) => dispatch(setCurrentSort(data)),
     };
 };

@@ -11,7 +11,6 @@
 /* CSS of components */
 @import "components/card_product.css";
 @import "components/cart_list.css";
-@import "components/control_quantity.css";
 @import "components/product_information.css";
 @import "components/text_field.css";
 @import "components/skeleton.css";
