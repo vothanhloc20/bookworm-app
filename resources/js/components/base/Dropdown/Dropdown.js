@@ -29,6 +29,7 @@ class Dropdown extends React.Component {
                             <BootstrapDropdown.Item
                                 eventKey={item.title}
                                 key={index}
+                                active={item.title === this.props.currentSelect}
                             >
                                 {item.title}
                             </BootstrapDropdown.Item>

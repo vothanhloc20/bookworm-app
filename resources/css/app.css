@@ -70,6 +70,14 @@ select:focus,
     box-shadow: none !important;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 .custom-control-input:checked ~ .custom-control-label::before {
     background-color: var(--app-blue);
     border-color: var(--app-blue);
@@ -111,8 +119,9 @@ select:focus,
 
 .app-divide-2 {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: var(--app-blue);
+    opacity: 0.4;
     border-radius: 4px;
 }
 
@@ -143,19 +152,33 @@ select:focus,
     color: var(--app-grey);
 }
 
-/* Cursor */
 .cursor-pointer {
     cursor: pointer;
 }
 
-/* Border Radius */
 .app-border-8px {
     border-radius: 8px;
 }
 
-/* Custom Swiper Slider */
+.app-border-radius-right-0 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.app-border-radius-left-0 {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 .swiper-slide {
     height: auto !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: var(--app-blue);
+    background-color: var(--app-light-blue);
+    font-weight: var(--font-semi);
 }
 
 @media (min-width: 1200px) {

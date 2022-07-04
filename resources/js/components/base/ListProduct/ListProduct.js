@@ -24,13 +24,15 @@ class ListProduct extends React.Component {
                             className={this.props.customClass}
                         >
                             <CardProduct
+                                productId={item.id}
                                 productImage={
                                     bookCoverData[item.book_cover_photo]
                                 }
                                 productName={item.book_title}
                                 productAuthor={item.author_name}
+                                productIsDiscount={item.is_discount}
                                 productDiscountPrice={item.discount_price}
-                                productFinalPrice={item.book_price}
+                                productBookPrice={item.book_price}
                             />
                         </Col>
                     );

@@ -18,12 +18,16 @@ class RenderPagination extends React.Component {
             top: 0,
             behavior: "smooth",
         });
-        const { category, author, perPage } = this.props.handleStateAdvanced();
+        const { category, author, ratingStar, perPage, sortValue, sortKey } =
+            this.props.handleStateAdvanced();
         const response = await getBooks({
             page: pageNumber,
             perPage,
             category,
             author,
+            ratingStar,
+            sortValue,
+            sortKey,
         });
         this.props.setBooks(response);
     };

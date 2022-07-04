@@ -2,10 +2,9 @@ import * as Type from "../types/mainTypes.js";
 
 const initState = {
     topTenOnSaleBooks: [],
-    recommendedBooks: [],
-    popularBooks: [],
     tagFeaturedBooks: [],
     isRecommended: true,
+    firstLoading: true,
 };
 
 const home = (state = initState, action) => {
@@ -14,16 +13,6 @@ const home = (state = initState, action) => {
             return {
                 ...state,
                 topTenOnSaleBooks: [...action.payload],
-            };
-        case Type.home_SET_RECOMMENDED_BOOKS:
-            return {
-                ...state,
-                recommendedBooks: [...action.payload],
-            };
-        case Type.home_SET_POPULAR_BOOKS:
-            return {
-                ...state,
-                popularBooks: [...action.payload],
             };
         case Type.home_SET_TAG_FEATURED_BOOKS:
             return {
@@ -34,6 +23,11 @@ const home = (state = initState, action) => {
             return {
                 ...state,
                 isRecommended: action.payload,
+            };
+        case Type.home_SET_FIRST_LOADING:
+            return {
+                ...state,
+                firstLoading: action.payload,
             };
         default:
             return state;

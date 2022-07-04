@@ -39,24 +39,74 @@ class Shop extends React.Component {
     };
 
     handlePerPage = async (event) => {
+        const per_page = Number.parseInt(event.split(" ")[1]);
         this.handleStateData(1);
-        await this.props.setCurrentPerPage(event);
-        const { category, author, perPage } = this.handleStateAdvanced();
+        await this.props.setCurrentPerPage(per_page);
+        const { category, author, ratingStar, perPage, sortValue, sortKey } =
+            this.handleStateAdvanced();
         const response = await getBooks({
             perPage,
             category,
             author,
+            ratingStar,
+            sortValue,
+            sortKey,
+        });
+        this.setBooks(response);
+    };
+
+    handleSort = async (event) => {
+        this.handleStateData(1);
+        switch (event) {
+            case "Sort by on sale":
+                await this.props.setCurrentSort({
+                    sort_key: "Sort by on sale",
+                    sort_value: "desc",
+                });
+                break;
+            case "Sort by popularity":
+                await this.props.setCurrentSort({
+                    sort_key: "Sort by popularity",
+                    sort_value: "desc",
+                });
+                break;
+            case "Sort by price: low to high":
+                await this.props.setCurrentSort({
+                    sort_key: "Sort by price: low to high",
+                    sort_value: "asc",
+                });
+                break;
+            case "Sort by price: high to low":
+                await this.props.setCurrentSort({
+                    sort_key: "Sort by price: high to low",
+                    sort_value: "desc",
+                });
+                break;
+        }
+        const { category, author, ratingStar, perPage, sortValue, sortKey } =
+            this.handleStateAdvanced();
+        const response = await getBooks({
+            perPage,
+            category,
+            author,
+            ratingStar,
+            sortValue,
+            sortKey,
         });
         this.setBooks(response);
     };
 
     getFilterBooks = async () => {
-        const { category, author, perPage } = this.handleStateAdvanced();
+        const { category, author, ratingStar, perPage, sortValue, sortKey } =
+            this.handleStateAdvanced();
         this.handleStateData(1);
         const response = await getBooks({
             perPage,
             category,
             author,
+            ratingStar,
+            sortValue,
+            sortKey,
         });
         this.setBooks(response);
     };
@@ -70,7 +120,10 @@ class Shop extends React.Component {
     handleStateAdvanced = () => {
         let category;
         let author;
+        let ratingStar;
         let perPage;
+        let sortKey;
+        let sortValue;
         const filterStateArray = [...this.props.shop.current_filter];
         const categoryIndex = filterStateArray.findIndex(
             (item) => item.title === "Category"
@@ -78,25 +131,53 @@ class Shop extends React.Component {
         const authorIndex = filterStateArray.findIndex(
             (item) => item.title === "Author"
         );
+        const ratingStarIndex = filterStateArray.findIndex(
+            (item) => item.title === "Rating Review"
+        );
         if (categoryIndex !== -1) {
             category = filterStateArray[categoryIndex].item;
         }
         if (authorIndex !== -1) {
             author = filterStateArray[authorIndex].item;
         }
+        if (ratingStarIndex !== -1) {
+            ratingStar = Number.parseInt(
+                filterStateArray[ratingStarIndex].item.split(" ")[0]
+            );
+        }
         if (this.props.shop.per_page !== 5) {
             perPage = this.props.shop.per_page;
+        }
+        if (this.props.shop.sort_key && this.props.shop.sort_value) {
+            sortValue = this.props.shop.sort_value;
+            switch (this.props.shop.sort_key) {
+                case "Sort by on sale":
+                    sortKey = "on_sale";
+                    break;
+                case "Sort by popularity":
+                    sortKey = "on_popularity";
+                    break;
+                case "Sort by price: low to high":
+                case "Sort by price: high to low":
+                    sortKey = "price";
+                    break;
+                default:
+                    sortKey = "on_sale";
+            }
         }
         return {
             category,
             author,
+            ratingStar,
             perPage,
+            sortValue,
+            sortKey,
         };
     };
 
     setBooks = (payload) => {
-        const { data, total, last_page, from, to } = payload.data;
-        this.props.setBooks(data);
+        const { data, meta } = payload.data;
+        const { total, last_page, from, to } = meta;
         if (data.length > 0) {
             this.props.setIndexItem({ from, to });
             this.props.setTotalPage(last_page);
@@ -106,6 +187,7 @@ class Shop extends React.Component {
         }
         this.props.setItemsTotal(total);
         this.props.setLoading(false);
+        this.props.setBooks(data);
     };
 
     render() {
@@ -159,10 +241,15 @@ class Shop extends React.Component {
                                         <>
                                             <Dropdown
                                                 variant="blue"
-                                                currentSelect="Sort by on sale"
+                                                currentSelect={
+                                                    this.props.shop.sort_key
+                                                }
                                                 selectData={sortData}
                                                 size="sm"
                                                 customClass="mr-4"
+                                                handleCurrentItem={
+                                                    this.handleSort
+                                                }
                                             />
                                             <Dropdown
                                                 variant="blue"

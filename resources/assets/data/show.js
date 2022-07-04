@@ -1,14 +1,14 @@
 export const showData = [
     {
-        "title": 5
+        title: "Show 5",
     },
     {
-        "title": 10,
+        title: "Show 10",
     },
     {
-        "title": 15,
+        title: "Show 15",
     },
     {
-        "title": 20,
-    }
-]
+        title: "Show 20",
+    },
+];

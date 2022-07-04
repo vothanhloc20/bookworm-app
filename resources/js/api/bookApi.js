@@ -1,45 +1,20 @@
 import axiosClient from "./axiosClient.js";
 
-let prefix = "/books";
+const prefix = "/books";
 
 const bookApi = {
-    getTopTenOnSaleBooks: () => {
-        const url = `${prefix}/getTopTenOnSaleBooks`;
-        return axiosClient.get(url);
-    },
-
-    getRecommendedBooks: () => {
-        const url = `${prefix}/getRecommendedBooks`;
-        return axiosClient.get(url);
-    },
-
-    getPopularBooks: () => {
-        const url = `${prefix}/getPopularBooks`;
-        return axiosClient.get(url);
-    },
-
-    getAllCategories: () => {
-        const url = `${prefix}/getAllCategories`;
-        return axiosClient.get(url);
-    },
-
-    getAllAuthors: () => {
-        const url = `${prefix}/getAllAuthors`;
-        return axiosClient.get(url);
-    },
-
-    getAllRatingStars: () => {
-        const url = `${prefix}/getAllRatingStars`;
-        return axiosClient.get(url);
-    },
-
     getBooks: ({
         page = undefined,
         perPage = undefined,
         category = undefined,
         author = undefined,
+        ratingStar = undefined,
+        sortKey = "on_sale",
+        sortValue = "desc",
+        limit = undefined,
+        paginate = false,
     } = {}) => {
-        let url = `${prefix}/getAllBooks`;
+        let url = prefix;
         const queryStringArray = [];
 
         if (page) {
@@ -51,11 +26,27 @@ const bookApi = {
         }
 
         if (category) {
-            queryStringArray.push(`category=${category}`);
+            queryStringArray.push(`filter[category]=${category}`);
         }
 
         if (author) {
-            queryStringArray.push(`author=${author}`);
+            queryStringArray.push(`filter[author]=${author}`);
+        }
+
+        if (ratingStar) {
+            queryStringArray.push(`filter[rating_star]=${ratingStar}`);
+        }
+
+        if (sortKey && sortValue) {
+            queryStringArray.push(`sort[${sortKey}]=${sortValue}`);
+        }
+
+        if (limit) {
+            queryStringArray.push(`limit=${limit}`);
+        }
+
+        if (paginate) {
+            queryStringArray.push("mode[paginate]=on");
         }
 
         if (queryStringArray.length > 0) {
@@ -67,6 +58,10 @@ const bookApi = {
             }
         }
 
+        return axiosClient.get(url);
+    },
+    getBookById: (id) => {
+        const url = `${prefix}/${id}`;
         return axiosClient.get(url);
     },
 };

@@ -22,6 +22,10 @@
     background-color: var(--app-blue);
 }
 
+.bg-grey {
+    background-color: var(--app-grey);
+}
+
 .bg-light-blue {
     background-color: var(--app-light-blue);
 }

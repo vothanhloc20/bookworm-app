@@ -21,37 +21,31 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.getHomeBooksData();
+        this.getOnSaleBooks();
+        this.getRecommendedBooks();
     }
 
-    getHomeBooksData = () => {
+    getOnSaleBooks = () => {
         getTopTenOnSaleBooks().then((result) => {
             this.props.setTopTenOnSaleBooks(result.data);
         });
+    };
+
+    getRecommendedBooks = () => {
+        this.props.setTagFeaturedBooks([]);
+        this.props.setIsRecommended(true);
         getRecommendedBooks().then((result) => {
-            this.props.setRecommendedBooks(result.data);
             this.props.setTagFeaturedBooks(result.data);
+            this.props.setFirstLoading(false);
         });
     };
 
-    getPopularBooks = async () => {
-        const { data } = await getPopularBooks();
-        this.props.setPopularBooks(data);
-        this.props.setTagFeaturedBooks(data);
-    };
-
-    handleTags = (tag) => {
-        this.props.setIsRecommended(!this.props.home.isRecommended);
-        if (tag === "recommended") {
-            this.props.setTagFeaturedBooks(this.props.home.recommendedBooks);
-        } else if (tag === "popular") {
-            if (this.props.home.popularBooks.length === 0) {
-                this.props.setTagFeaturedBooks([]);
-                this.getPopularBooks();
-            } else {
-                this.props.setTagFeaturedBooks(this.props.home.popularBooks);
-            }
-        }
+    getPopularBooks = () => {
+        this.props.setTagFeaturedBooks([]);
+        this.props.setIsRecommended(false);
+        getPopularBooks().then((result) => {
+            this.props.setTagFeaturedBooks(result.data);
+        });
     };
 
     render() {
@@ -86,7 +80,7 @@ class Home extends React.Component {
                         <h4 className="font-weight-semi mb-4">
                             Featured Books
                         </h4>
-                        {this.props.home.tagFeaturedBooks.length > 0 ? (
+                        {!this.props.home.firstLoading ? (
                             <>
                                 <Button
                                     variant={
@@ -96,9 +90,7 @@ class Home extends React.Component {
                                     }
                                     className="font-weight-semi"
                                     disabled={this.props.home.isRecommended}
-                                    onClick={() =>
-                                        this.handleTags("recommended")
-                                    }
+                                    onClick={() => this.getRecommendedBooks()}
                                 >
                                     Recommended
                                 </Button>
@@ -110,7 +102,7 @@ class Home extends React.Component {
                                     }
                                     disabled={!this.props.home.isRecommended}
                                     className="font-weight-semi"
-                                    onClick={() => this.handleTags("popular")}
+                                    onClick={() => this.getPopularBooks()}
                                 >
                                     Popular
                                 </Button>

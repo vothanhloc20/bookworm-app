@@ -4,6 +4,7 @@ import drawer from "./drawer.reducer.js";
 import filter from "./filter.reducer.js";
 import home from "./home.reducer.js";
 import modal from "./modal.reducer.js";
+import product from "./product.reducer.js";
 import shop from "./shop.reducer.js";
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     home,
     drawer,
     shop,
+    product,
 });
 
 export default rootReducer;
