@@ -45,13 +45,15 @@ class OnSale extends React.Component {
                     return (
                         <SwiperSlide key={index}>
                             <CardProduct
+                                productId={item.id}
                                 productImage={
                                     bookCoverData[item.book_cover_photo]
                                 }
                                 productName={item.book_title}
                                 productAuthor={item.author_name}
+                                productIsDiscount={item.is_discount}
                                 productDiscountPrice={item.discount_price}
-                                productFinalPrice={item.book_price}
+                                productBookPrice={item.book_price}
                             />
                         </SwiperSlide>
                     );

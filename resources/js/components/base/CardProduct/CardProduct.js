@@ -9,7 +9,7 @@ class CardProduct extends React.Component {
     }
     render() {
         return (
-            <Link to="/shop/1">
+            <Link to={`/shop/${this.props.productId}`}>
                 <Card id="app-card-product" className="h-100">
                     <div className="card-image">
                         <div className="card-image-layout">
@@ -27,15 +27,15 @@ class CardProduct extends React.Component {
                         <Card.Text>{this.props.productAuthor}</Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted">
-                        {this.props.productDiscountPrice === null ? (
+                        {!this.props.productIsDiscount ? (
                             <span className="text-red font-weight-bold font-20px">
-                                ${this.props.productFinalPrice}
+                                ${this.props.productBookPrice}
                             </span>
                         ) : (
                             <>
                                 <strike>
                                     <span className="text-grey font-weight-medium">
-                                        {this.props.productFinalPrice}
+                                        {this.props.productBookPrice}
                                     </span>
                                 </strike>
                                 &nbsp;
