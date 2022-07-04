@@ -9,3 +9,4 @@ export const shop_EDIT_CURRENT_FILTER = "shop_EDIT_CURRENT_FILTER";
 export const shop_REMOVE_CURRENT_FILTER = "shop_REMOVE_CURRENT_FILTER";
 export const shop_SET_LOADING = "shop_SET_LOADING";
 export const shop_SET_FIRST_LOADING = "shop_SET_FIRST_LOADING";
+export const shop_SET_CURRENT_SORT = "shop_SET_CURRENT_SORT";

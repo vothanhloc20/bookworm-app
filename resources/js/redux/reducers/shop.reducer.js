@@ -9,6 +9,8 @@ const initState = {
     items_total: 0,
     from: 0,
     to: 0,
+    sort_key: "Sort by on sale",
+    sort_value: "desc",
     current_filter: [],
     books: [],
 };
@@ -79,6 +81,12 @@ const shop = (state = initState, action) => {
             return {
                 ...state,
                 first_loading: action.payload,
+            };
+        case Type.shop_SET_CURRENT_SORT:
+            return {
+                ...state,
+                sort_key: action.payload.sort_key,
+                sort_value: action.payload.sort_value,
             };
         default:
             return state;

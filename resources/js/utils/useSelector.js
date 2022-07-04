@@ -6,5 +6,6 @@ export const mapStateToProps = (state) => {
         home: state.home,
         drawer: state.drawer,
         shop: state.shop,
+        product: state.product,
     };
 };
