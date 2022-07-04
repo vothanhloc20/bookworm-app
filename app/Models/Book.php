@@ -55,33 +55,52 @@ class Book extends Model
             });
     }
 
-    public function scopeOnSaleBooks($query)
+    public function scopeOnSaleBooks($query, $onSaleSortDirection)
     {
         return $query
             ->JoinWithBooks()
             ->where('check_discount.discount_price', '!=', null)
             ->whereRaw('check_discount.discount_price = check_discount.final_price')
             ->selectRaw('book.book_price - check_discount.discount_price AS sub_price')
+            ->orderBy('sub_price', $onSaleSortDirection)
             ->orderBy('check_discount.final_price', 'asc');
     }
 
-    public function scopeOnRecommendedBooks($query)
+    public function scopeOnRecommendedBooks($query, $onRecommendedSortDirection)
     {
         return $query
             ->JoinWithBooks()
             ->join('review', 'book.id', '=', 'review.book_id')
             ->withAvg('review', 'rating_star')
-            ->distinct()
+            ->groupBy('book.id',
+                'book.book_title',
+                'author.author_name',
+                'book.book_price',
+                'book.book_cover_photo',
+                'book.book_summary',
+                'check_discount.discount_price',
+                'check_discount.final_price',
+                'review_avg_rating_star')
+            ->orderBy('review_avg_rating_star', $onRecommendedSortDirection)
             ->orderBy('check_discount.final_price', 'asc');
     }
 
-    public function scopeOnPopularBooks($query)
+    public function scopeOnPopularBooks($query, $onPopularSortDirection)
     {
         return $query
             ->JoinWithBooks()
             ->join('review', 'book.id', '=', 'review.book_id')
-            ->distinct()
             ->withCount('review')
+            ->groupBy('book.id',
+                'book.book_title',
+                'author.author_name',
+                'book.book_price',
+                'book.book_cover_photo',
+                'book.book_summary',
+                'check_discount.discount_price',
+                'check_discount.final_price',
+                'review_count')
+            ->orderBy('review_count', $onPopularSortDirection)
             ->orderBy('check_discount.final_price', 'asc');
     }
 
@@ -100,18 +119,16 @@ class Book extends Model
                 $query
                     ->when($sortBy === 'on_sale', function ($query) use ($sortValue) {
                         $query
-                            ->onSaleBooks()
-                            ->orderBy('sub_price', $sortValue);
+                            ->onSaleBooks($sortValue);
+
                     })
                     ->when($sortBy === 'on_popularity', function ($query) use ($sortValue) {
                         $query
-                            ->OnPopularBooks()
-                            ->orderBy('review_count', $sortValue);
+                            ->OnPopularBooks($sortValue);
                     })
                     ->when($sortBy === 'on_recommended', function ($query) use ($sortValue) {
                         $query
-                            ->OnRecommendedBooks()
-                            ->orderBy('review_avg_rating_star', $sortValue);
+                            ->OnRecommendedBooks($sortValue);
                     })
                     ->when($sortBy === 'price', function ($query) use ($sortValue) {
                         $query
