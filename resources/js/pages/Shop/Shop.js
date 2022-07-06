@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import {
     getBooks,
     getShopData,
@@ -9,6 +9,7 @@ import {
 import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import Dropdown from "../../components/base/Dropdown/Dropdown.js";
 import { FaFilter } from "react-icons/fa";
+import FilterDrawer from "../../components/base/Drawer/FilterDrawer.js";
 import RenderBookData from "../../components/layouts/Shop/Common/RenderBookData.js";
 import RenderCurrentValueFilter from "../../components/layouts/Shop/Common/RenderCurrentValueFilter.js";
 import RenderFilterData from "../../components/layouts/Shop/Common/RenderFilterData.js";
@@ -27,7 +28,10 @@ class Shop extends React.Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await this.props.setReset();
+        await this.props.setResetFilter();
+        this.setState({ data: [] });
         this.getShopData();
     }
 
@@ -175,6 +179,10 @@ class Shop extends React.Component {
         };
     };
 
+    handleDrawer = () => {
+        this.props.openFilterDrawer();
+    };
+
     setBooks = (payload) => {
         const { data, meta } = payload.data;
         const { total, last_page, from, to } = meta;
@@ -194,16 +202,24 @@ class Shop extends React.Component {
         return (
             <main>
                 <section>
-                    <div className="d-flex align-items-center">
-                        <h4 className="font-weight-semi">Books</h4>
+                    <div
+                        className={`d-flex ${
+                            this.props.app.width <= 576
+                                ? "align-items-start flex-column"
+                                : "align-items-center"
+                        }`}
+                    >
+                        <p className="text-center font-18px font-weight-bold ">
+                            Books
+                        </p>
                         <RenderCurrentValueFilter />
                     </div>
-                    <div className="app-divide mt-4 mb-5"></div>
+                    <div className="app-divide mt-4 mb-5" />
                     <Row>
-                        <Col md={3}>
+                        <Col lg={3} className="pl-0 d-none d-lg-block">
                             <p className="mb-4 text-blue d-flex align-items-center">
                                 <FaFilter />
-                                <span className="flex-grow-1 font-weight-semi ml-2">
+                                <span className="flex-grow-1 font-16px font-weight-semi ml-2">
                                     Filter By
                                 </span>
                             </p>
@@ -211,9 +227,22 @@ class Shop extends React.Component {
                                 getFilterBooks={this.getFilterBooks}
                             />
                         </Col>
-                        <Col md={9}>
+                        <Col
+                            lg={9}
+                            className={`pr-0 ${
+                                this.props.app.width <= 992 ? "pl-0" : ""
+                            } ${this.props.app.width <= 400 ? "mx-2" : ""}`}
+                        >
                             <Row className="align-items-center mb-2">
-                                <Col>
+                                <Col
+                                    xs={12}
+                                    sm={6}
+                                    className={`${
+                                        this.props.app.width <= 576
+                                            ? "mb-3 pl-2"
+                                            : ""
+                                    }`}
+                                >
                                     <p>
                                         Showing {this.props.shop.from} -{" "}
                                         {this.props.shop.to} of{" "}
@@ -230,7 +259,15 @@ class Shop extends React.Component {
                                         )}
                                     </p>
                                 </Col>
-                                <Col className="d-flex justify-content-end">
+                                <Col
+                                    xs={12}
+                                    sm={6}
+                                    className={`d-flex pr-2 ${
+                                        this.props.app.width <= 576
+                                            ? "justify-content-start pl-1"
+                                            : "justify-content-end"
+                                    }`}
+                                >
                                     {this.props.shop.first_loading ? (
                                         <div className="d-flex align-items-center justify-content-center">
                                             <ButtonSkeleton />
@@ -246,7 +283,8 @@ class Shop extends React.Component {
                                                 }
                                                 selectData={sortData}
                                                 size="sm"
-                                                customClass="mr-4"
+                                                customClass="mr-2"
+                                                customClassButtonDropdown="font-weight-bold"
                                                 handleCurrentItem={
                                                     this.handleSort
                                                 }
@@ -256,6 +294,7 @@ class Shop extends React.Component {
                                                 currentSelect={`Show ${this.props.shop.per_page}`}
                                                 size="sm"
                                                 selectData={showData}
+                                                customClassButtonDropdown="font-weight-bold"
                                                 handleCurrentItem={
                                                     this.handlePerPage
                                                 }
@@ -273,6 +312,14 @@ class Shop extends React.Component {
                         </Col>
                     </Row>
                 </section>
+                <Button
+                    onClick={() => this.handleDrawer()}
+                    className="app-filter-button-shop"
+                    variant="blue"
+                >
+                    <FaFilter />
+                </Button>
+                <FilterDrawer getFilterBooks={this.getFilterBooks} />
             </main>
         );
     }

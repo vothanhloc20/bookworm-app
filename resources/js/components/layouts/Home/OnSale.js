@@ -28,7 +28,8 @@ class OnSale extends React.Component {
                 }}
                 breakpoints={{
                     0: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
+                        spaceBetween: 8,
                     },
                     576: {
                         slidesPerView: 2,

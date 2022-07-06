@@ -7,10 +7,14 @@ class Chip extends React.Component {
 
     render() {
         return (
-            <div className="px-2 py-1 d-flex align-items-center bg-light-blue app-border-8px text-blue font-weight-bold">
+            <div
+                className={`px-2 py-1 d-flex align-items-center app-border-8px font-weight-bold ${this.props.background} ${this.props.color}`}
+            >
                 {this.props.icon && <span>{this.props.icon}</span>}
                 <span
-                    className={`flex-grow-1 ${this.props.icon ? "ml-2" : ""}`}
+                    className={`flex-grow-1 font-16px ${
+                        this.props.icon ? "ml-2" : ""
+                    }`}
                 >
                     {this.props.title}
                 </span>

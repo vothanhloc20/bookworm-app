@@ -13,7 +13,7 @@ class About extends React.Component {
             <Container className="py-4 flex-grow-1">
                 <main>
                     <section>
-                        <h4 className="font-weight-semi">About Us</h4>
+                        <p className="font-weight-bold font-20px">About Us</p>
                         <div className="app-divide my-4"></div>
                         <AboutUs />
                     </section>

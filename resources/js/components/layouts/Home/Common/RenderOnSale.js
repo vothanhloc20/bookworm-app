@@ -21,7 +21,7 @@ class RenderOnSale extends React.Component {
             } else if (this.props.app.width >= 576) {
                 return 2;
             } else {
-                return 1;
+                return 2;
             }
         };
 
@@ -29,10 +29,12 @@ class RenderOnSale extends React.Component {
             this.props.home.topTenOnSaleBooks.length === 0 ? (
                 <GridSkeleton
                     xl={3}
+                    lg={4}
                     md={4}
                     sm={6}
+                    xs={6}
                     quantity={quantityOnSaleSkeleton()}
-                    customClass="p-2 align-items-stretch"
+                    customClass="app-card-padding align-items-stretch"
                 />
             ) : (
                 <OnSale data={this.props.home.topTenOnSaleBooks} />

@@ -16,8 +16,8 @@ class Skeleton extends React.Component {
                     </div>
                 </div>
                 <Card.Body>
-                    <div className="skeleton-main-title skeleton-animation mb-3" />
-                    <div className="skeleton-title skeleton-animation mb-5" />
+                    <div className="skeleton-main-title skeleton-animation mb-2" />
+                    <div className="skeleton-title skeleton-animation mb-2" />
                     <div className="skeleton-subtitle skeleton-animation" />
                 </Card.Body>
                 <Card.Footer>

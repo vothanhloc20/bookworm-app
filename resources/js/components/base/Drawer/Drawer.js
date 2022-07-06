@@ -15,7 +15,7 @@ class Drawer extends React.Component {
         this.props.showModal();
     };
 
-    handleDrawer = (e) => {
+    handleDrawer = () => {
         this.props.closeDrawer();
     };
 
@@ -27,7 +27,7 @@ class Drawer extends React.Component {
                         onClick={this.handleDrawer}
                         className="app-overlay cursor-pointer"
                     >
-                        <div className="app-overlay-scope"></div>
+                        <div className="app-overlay-scope" />
                     </div>
                 )}
                 <nav

@@ -20,6 +20,7 @@ class Dropdown extends React.Component {
                 <BootstrapDropdown.Toggle
                     variant={this.props.variant}
                     size={this.props.size}
+                    className={this.props.customClassButtonDropdown}
                 >
                     {this.props.currentSelect}
                 </BootstrapDropdown.Toggle>

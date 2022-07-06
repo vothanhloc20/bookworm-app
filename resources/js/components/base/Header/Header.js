@@ -29,18 +29,19 @@ class Header extends React.Component {
                 <Navbar.Brand>
                     <Link to="/">
                         <Row className="align-items-center">
-                            <Col>
+                            <Col className="px-0">
                                 <img
                                     src={Logo40}
                                     width="100%"
                                     height="100%"
                                     alt="Bookworm Logo"
+                                    className="ml-1"
                                 />
                             </Col>
-                            <Col className="px-0">
-                                <h4 className="text-blue font-weight-bold">
+                            <Col className="px-0 ml-3">
+                                <p className="text-blue font-weight-bold font-20px">
                                     BOOKWORM
-                                </h4>
+                                </p>
                             </Col>
                         </Row>
                     </Link>

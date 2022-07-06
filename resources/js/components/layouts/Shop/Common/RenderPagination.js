@@ -38,7 +38,7 @@ class RenderPagination extends React.Component {
         if (this.props.shop.total_page > 0) {
             onPaginate = (
                 <Row className="pt-4 mt-4">
-                    <Col className="d-flex justify-content-center">
+                    <Col className="d-flex px-0 justify-content-center">
                         <Pagination
                             activePage={this.props.shop.current_page}
                             itemsCountPerPage={Number.parseInt(
