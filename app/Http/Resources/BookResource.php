@@ -27,6 +27,7 @@ class BookResource extends JsonResource
 
         if ($request->route()->uri() === 'api/books/{book}') {
             $arrayData['book_summary'] = $this->book_summary;
+            $arrayData['category_name'] = $this->category_name;
         }
 
         return $arrayData;
