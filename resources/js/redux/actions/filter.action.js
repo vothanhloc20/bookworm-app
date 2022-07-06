@@ -6,3 +6,9 @@ export const setDataFilter = (data) => {
         payload: data,
     };
 };
+
+export const setResetFilter = () => {
+    return {
+        type: Type.filter_SET_RESET,
+    };
+};

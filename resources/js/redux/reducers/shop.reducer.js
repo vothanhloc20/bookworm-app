@@ -17,6 +17,8 @@ const initState = {
 
 const shop = (state = initState, action) => {
     switch (action.type) {
+        case Type.shop_RESET:
+            return initState;
         case Type.shop_SET_TOTAL_PAGES:
             return {
                 ...state,

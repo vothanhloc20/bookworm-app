@@ -1,3 +1,4 @@
+export const shop_RESET = "shop_RESET";
 export const shop_SET_TOTAL_PAGES = "shop_SET_TOTAL_PAGES";
 export const shop_SET_BOOKS = "shop_SET_BOOKS";
 export const shop_SET_ITEMS_TOTAL = "shop_SET_ITEMS_TOTAL";

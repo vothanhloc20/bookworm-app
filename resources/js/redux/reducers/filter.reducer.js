@@ -14,6 +14,8 @@ const filter = (state = initState, action) => {
                 ...state,
                 filters: [...action.payload],
             };
+        case Type.filter_SET_RESET:
+            return initState;
         default:
             return state;
     }

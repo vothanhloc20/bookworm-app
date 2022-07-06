@@ -1,5 +1,11 @@
 import * as Type from "../types/mainTypes.js";
 
+export const setReset = (data) => {
+    return {
+        type: Type.product_SET_RESET,
+    };
+};
+
 export const setDetailBook = (data) => {
     return {
         type: Type.product_SET_DETAIL_BOOK,

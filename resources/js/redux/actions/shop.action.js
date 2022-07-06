@@ -1,5 +1,11 @@
 import * as Type from "../types/mainTypes.js";
 
+export const setReset = () => {
+    return {
+        type: Type.shop_RESET,
+    };
+};
+
 export const setTotalPage = (data) => {
     return {
         type: Type.shop_SET_TOTAL_PAGES,

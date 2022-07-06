@@ -1,7 +1,7 @@
 import * as Type from "../types/mainTypes.js";
 
 const initState = {
-    status: false,
+    status: true,
     headingTitle: "Login",
     contentButton: "Login",
 };

@@ -22,6 +22,8 @@ const initState = {
 
 const product = (state = initState, action) => {
     switch (action.type) {
+        case Type.product_SET_RESET:
+            return initState;
         case Type.product_SET_DETAIL_BOOK:
             return {
                 ...state,
