@@ -10,6 +10,7 @@ import {
     setMainPriceBook,
     setPerPage,
     setQuantityBook,
+    setReset,
     setReviewData,
     setSecondLoadingReview,
     setSortReview,
@@ -43,6 +44,10 @@ export const getReviewByBookId = ({
     });
 };
 
+export const createNewReview = (body) => {
+    return reviewApi.createNewReview(body);
+};
+
 export const mapDispatchToProps = (dispatch) => {
     return {
         setDetailBook: (data) => dispatch(setDetailBook(data)),
@@ -63,5 +68,6 @@ export const mapDispatchToProps = (dispatch) => {
         setCurrentFilterStar: (data) => dispatch(setCurrentFilterStar(data)),
         setSortReview: (data) => dispatch(setSortReview(data)),
         setPerPage: (data) => dispatch(setPerPage(data)),
+        setReset: () => dispatch(setReset()),
     };
 };

@@ -34,27 +34,37 @@ class CustomerReviews extends React.Component {
         this.props.handleFilter(ratingStar);
     };
 
+    resetFilter = () => {
+        this.props.resetFilter();
+    };
+
     render() {
         return (
             <Card className="bg-light-blue">
                 <div className="p-4">
-                    <p className="mb-4">
-                        <span className="font-20px font-weight-semi">
+                    <div className="d-flex align-items-center mb-4">
+                        <div className="font-20px font-weight-semi">
                             Customer Reviews
-                        </span>
+                        </div>
                         {this.props.product.current_filter_star !== 0 && (
                             <>
                                 &nbsp;
-                                <span className="23text-grey font-14px">
-                                    (Filtered by )
-                                </span>
+                                <div className="d-flex align-items-center 23text-grey font-14px">
+                                    <div>(&nbsp;Filtered by&nbsp;</div>
+                                    <Chip
+                                        background="bg-blue"
+                                        color="text-white"
+                                        title={`${this.props.product.current_filter_star} star`}
+                                    />
+                                    <div>&nbsp;)</div>
+                                </div>
                             </>
                         )}
-                    </p>
+                    </div>
                     <div className="d-flex align-items-center mb-4">
                         <div>
                             <h4>{this.props.product.average}</h4>
-                            <p>
+                            <p onClick={() => this.resetFilter()}>
                                 <u>({this.props.product.total_review})</u>
                             </p>
                         </div>

@@ -6,9 +6,9 @@ import {
     getReviewByBookId,
 } from "../../adapters/ProductAdapter/ProductAdapter.js";
 
-import FormReview from "../../components/layouts/Product/FormReview.js";
 import RenderAddToCart from "../../components/layouts/Product/Common/RenderAddToCart.js";
 import RenderCustomerReviews from "../../components/layouts/Product/Common/RenderCustomerReviews.js";
+import RenderFormReview from "../../components/layouts/Product/Common/RenderFormReview.js";
 import RenderProductInformation from "../../components/layouts/Product/Common/RenderProductInformation.js";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../adapters/ProductAdapter/ProductAdapter.js";
@@ -23,6 +23,7 @@ class Product extends React.Component {
     }
 
     async componentDidMount() {
+        await this.props.setReset();
         const bookId = await this.getIdBook();
         this.setState({ book_id: bookId });
         this.getBookById(bookId);
@@ -155,7 +156,9 @@ class Product extends React.Component {
             this.props.setToReview(0);
             this.props.setTotalPageReview(0);
         }
-        this.props.setTotalReview(total);
+        if (this.props.product.first_loading_review) {
+            this.props.setTotalReview(total);
+        }
         if (general_total !== null) {
             this.props.setAverageReview(
                 parseFloat(general_total.average_rating_star).toFixed(2)
@@ -168,7 +171,15 @@ class Product extends React.Component {
         return (
             <main>
                 <section>
-                    <h4 className="font-weight-semi">Category Name</h4>
+                    {this.props.product.detail_book.length === 0 ? (
+                        <div className="app-skeleton">
+                            <div className="skeleton-subtitle-2 skeleton-animation" />
+                        </div>
+                    ) : (
+                        <h4 className="font-weight-semi">
+                            {this.props.product.detail_book[0].category_name}
+                        </h4>
+                    )}
                     <div className="app-divide mt-4 mb-5"></div>
                     <Row className="mb-4">
                         <Col md={8}>
@@ -190,7 +201,7 @@ class Product extends React.Component {
                             />
                         </Col>
                         <Col md={4}>
-                            <FormReview />
+                            <RenderFormReview bookId={this.state.book_id} />
                         </Col>
                     </Row>
                 </section>

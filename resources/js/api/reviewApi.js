@@ -36,6 +36,11 @@ const reviewApi = {
 
         return axiosClient.get(finalUrl);
     },
+
+    createNewReview: (body) => {
+        const url = `${prefix}`;
+        return axiosClient.post(url, body);
+    },
 };
 
 export default reviewApi;

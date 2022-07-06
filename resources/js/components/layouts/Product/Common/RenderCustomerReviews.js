@@ -38,6 +38,10 @@ class RenderCustomerReviews extends React.Component {
         this.props.handleFilter(ratingStar);
     };
 
+    resetFilter = () => {
+        // TODO: showAll
+    };
+
     render() {
         const customerReviews = this.props.product.first_loading_review ? (
             <ProductCustomerReviewSkeleton />
@@ -47,6 +51,7 @@ class RenderCustomerReviews extends React.Component {
                 handlePerPage={this.handlePerPage}
                 handleSort={this.handleSort}
                 handleFilter={this.handleFilter}
+                resetFilter={this.resetFilter}
             />
         );
 
