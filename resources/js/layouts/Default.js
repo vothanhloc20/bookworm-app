@@ -16,13 +16,11 @@ class Default extends React.Component {
     }
 
     componentDidMount() {
-        // Handle Resize Breakpoint
         this.updateBreakpoint;
         window.addEventListener("resize", this.updateBreakpoint);
     }
 
     componentWillUnmount() {
-        // Handle Resize Breakpoint
         window.removeEventListener("resize", this.updateBreakpoint);
     }
 
