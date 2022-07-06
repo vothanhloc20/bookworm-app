@@ -79,7 +79,7 @@ class ReviewRepository implements ReviewInterface
             'review_title' => $request->review_title,
             'review_details' => $request->review_details,
             'rating_star' => $request->rating_star,
-            'review_date' => Carbon::now()->toDateString(),
+            'review_date' => Carbon::now()->toDateTimeString(),
         ];
 
         $newProduct = Review::create($body);
