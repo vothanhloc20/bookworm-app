@@ -13,7 +13,16 @@
     box-shadow: none;
 }
 
-.pagination .page-item {
+.pagination {
+    font-weight: var(--font-semi);
+}
+
+.pagination .page-item.active .page-link {
+    color: var(--app-white);
+}
+
+.pagination .page-item,
+.pagination .page-item .page-link {
     color: var(--app-blue);
 }
 
@@ -45,4 +54,17 @@
 .row {
     margin-left: -4px;
     margin-right: -4px;
+}
+
+#dropdown-user {
+    font-weight: var(--font-bold);
+}
+
+#dropdown-user::after {
+    content: none;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
 }

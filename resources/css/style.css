@@ -11,6 +11,7 @@
 @import "./scroll_bar.css";
 @import "./input.css";
 @import "./custom_bootstrap.css";
+@import "./custom_toast.css";
 
 /* CSS of components */
 @import "components/card_product.css";
@@ -19,3 +20,6 @@
 @import "components/text_field.css";
 @import "components/skeleton.css";
 @import "components/drawer.css";
+
+/* Animate CSS */
+@import "./animate.min.css";
