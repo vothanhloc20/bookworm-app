@@ -124,3 +124,10 @@ export const setPerPage = (data) => {
         payload: data,
     };
 };
+
+export const setPriceBook = (data) => {
+    return {
+        type: Type.product_SET_PRICE_BOOK,
+        payload: data,
+    };
+};
