@@ -12,12 +12,17 @@ class AuthenticateModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            active_tab: "register",
+            active_tab: "login",
+            backdrop: true,
         };
     }
 
     hideModal = () => {
         this.props.hideModal();
+    };
+
+    setBackdrop = (value) => {
+        this.setState({ backdrop: value });
     };
 
     handleAuthenticateForm = (action) => {
@@ -39,16 +44,16 @@ class AuthenticateModal extends React.Component {
                 onHide={this.hideModal}
                 size="md"
                 centered
+                backdrop={this.state.backdrop}
+                id="authenticate-form"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title className="font-weight-semi">
-                        {action}
-                    </Modal.Title>
+                    <p className="font-weight-bold font-20px">{action}</p>
                 </Modal.Header>
                 <Modal.Body className="p-0">
                     <TabContainer
                         activeKey={this.state.active_tab}
-                        defaultActiveKey="register"
+                        defaultActiveKey="login"
                     >
                         <Tab.Content>
                             <Tab.Pane eventKey="login">
@@ -56,6 +61,7 @@ class AuthenticateModal extends React.Component {
                                     handleAuthenticateForm={
                                         this.handleAuthenticateForm
                                     }
+                                    setBackdrop={this.setBackdrop}
                                 />
                             </Tab.Pane>
                             <Tab.Pane eventKey="register">
@@ -63,6 +69,7 @@ class AuthenticateModal extends React.Component {
                                     handleAuthenticateForm={
                                         this.handleAuthenticateForm
                                     }
+                                    setBackdrop={this.setBackdrop}
                                 />
                             </Tab.Pane>
                         </Tab.Content>

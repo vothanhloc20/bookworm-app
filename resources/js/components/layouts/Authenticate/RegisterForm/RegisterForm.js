@@ -4,10 +4,11 @@ import * as yup from "yup";
 import { Button, Form } from "react-bootstrap";
 import { FaEnvelope, FaLock, FaUserAlt } from "react-icons/fa";
 
+import Notiflix from "notiflix";
 import TextField from "../../../base/TextField/TextField.js";
+import { Toast } from "../../../../utils/toast.js";
 import authApi from "../../../../api/authApi.js";
 import { hashPassword } from "../../../../utils/hashPassword.js";
-import { register } from "../../../../adapters/AuthAdapter/AuthAdapter.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -24,6 +25,7 @@ function RegisterForm(props) {
     const {
         register,
         handleSubmit,
+        resetField,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
@@ -38,21 +40,54 @@ function RegisterForm(props) {
     };
 
     const onSubmit = async (data) => {
+        Notiflix.Block.hourglass(".modal-content", "Please wait...", {
+            backgroundColor: "rgba(239, 244, 251, 0.91)",
+            messageColor: "#739dd8",
+            svgColor: "#739dd8",
+            fontWeight: "700",
+        });
+        props.setBackdrop("static");
         const body = Object.assign({}, data);
         body.password = await hashPassword(data.password);
         body.password_confirmation = body.password;
         const result = await authApi.register(body);
-        console.log(result);
-        if (result.data.error.email) {
+
+        if (result.data.error?.email) {
+            Toast.fire({
+                icon: "error",
+                title: "This email is already registered",
+                background: "#fde8e8",
+                color: "#f27474",
+            });
+            Notiflix.Block.remove(".modal-content");
+            props.setBackdrop(true);
+        }
+
+        if (result.message === "Register Successfully") {
+            Toast.fire({
+                icon: "success",
+                title: "Register successfully",
+                background: "#f0f9eb",
+                color: "#a5dc86",
+            });
+            Notiflix.Block.remove(".modal-content");
+            props.setBackdrop(true);
+            resetField("first_name");
+            resetField("last_name");
+            resetField("email");
+            resetField("password");
+            setTimeout(() => {
+                handleAuthenticateForm();
+            }, 100);
         }
     };
 
     return (
         <Form id="form-register" onSubmit={handleSubmit(onSubmit)}>
             <div className="p-3">
-                <h6 className="mb-3 font-weight-semi">
+                <p className="mb-3 font-weight-bold font-18px">
                     Hi, Welcome to Bookworm 👋
-                </h6>
+                </p>
                 <TextField
                     label="First name"
                     type="text"
@@ -64,7 +99,7 @@ function RegisterForm(props) {
                     message={errors.first_name?.message}
                 />
                 <TextField
-                    label="First name"
+                    label="Last name"
                     type="text"
                     mandatory={true}
                     select={false}

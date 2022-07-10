@@ -4,8 +4,11 @@ import * as yup from "yup";
 import { Button, Form } from "react-bootstrap";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 
+import Notiflix from "notiflix";
 import TextField from "../../../base/TextField/TextField.js";
+import { Toast } from "../../../../utils/toast.js";
 import { hashPassword } from "../../../../utils/hashPassword.js";
+import { login } from "../../../../adapters/AuthAdapter/AuthAdapter.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -36,15 +39,60 @@ function LoginForm(props) {
     };
 
     const onSubmit = async (data) => {
-        console.log(data);
-        const hash_password = hashPassword(data.password);
-        console.log(password);
+        Notiflix.Block.hourglass(".modal-content", "Please wait...", {
+            backgroundColor: "rgba(239, 244, 251, 0.91)",
+            messageColor: "#739dd8",
+            svgColor: "#739dd8",
+            fontWeight: "700",
+        });
+        props.setBackdrop("static");
+        const body = Object.assign({}, data);
+        body.password = await hashPassword(data.password);
+        const result = await login(body);
+
+        if (result.data.message === "Password is incorrect") {
+            Toast.fire({
+                icon: "error",
+                title: "Password is incorrect",
+                background: "#fde8e8",
+                color: "#f27474",
+            });
+            Notiflix.Block.remove(".modal-content");
+            props.setBackdrop(true);
+        } else if (result.data.message === "User not found") {
+            Toast.fire({
+                icon: "error",
+                title: "This email is not registered",
+                background: "#fde8e8",
+                color: "#f27474",
+            });
+            Notiflix.Block.remove(".modal-content");
+            props.setBackdrop(true);
+        }
+
+        if (result.message === "Login Successfully") {
+            Toast.fire({
+                icon: "success",
+                title: "Login successfully",
+                background: "#f0f9eb",
+                color: "#a5dc86",
+            });
+            const token = result.data.token;
+            localStorage.setItem("token", token);
+            Notiflix.Block.remove(".modal-content");
+            props.setBackdrop(true);
+            setTimeout(() => {
+                window.location.reload();
+            }, 100);
+        }
     };
 
     return (
         <Form id="form-login" onSubmit={handleSubmit(onSubmit)}>
             <div className="p-3">
-                <h6 className="mb-3 font-weight-semi">Hi, Welcome back 👋</h6>
+                <p className="mb-3 font-weight-bold font-18px">
+                    Hi, Welcome back 👋
+                </p>
                 <TextField
                     label="Email"
                     type="text"
