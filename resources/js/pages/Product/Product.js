@@ -37,8 +37,60 @@ class Product extends React.Component {
     getBookById = (bookId) => {
         getBookById(bookId).then((result) => {
             const { data } = result;
+            this.props.setPriceBook(data[0].final_price);
+            const checkCart = localStorage.getItem("cart");
+            if (checkCart) {
+                const cart = JSON.parse(checkCart);
+                const find = cart.find((element) => element.id === data[0].id);
+                data[0].quantity = find ? find.quantity : 1;
+                if (data[0].is_discount) {
+                    data[0].discount_price = parseFloat(
+                        (data[0].discount_price * data[0].quantity).toFixed(2)
+                    ).toString();
+                    data[0].final_price = data[0].discount_price;
+                } else {
+                    data[0].book_price = parseFloat(
+                        (data[0].book_price * data[0].quantity).toFixed(2)
+                    ).toString();
+                    data[0].final_price = data[0].book_price;
+                }
+            } else {
+                data[0].quantity = 1;
+            }
             this.props.setDetailBook(data);
+            this.handleCartWhenReload(data);
         });
+    };
+
+    handleCartWhenReload = async (data) => {
+        const checkCart = localStorage.getItem("cart");
+        if (checkCart) {
+            const cart = JSON.parse(checkCart);
+            const findIndex = cart.findIndex(
+                (element) => element.id === data[0].id
+            );
+            if (findIndex !== -1) {
+                const newCart = await cart.map(
+                    (obj) =>
+                        data.find((element) => element.id === obj.id) || obj
+                );
+                localStorage.setItem("cart", JSON.stringify(newCart));
+                this.handleSumCartQuantity(newCart);
+            } else {
+                this.handleSumCartQuantity(cart);
+            }
+        }
+    };
+
+    handleSumCartQuantity = (data) => {
+        const initialValue = 0;
+        let sumCartQuantity = 0;
+        if (data.length > 0) {
+            sumCartQuantity = data.reduce((accumulator, current) => {
+                return accumulator + current.quantity;
+            }, initialValue);
+        }
+        this.props.setSumCartQuantity(sumCartQuantity);
     };
 
     getReviewByBookId = (bookId) => {
@@ -144,21 +196,23 @@ class Product extends React.Component {
             general_total,
         } = response;
         this.props.setReviewData(data);
+
         if (count_rating_star !== null) {
             this.props.setCountRatingStar(count_rating_star);
         }
+
         if (data.length > 0) {
             this.props.setFromReview(from);
             this.props.setToReview(to);
             this.props.setTotalPageReview(last_page);
+            this.props.setTotalReview(total);
         } else {
             this.props.setFromReview(0);
             this.props.setToReview(0);
             this.props.setTotalPageReview(0);
+            this.props.setTotalReview(0);
         }
-        if (this.props.product.first_loading_review) {
-            this.props.setTotalReview(total);
-        }
+
         if (general_total !== null) {
             this.props.setAverageReview(
                 parseFloat(general_total.average_rating_star).toFixed(2)
@@ -176,21 +230,50 @@ class Product extends React.Component {
                             <div className="skeleton-subtitle-2 skeleton-animation" />
                         </div>
                     ) : (
-                        <h4 className="font-weight-semi">
-                            {this.props.product.detail_book[0].category_name}
-                        </h4>
+                        <p className="font-18px font-weight-bold">
+                            Category:{" "}
+                            <span className="text-blue">
+                                {
+                                    this.props.product.detail_book[0]
+                                        .category_name
+                                }
+                            </span>
+                        </p>
                     )}
-                    <div className="app-divide mt-4 mb-5"></div>
+                    <div className="app-divide mt-4 mb-5" />
                     <Row className="mb-4">
-                        <Col md={8}>
+                        <Col
+                            lg={8}
+                            className={`${
+                                this.props.app.width >= 992
+                                    ? "pl-0"
+                                    : "px-0 mb-4"
+                            }`}
+                        >
                             <RenderProductInformation />
                         </Col>
-                        <Col md={4}>
-                            <RenderAddToCart />
+                        <Col
+                            lg={4}
+                            className={`${
+                                this.props.app.width >= 992 ? "pr-0" : "px-0"
+                            }`}
+                        >
+                            <RenderAddToCart
+                                handleSumCartQuantity={
+                                    this.handleSumCartQuantity
+                                }
+                            />
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={8}>
+                        <Col
+                            lg={8}
+                            className={`${
+                                this.props.app.width >= 992
+                                    ? "pl-0"
+                                    : "px-0 mb-4"
+                            }`}
+                        >
                             <RenderCustomerReviews
                                 handleStateData={this.handleStateData}
                                 handleStateAdvanced={this.handleStateAdvanced}
@@ -200,7 +283,12 @@ class Product extends React.Component {
                                 handleFilter={this.handleFilter}
                             />
                         </Col>
-                        <Col md={4}>
+                        <Col
+                            lg={4}
+                            className={`${
+                                this.props.app.width >= 992 ? "pr-0" : "px-0"
+                            }`}
+                        >
                             <RenderFormReview bookId={this.state.book_id} />
                         </Col>
                     </Row>

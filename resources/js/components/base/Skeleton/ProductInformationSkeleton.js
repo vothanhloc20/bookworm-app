@@ -2,6 +2,9 @@ import * as React from "react";
 
 import { Card, Col, Row } from "react-bootstrap";
 
+import { connect } from "react-redux";
+import { mapStateToProps } from "../../../utils/useSelector";
+
 class ProductInformationSkeleton extends React.Component {
     constructor(props) {
         super(props);
@@ -9,9 +12,19 @@ class ProductInformationSkeleton extends React.Component {
 
     render() {
         return (
-            <Card className="app-skeleton">
-                <Row>
-                    <Col md={3}>
+            <Card
+                className={`app-skeleton ${
+                    this.props.app.width <= 400 ? "mx-2" : ""
+                }`}
+            >
+                <Row className="m-0">
+                    <Col
+                        xs={4}
+                        sm={3}
+                        className={`product-column-image ${
+                            this.props.app.width <= 400 ? "pt-4 px-4" : "px-0"
+                        }`}
+                    >
                         <div className="skeleton-image mb-4">
                             <div className="skeleton-image-layout">
                                 <div className="skeleton-image-layout-image skeleton-product-image skeleton-animation " />
@@ -21,7 +34,11 @@ class ProductInformationSkeleton extends React.Component {
                             <div className="skeleton-title skeleton-animation" />
                         </div>
                     </Col>
-                    <Col md={9}>
+                    <Col
+                        xs={8}
+                        sm={9}
+                        className="px-0 product-column-information"
+                    >
                         <div className="p-4">
                             <div className="skeleton-title skeleton-animation mb-4" />
                             <div className="skeleton-subtitle skeleton-animation mb-3" />
@@ -50,4 +67,4 @@ class ProductInformationSkeleton extends React.Component {
     }
 }
 
-export default ProductInformationSkeleton;
+export default connect(mapStateToProps, null)(ProductInformationSkeleton);

@@ -16,21 +16,21 @@ class RenderFilterRatingReviews extends React.Component {
         let filterStar;
         if (this.props.product.count_rating_star.length === 0) {
             filterStar = (
-                <ul className="d-flex align-items-center">
-                    <li className="pr-2 app-border-right cursor-pointer">
+                <ul className="product-filter-rating-star font-16px font-weight-semi">
+                    <li className="cursor-pointer">
                         <u>5 stars (0)</u>
                     </li>
-                    <li className="px-2 app-border-right cursor-pointer">
+                    <li className="cursor-pointer">
                         <u>4 stars (0)</u>
                     </li>
-                    <li className="px-2 app-border-right cursor-pointer">
+                    <li className="cursor-pointer">
                         <u>3 stars (0)</u>
                     </li>
-                    <li className="px-2 app-border-right cursor-pointer">
+                    <li className="cursor-pointer">
                         <u>2 stars (0)</u>
                     </li>
-                    <li className="pl-2">
-                        <u>1 stars (0)</u>
+                    <li className="cursor-pointer">
+                        <u>1 star (0)</u>
                     </li>
                 </ul>
             );
@@ -52,47 +52,47 @@ class RenderFilterRatingReviews extends React.Component {
             );
 
             filterStar = (
-                <ul className="d-flex align-items-center">
+                <ul className="product-filter-rating-star font-16px font-weight-medium">
                     <li
-                        className={`pr-2 app-border-right cursor-pointer ${
+                        className={`cursor-pointer ${
                             this.props.product.current_filter_star === 5 &&
-                            "text-blue font-weight-semi"
+                            "text-blue font-weight-bold"
                         }`}
                         onClick={() => this.handleFilter(5)}
                     >
                         <u>5 stars ({fiveStar ? fiveStar.count : 0})</u>
                     </li>
                     <li
-                        className={`px-2 app-border-right cursor-pointer ${
+                        className={`cursor-pointer ${
                             this.props.product.current_filter_star === 4 &&
-                            "text-blue font-weight-semi"
+                            "text-blue font-weight-bold"
                         }`}
                         onClick={() => this.handleFilter(4)}
                     >
                         <u>4 stars ({fourStar ? fourStar.count : 0})</u>
                     </li>
                     <li
-                        className={`px-2 app-border-right cursor-pointer ${
+                        className={`cursor-pointer ${
                             this.props.product.current_filter_star === 3 &&
-                            "text-blue font-weight-semi"
+                            "text-blue font-weight-bold"
                         }`}
                         onClick={() => this.handleFilter(3)}
                     >
                         <u>3 stars ({threeStar ? threeStar.count : 0})</u>
                     </li>
                     <li
-                        className={`px-2 app-border-right cursor-pointer ${
+                        className={`cursor-pointer ${
                             this.props.product.current_filter_star === 2 &&
-                            "text-blue font-weight-semi"
+                            "text-blue font-weight-bold"
                         }`}
                         onClick={() => this.handleFilter(2)}
                     >
                         <u>2 stars ({twoStar ? twoStar.count : 0})</u>
                     </li>
                     <li
-                        className={`pl-2 cursor-pointer ${
+                        className={`cursor-pointer ${
                             this.props.product.current_filter_star === 1 &&
-                            "text-blue font-weight-semi"
+                            "text-blue font-weight-bold"
                         }`}
                         onClick={() => this.handleFilter(1)}
                     >

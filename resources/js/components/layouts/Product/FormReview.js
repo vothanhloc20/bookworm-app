@@ -6,7 +6,9 @@ import { Button, Card, Form } from "react-bootstrap";
 import Notiflix from "notiflix";
 import Swal from "sweetalert2";
 import TextField from "../../base/TextField/TextField.js";
+import { connect } from "react-redux";
 import { createNewReview } from "../../../adapters/ProductAdapter/ProductAdapter.js";
+import { mapStateToProps } from "../../../utils/useSelector.js";
 import { ratingStar } from "../../../../assets/data/ratingstar.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,7 +24,7 @@ const schema = yup
     })
     .required();
 
-function FormReview({ bookId }) {
+function FormReview({ bookId, app }) {
     const {
         register,
         handleSubmit,
@@ -51,8 +53,8 @@ function FormReview({ bookId }) {
                 window.location.reload();
             }, 5000);
             Swal.fire({
-                title: "<h4 class='text-blue font-weight-semi'>Submit review successfully</h4>",
-                html: "This page will reload after <b></b> seconds",
+                title: "<p class='text-blue font-20px font-weight-bold'>Submit review successfully</p>",
+                html: "<p className='font-16px font-weight-semi'>This page will reload after <b></b> seconds</p>",
                 icon: "success",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
@@ -81,11 +83,11 @@ function FormReview({ bookId }) {
 
     return (
         <Form id="form-review" onSubmit={handleSubmit(onSubmit)}>
-            <Card>
+            <Card className={`${app.width <= 400 ? "mx-2" : ""}`}>
                 <Card.Header className="bg-blue">
-                    <h6 className="text-white font-weight-semi">
+                    <p className="text-white font-weight-bold font-18px">
                         Write a Review
-                    </h6>
+                    </p>
                 </Card.Header>
                 <Card.Body>
                     <TextField
@@ -126,7 +128,7 @@ function FormReview({ bookId }) {
                     <Button
                         variant="blue"
                         block
-                        className="font-weight-semi"
+                        className="font-weight-semi font-16px"
                         type="submit"
                     >
                         Submit Review
@@ -137,4 +139,4 @@ function FormReview({ bookId }) {
     );
 }
 
-export default FormReview;
+export default connect(mapStateToProps, null)(FormReview);

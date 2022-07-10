@@ -2,6 +2,8 @@ import * as React from "react";
 
 import ButtonSkeleton from "./ButtonSkeleton";
 import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
+import { mapStateToProps } from "../../../utils/useSelector.js";
 
 class ProductFormReviewSkeleton extends React.Component {
     constructor(props) {
@@ -10,7 +12,11 @@ class ProductFormReviewSkeleton extends React.Component {
 
     render() {
         return (
-            <Card className="app-skeleton">
+            <Card
+                className={`app-skeleton ${
+                    this.props.app.width <= 400 ? "mx-2" : ""
+                }`}
+            >
                 <Card.Header>
                     <div className="skeleton-title skeleton-animation" />
                 </Card.Header>
@@ -36,4 +42,4 @@ class ProductFormReviewSkeleton extends React.Component {
     }
 }
 
-export default ProductFormReviewSkeleton;
+export default connect(mapStateToProps, null)(ProductFormReviewSkeleton);

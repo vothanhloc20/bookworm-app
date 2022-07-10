@@ -34,22 +34,22 @@ class CustomerReviews extends React.Component {
         this.props.handleFilter(ratingStar);
     };
 
-    resetFilter = () => {
-        this.props.resetFilter();
-    };
-
     render() {
         return (
-            <Card className="bg-light-blue">
+            <Card
+                className={`bg-light-blue ${
+                    this.props.app.width <= 400 ? "mx-2" : ""
+                }`}
+            >
                 <div className="p-4">
                     <div className="d-flex align-items-center mb-4">
-                        <div className="font-20px font-weight-semi">
+                        <div className="font-18px font-weight-bold">
                             Customer Reviews
                         </div>
                         {this.props.product.current_filter_star !== 0 && (
                             <>
                                 &nbsp;
-                                <div className="d-flex align-items-center 23text-grey font-14px">
+                                <div className="d-flex align-items-center text-grey font-16px">
                                     <div>(&nbsp;Filtered by&nbsp;</div>
                                     <Chip
                                         background="bg-blue"
@@ -61,23 +61,42 @@ class CustomerReviews extends React.Component {
                             </>
                         )}
                     </div>
-                    <div className="d-flex align-items-center mb-4">
-                        <div>
-                            <h4>{this.props.product.average}</h4>
-                            <p onClick={() => this.resetFilter()}>
+                    <Row className="mb-4 mx-0">
+                        <Col
+                            sm={12}
+                            md={2}
+                            className={`pl-0 ${
+                                this.props.app.width <= 768 ? "mb-4" : ""
+                            }`}
+                        >
+                            <p className="font-20px font-weight-bold">
+                                {this.props.product.average}
+                            </p>
+                            <p className="font-16px font-weight-semi">
                                 <u>({this.props.product.total_review})</u>
                             </p>
-                        </div>
-                        <div className="flex-grow-1 ml-3">
-                            <h4>Star</h4>
+                        </Col>
+                        <Col
+                            sm={12}
+                            md={10}
+                            className={`px-0 ${
+                                this.props.app.width <= 768 ? "ml-0" : ""
+                            }`}
+                        >
+                            <p className="font-20px font-weight-bold">Star</p>
                             <RenderFilterRatingReview
                                 handleFilter={this.handleFilter}
                             />
-                        </div>
-                    </div>
-                    <Row className="align-items-center mb-5">
-                        <Col>
-                            <p>
+                        </Col>
+                    </Row>
+                    <Row className="mx-0">
+                        <Col
+                            md={6}
+                            className={`px-0 ${
+                                this.props.app.width <= 768 ? "mb-4" : ""
+                            }`}
+                        >
+                            <p className="font-16px">
                                 Showing {this.props.product.from} -{" "}
                                 {this.props.product.to} of{" "}
                                 {this.props.product.total_review === 1
@@ -85,13 +104,23 @@ class CustomerReviews extends React.Component {
                                     : `${this.props.product.total_review} reviews`}{" "}
                             </p>
                         </Col>
-                        <Col className="d-flex justify-content-end">
+                        <Col
+                            md={6}
+                            className={`d-flex align-items-center px-0 ${
+                                this.props.app.width >= 768
+                                    ? "justify-content-end"
+                                    : ""
+                            } ${
+                                this.props.app.width <= 420 ? "flex-wrap" : ""
+                            }`}
+                        >
                             <Dropdown
                                 variant="blue"
                                 currentSelect={this.props.product.sort_key}
                                 selectData={sortReviewData}
                                 size="sm"
-                                customClass="mr-4"
+                                customClass="mr-4 mb-4"
+                                customClassButtonDropdown="font-weight-bold"
                                 handleCurrentItem={this.handleSort}
                             />
                             <Dropdown
@@ -99,12 +128,14 @@ class CustomerReviews extends React.Component {
                                 currentSelect={`Show ${this.props.product.per_page}`}
                                 size="sm"
                                 selectData={showData}
+                                customClass="mb-4"
+                                customClassButtonDropdown="font-weight-bold"
                                 handleCurrentItem={this.handlePerPage}
                             />
                         </Col>
                     </Row>
                     <RenderListReviews />
-                    {this.props.product.total_page > 0 && (
+                    {this.props.product.total_page > 1 && (
                         <div className="mt-4 d-flex justify-content-center">
                             <Pagination
                                 activePage={this.props.product.current_page}
