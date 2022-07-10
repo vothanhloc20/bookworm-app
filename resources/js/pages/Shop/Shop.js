@@ -209,7 +209,7 @@ class Shop extends React.Component {
                                 : "align-items-center"
                         }`}
                     >
-                        <p className="text-center font-18px font-weight-bold ">
+                        <p className="text-center font-18px font-weight-bold">
                             Books
                         </p>
                         <RenderCurrentValueFilter />
@@ -243,7 +243,7 @@ class Shop extends React.Component {
                                             : ""
                                     }`}
                                 >
-                                    <p>
+                                    <p className="font-16px">
                                         Showing {this.props.shop.from} -{" "}
                                         {this.props.shop.to} of{" "}
                                         {this.props.shop.items_total > 1 ? (

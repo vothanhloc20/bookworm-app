@@ -35,7 +35,7 @@ class RenderPagination extends React.Component {
     render() {
         let onPaginate;
 
-        if (this.props.shop.total_page > 0) {
+        if (this.props.shop.total_page > 1) {
             onPaginate = (
                 <Row className="pt-4 mt-4">
                     <Col className="d-flex px-0 justify-content-center">
