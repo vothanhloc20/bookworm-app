@@ -64,6 +64,10 @@ li {
     border-top: 1px solid var(--bootstrap-color-divide);
 }
 
+.app-border {
+    border: 2px solid var(--bootstrap-color-divide);
+}
+
 .app-border-right {
     height: auto;
     border-right: 1px solid var(--app-black);
@@ -91,6 +95,21 @@ li {
     height: auto !important;
 }
 
+.swiper-pagination {
+    position: relative !important;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: 0 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--app-blue) !important;
+}
+
 [id^="NotiflixBlockWrap"] > span[class*="-message"] {
     font-weight: var(--font-semi) !important;
 }
@@ -109,5 +128,32 @@ li {
 
 .app-overflow {
     overflow-y: auto;
+}
+
+.product-filter-rating-star {
+    --spacing: 8px;
+    --columns: 5;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+}
+
+.product-filter-rating-star li {
+    overflow: hidden;
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    margin-left: var(--spacing);
+    margin-bottom: calc(var(--spacing) + 6px);
+}
+
+.product-filter-rating-star li:not(:last-child) {
+    border-right: 1px solid var(--app-black);
+}
+
+.width-100px {
+    width: 100px;
+}
+
+.height-100px {
+    height: 100px;
 }
 
