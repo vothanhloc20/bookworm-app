@@ -10,6 +10,7 @@ import {
 
 import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import { FaAngleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import RenderOnFeatured from "../../components/layouts/Home/Common/RenderOnFeatured.js";
 import RenderOnSale from "../../components/layouts/Home/Common/RenderOnSale.js";
 import { connect } from "react-redux";
@@ -64,16 +65,18 @@ class Home extends React.Component {
                             className="d-flex justify-content-end app-card-padding"
                         >
                             {this.props.home.topTenOnSaleBooks.length > 0 ? (
-                                <Button
-                                    variant="blue"
-                                    className="font-weight-bold font-16px d-flex align-items-center"
-                                >
-                                    <span className="flex-grow-1">
-                                        View All
-                                    </span>
-                                    &nbsp;
-                                    <FaAngleRight />
-                                </Button>
+                                <Link to="/shop">
+                                    <Button
+                                        variant="blue"
+                                        className="font-weight-bold font-16px d-flex align-items-center"
+                                    >
+                                        <span className="flex-grow-1">
+                                            View All
+                                        </span>
+                                        &nbsp;
+                                        <FaAngleRight />
+                                    </Button>
+                                </Link>
                             ) : (
                                 <ButtonSkeleton />
                             )}

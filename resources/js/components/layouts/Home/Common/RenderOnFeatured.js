@@ -26,7 +26,17 @@ class RenderOnFeatured extends React.Component {
                 <FeaturedBooks data={this.props.home.tagFeaturedBooks} />
             );
 
-        return <>{onFeaturedBooks}</>;
+        return (
+            <div
+                className={`${
+                    this.props.app.width < 576
+                        ? ""
+                        : "py-3 px-5 app-border app-border-8px"
+                }`}
+            >
+                {onFeaturedBooks}
+            </div>
+        );
     }
 }
 

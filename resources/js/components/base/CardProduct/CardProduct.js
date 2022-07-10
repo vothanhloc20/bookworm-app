@@ -10,7 +10,7 @@ class CardProduct extends React.Component {
     render() {
         return (
             <Link to={`/shop/${this.props.productId}`}>
-                <Card id="app-card-product" className="h-100">
+                <Card className="app-card-product h-100">
                     <div className="card-image">
                         <div className="card-image-layout">
                             <Card.Img
