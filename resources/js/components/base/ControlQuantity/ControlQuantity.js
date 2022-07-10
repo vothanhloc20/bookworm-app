@@ -11,7 +11,7 @@ class ControlQuantity extends React.Component {
     onChange = (event) => {
         const regexNumber = /^[1-8\b]\g{0,1}$/;
         if (event.target.value === "" || regexNumber.test(event.target.value)) {
-            this.props.setQuantity(event.target.value);
+            this.props.setQuantity(event.target.value, event.target.id);
         }
     };
 
@@ -29,11 +29,14 @@ class ControlQuantity extends React.Component {
                     <Button
                         variant="blue"
                         className="d-flex align-items-center app-border-radius-right-0"
-                        onClick={() => this.props.handleQuantity("minus")}
+                        onClick={() =>
+                            this.props.handleQuantity("minus", this.props.id)
+                        }
                     >
                         <BsDash className="font-18px" />
                     </Button>
                     <FormControl
+                        id={this.props.id}
                         className="text-center"
                         type="number"
                         value={this.props.quantity}
@@ -43,7 +46,9 @@ class ControlQuantity extends React.Component {
                     <Button
                         variant="blue"
                         className="d-flex align-items-center app-border-radius-left-0"
-                        onClick={() => this.props.handleQuantity("add")}
+                        onClick={() =>
+                            this.props.handleQuantity("add", this.props.id)
+                        }
                     >
                         <BsPlus className="font-18px" />
                     </Button>
