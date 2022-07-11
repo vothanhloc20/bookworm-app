@@ -16,7 +16,10 @@ const schema = yup.object({
     first_name: yup.string().required("Required"),
     last_name: yup.string().required("Required"),
     email: yup.string().email("Invalid email").required("Required"),
-    password: yup.string().required("Required"),
+    password: yup
+        .string()
+        .min(8, "Be at least 8 in length")
+        .required("Required"),
 });
 
 function RegisterForm(props) {

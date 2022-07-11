@@ -76,7 +76,7 @@ class AddToCart extends React.Component {
                 this.notifyNoUpdate();
             }
         } else {
-            finalCart = [...cart, this.props.product.detail_book[0]];
+            finalCart = [this.props.product.detail_book[0]].concat(cart);
             this.addNewCart(finalCart);
         }
 
