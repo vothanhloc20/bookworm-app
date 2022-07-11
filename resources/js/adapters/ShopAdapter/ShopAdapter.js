@@ -12,6 +12,7 @@ import {
     setItemsTotal,
     setLoading,
     setReset,
+    setResetFilterShop,
     setTotalPage,
 } from "../../redux/actions/shop.action.js";
 import {
@@ -110,5 +111,6 @@ export const mapDispatchToProps = (dispatch) => {
         setReset: () => dispatch(setReset()),
         setResetFilter: () => dispatch(setResetFilter()),
         openFilterDrawer: () => dispatch(openFilterDrawer()),
+        setResetFilterShop: () => dispatch(setResetFilterShop()),
     };
 };

@@ -116,6 +116,22 @@ class Shop extends React.Component {
         this.setBooks(response);
     };
 
+    resetFilter = async () => {
+        await this.props.setResetFilterShop();
+        const { category, author, ratingStar, perPage, sortValue, sortKey } =
+            this.handleStateAdvanced();
+        this.handleStateData(1);
+        const response = await getBooks({
+            perPage,
+            category,
+            author,
+            ratingStar,
+            sortValue,
+            sortKey,
+        });
+        this.setBooks(response);
+    };
+
     handleStateData = (pageNumber) => {
         this.props.setLoading(true);
         this.props.setBooks([]);
@@ -222,12 +238,22 @@ class Shop extends React.Component {
                     <div className="app-divide mt-4 mb-5" />
                     <Row>
                         <Col lg={3} className="pl-0 d-none d-lg-block">
-                            <p className="mb-4 text-blue d-flex align-items-center">
-                                <FaFilter />
-                                <span className="flex-grow-1 font-16px font-weight-semi ml-2">
-                                    Filter By
-                                </span>
-                            </p>
+                            <div className="mb-4 d-flex align-items-center">
+                                <p className="text-blue d-flex align-items-center flex-grow-1">
+                                    <FaFilter />
+                                    <span className="flex-grow-1 font-16px font-weight-semi ml-2">
+                                        Filter By
+                                    </span>
+                                </p>
+                                {this.props.shop.current_filter.length > 0 && (
+                                    <p
+                                        onClick={() => this.resetFilter()}
+                                        className="cursor-pointer text-right flex-grow-1"
+                                    >
+                                        Reset filter
+                                    </p>
+                                )}
+                            </div>
                             <RenderFilterData
                                 getFilterBooks={this.getFilterBooks}
                             />
@@ -324,7 +350,10 @@ class Shop extends React.Component {
                 >
                     <FaFilter />
                 </Button>
-                <FilterDrawer getFilterBooks={this.getFilterBooks} />
+                <FilterDrawer
+                    getFilterBooks={this.getFilterBooks}
+                    resetFilter={this.resetFilter}
+                />
             </main>
         );
     }

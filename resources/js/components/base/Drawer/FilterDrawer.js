@@ -39,19 +39,27 @@ class FilterDrawer extends React.Component {
                     }`}
                 >
                     <div className="d-flex flex-column h-100 app-overflow p-4">
+                        <p
+                            onClick={this.handleDrawer}
+                            className="text-red flex-grow-1 cursor-pointer mb-3"
+                        >
+                            <FaTimes />
+                        </p>
                         <div className="d-flex align-items-center mb-4 ">
-                            <p
-                                onClick={this.handleDrawer}
-                                className="text-red flex-grow-1 cursor-pointer"
-                            >
-                                <FaTimes />
-                            </p>
-                            <p className="text-blue d-flex align-items-center">
+                            <p className="text-blue flex-grow-1 d-flex align-items-center">
                                 <FaFilter />
                                 <span className="flex-grow-1 font-weight-semi ml-2">
                                     Filter By
                                 </span>
                             </p>
+                            {this.props.shop.current_filter.length > 0 && (
+                                <p
+                                    onClick={() => this.props.resetFilter()}
+                                    className="font-weight-bold flex-grow-1 text-right cursor-pointer"
+                                >
+                                    Reset filter
+                                </p>
+                            )}
                         </div>
                         <RenderFilterData
                             getFilterBooks={this.getFilterBooks}

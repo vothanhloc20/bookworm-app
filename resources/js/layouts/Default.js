@@ -7,6 +7,8 @@ import { Container } from "react-bootstrap";
 import Drawer from "../components/base/Drawer/Drawer.js";
 import Footer from "../components/base/Footer/Footer.js";
 import Header from "../components/base/Header/Header.js";
+import { closeDrawer } from "../redux/actions/drawer.action.js";
+import { closeFilterDrawer } from "../redux/actions/drawer.action";
 import { connect } from "react-redux";
 import { setWidth } from "../redux/actions/app.action.js";
 
@@ -26,6 +28,10 @@ class Default extends React.Component {
 
     updateBreakpoint = () => {
         this.props.setWidth(window.innerWidth);
+        if (window.innerWidth > 992) {
+            this.props.closeDrawer();
+            this.props.closeFilterDrawer();
+        }
     };
 
     render() {
@@ -48,6 +54,8 @@ class Default extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         setWidth: (data) => dispatch(setWidth(data)),
+        closeFilterDrawer: () => dispatch(closeFilterDrawer()),
+        closeDrawer: () => dispatch(closeDrawer()),
     };
 };
 

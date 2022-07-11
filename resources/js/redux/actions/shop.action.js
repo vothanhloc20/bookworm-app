@@ -89,3 +89,9 @@ export const setCurrentSort = (data) => {
         payload: data,
     };
 };
+
+export const setResetFilterShop = () => {
+    return {
+        type: Type.shop_RESET_FILTER,
+    };
+};
