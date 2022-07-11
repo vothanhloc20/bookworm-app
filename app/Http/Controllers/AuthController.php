@@ -101,4 +101,13 @@ class AuthController extends Controller
     {
         return $this->authRepository->login($request);
     }
+
+    public function logout()
+    {
+        return $this->authRepository->logout();
+    }
+
+    public function userInformation(Request $request){
+        return $this->authRepository->userInformation($request);
+    }
 }

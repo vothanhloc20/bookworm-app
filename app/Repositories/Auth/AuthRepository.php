@@ -6,6 +6,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Traits\ApiResponse;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthInterface
@@ -53,5 +55,21 @@ class AuthRepository implements AuthInterface
         ];
 
         return $this->apiResponse($data, 'success', 'Login Successfully');
+    }
+
+    public function logout()
+    {
+        Auth::user()->tokens()->delete();
+
+        return $this->apiResponse([], 'success', 'Logout Successfully');
+    }
+
+    public function userInformation(Request $request)
+    {
+        $user = Auth::user();
+
+        $user['full_name'] = User::query()->find($user['id'])->full_name;
+
+        return $this->apiResponse($user, 'success', 'Get Data Successfully');
     }
 }
