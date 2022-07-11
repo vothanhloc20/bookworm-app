@@ -47,7 +47,11 @@ class CartList extends React.Component {
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody
+                    style={{
+                        height: this.props.data.length > 2 ? "286px" : "auto",
+                    }}
+                >
                     {this.props.data.length > 0 &&
                         this.props.data.map((item, index) => {
                             return (
@@ -73,7 +77,7 @@ class CartList extends React.Component {
                                                 <p className="font-weight-bold font-18px card-title mb-1">
                                                     {item.book_title}
                                                 </p>
-                                                <p className="font-16px font-weight-medium">
+                                                <p className="font-16px font-weight-medium author_name">
                                                     {item.author_name}
                                                 </p>
                                             </div>
@@ -143,12 +147,14 @@ class CartList extends React.Component {
                             );
                         })}
                     {this.props.data.length === 0 && (
-                        <div className="h-100 d-flex flex-column align-items-center justify-content-center">
-                            <img src={CartEmpty} width="130" height="130" />
-                            <p className="mt-3 text-blue font-weight-bold font-20px text-blue">
-                                Oops... Your cart is empty
-                            </p>
-                        </div>
+                        <tr className="h-100 d-flex flex-column align-items-center justify-content-center p-5">
+                            <td className="d-flex flex-column align-items-center justify-content-center">
+                                <img src={CartEmpty} width="130" height="130" />
+                                <p className="mt-3 text-blue font-weight-bold font-20px text-center">
+                                    Oops... Your cart is empty
+                                </p>
+                            </td>
+                        </tr>
                     )}
                 </tbody>
             </Table>

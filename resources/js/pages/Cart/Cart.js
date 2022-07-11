@@ -4,9 +4,14 @@ import { Col, Row } from "react-bootstrap";
 
 import CartList from "../../components/layouts/Cart/CartList.js";
 import CartTotals from "../../components/layouts/Cart/CartTotals.js";
+import Notiflix from "notiflix";
+import Swal from "sweetalert2";
+import { Toast } from "../../utils/toast.js";
+import { boolean } from "yup";
 import { connect } from "react-redux";
 import { deleteKeyValue } from "../../utils/deleteKeyValue.js";
 import { mapStateToProps } from "../../utils/useSelector.js";
+import orderApi from "../../api/orderApi.js";
 import { setSumCartQuantity } from "../../redux/actions/app.action.js";
 
 class Cart extends React.Component {
@@ -127,6 +132,131 @@ class Cart extends React.Component {
         localStorage.setItem("cart", JSON.stringify(cart_local_storage));
     };
 
+    placeOrder = async () => {
+        const booleanArray = [];
+        this.state.cart.forEach((item, index) => {
+            if (item.temp_quantity === "") booleanArray.push(false);
+            if (item.temp_quantity !== "") booleanArray.push(true);
+        });
+        const checkBooleanArray = booleanArray.every(
+            (element) => element === true
+        );
+
+        if (!checkBooleanArray) {
+            Toast.fire({
+                icon: "warning",
+                title: "Quantity is required",
+                background: "#fef1e7",
+                color: "#f8bb86",
+            });
+            return;
+        }
+
+        Notiflix.Block.hourglass("#app-cart-page", "Please wait...", {
+            backgroundColor: "rgba(239, 244, 251, 0.91)",
+            messageColor: "#739dd8",
+            svgColor: "#739dd8",
+            fontWeight: "700",
+        });
+
+        const temp_cart = JSON.parse(JSON.stringify(this.state.cart));
+        const new_cart = [];
+        temp_cart.forEach((item, index) => {
+            if (item.is_discount) {
+                new_cart.push({
+                    book_id: item.id,
+                    book_title: item.book_title,
+                    quantity: item.quantity,
+                    price: item.discount_price,
+                });
+            } else {
+                new_cart.push({
+                    book_id: item.id,
+                    quantity: item.quantity,
+                    price: item.book_price,
+                });
+            }
+        });
+
+        const create_cart = {
+            user_id: this.props.app.user.id,
+            order_amount: this.props.app.totalQuantity,
+            cart: JSON.parse(JSON.stringify(new_cart)),
+        };
+
+        const response = await orderApi.createOrder(create_cart);
+
+        if (
+            response.status === 404 &&
+            response.data.message === "Some books are not available"
+        ) {
+            const book_unvailable = response.data.data;
+
+            let name = "";
+            book_unvailable.forEach((element, index) => {
+                name +=
+                    index === 0
+                        ? element.book_title
+                        : `; ${element.book_title}`;
+            });
+
+            await Swal.fire({
+                title: "<p class='text-red font-20px font-weight-bold'>Place order unsuccessfully</p>",
+                html: `<p class='font-16px font-weight-semi'>Book titled <span class="font-weight-bold text-blue">${name}</span> was unavailable. So we will remove it from your cart</p>`,
+                icon: "error",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                confirmButtonColor: "#739dd8",
+                confirmButtonText: "I understand",
+            });
+
+            const array_index = [];
+
+            book_unvailable.forEach((item) => {
+                array_index.push(item.book_id);
+            });
+
+            const newCart = this.state.cart.filter(
+                (element) => !array_index.includes(element.id)
+            );
+
+            this.handleSumCartQuantity(newCart);
+            this.setState({ cart: [...newCart] });
+            this.handleSumAmount(newCart);
+            this.handleLocalStorage(newCart);
+
+            Notiflix.Block.remove("#app-cart-page");
+        }
+
+        if (response.status === "success") {
+            let timer = 10;
+            Notiflix.Block.remove("#app-cart-page");
+            setTimeout(() => {
+                Swal.close();
+                window.location.href = "/";
+                localStorage.removeItem("cart");
+            }, 10000);
+            Swal.fire({
+                title: "<p class='text-blue font-20px font-weight-bold'>Place order successfully</p>",
+                html: "<p className='font-16px font-weight-semi'>This page will reload after <b></b> seconds</p>",
+                icon: "success",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                timer: 10000,
+                didOpen: () => {
+                    const b = Swal.getHtmlContainer().querySelector("b");
+                    b.textContent = 10;
+                    timer = setInterval(() => {
+                        b.textContent = Math.abs(
+                            Swal.getTimerLeft() / 1000
+                        ).toFixed(0);
+                    }, 500);
+                },
+            });
+        }
+    };
+
     render() {
         return (
             <main>
@@ -140,7 +270,7 @@ class Cart extends React.Component {
                         </span>
                     </p>
                     <div className="app-divide mt-4 mb-5" />
-                    <Row className="mx-0">
+                    <Row id="app-cart-page" className="mx-0">
                         <Col
                             lg={9}
                             className={`${
@@ -158,6 +288,7 @@ class Cart extends React.Component {
                         <Col lg={3} className="px-0">
                             <CartTotals
                                 total_amount={this.state.total_amount}
+                                placeOrder={this.placeOrder}
                             />
                         </Col>
                     </Row>
