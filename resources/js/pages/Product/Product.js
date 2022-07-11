@@ -28,6 +28,10 @@ class Product extends React.Component {
         this.setState({ book_id: bookId });
         this.getBookById(bookId);
         this.getReviewByBookId(bookId);
+        window.addEventListener("storage", (e) => {
+            const bookId = this.getIdBook();
+            this.getBookById(bookId);
+        });
     }
 
     getIdBook = () => {
@@ -90,6 +94,7 @@ class Product extends React.Component {
                 return accumulator + current.quantity;
             }, initialValue);
         }
+        console.log(sumCartQuantity);
         this.props.setSumCartQuantity(sumCartQuantity);
     };
 

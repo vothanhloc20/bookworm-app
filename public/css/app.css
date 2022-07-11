@@ -77,6 +77,10 @@ li {
     cursor: pointer;
 }
 
+.cursor-no-drop {
+    cursor: no-drop;
+}
+
 .app-border-8px {
     border-radius: 8px;
 }

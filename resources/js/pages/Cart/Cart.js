@@ -19,26 +19,30 @@ class Cart extends React.Component {
         super(props);
         this.state = {
             cart: [],
-            total_amount: "0",
+            total_amount: "0.00",
         };
     }
 
     componentDidMount() {
         this.getCart();
+        window.addEventListener("storage", (e) => {
+            this.getCart("listener");
+        });
     }
 
-    getCart = () => {
+    getCart = (value) => {
         const checkCart = localStorage.getItem("cart");
-
+        let newCart = [];
         if (checkCart) {
             const cart = JSON.parse(checkCart);
-            const newCart = cart.map((obj) => ({
+            newCart = cart.map((obj) => ({
                 ...obj,
                 temp_quantity: obj.quantity.toString(),
             }));
             this.handleSumAmount(newCart);
             this.setState({ cart: [...newCart] });
         }
+        if (value === "listener") this.handleSumCartQuantity(newCart);
     };
 
     handleSumAmount = (data) => {
@@ -129,7 +133,11 @@ class Cart extends React.Component {
         cart_local_storage = deleteKeyValue(cart_local_storage, [
             "temp_quantity",
         ]);
-        localStorage.setItem("cart", JSON.stringify(cart_local_storage));
+        if (data.length > 0) {
+            localStorage.setItem("cart", JSON.stringify(cart_local_storage));
+        } else {
+            localStorage.removeItem("cart");
+        }
     };
 
     placeOrder = async () => {

@@ -31,6 +31,40 @@
     transition: color 0.4s ease-in;
 }
 
+.app-cart.app-cart.app-cart-responsive {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+}
+
+.app-cart.app-cart.app-cart-responsive .acr-heading {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.app-cart.app-cart-responsive .acr-body {
+    padding: 0.75rem;
+}
+
+.app-cart.app-cart-responsive .acr-main {
+    overflow: auto;
+}
+
+.app-cart.app-cart-responsive .acr-body:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.app-cart.app-cart-responsive .acr-body a {
+    color: inherit;
+}
+
+.app-cart.app-cart-responsive .acr-body a:hover .card-title {
+    color: var(--app-blue);
+}
+
+.app-cart.app-cart-responsive .acr-body a:hover .author_name {
+    color: var(--app-black);
+}
+
 .app-card-product:hover .card-title {
     color: var(--app-blue);
 }

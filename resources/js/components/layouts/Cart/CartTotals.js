@@ -35,7 +35,11 @@ class CartTotals extends React.Component {
                     <Button
                         onClick={() => this.handlePlaceOrder()}
                         variant="blue"
-                        className="font-weight-semi"
+                        className={`font-weight-semi ${
+                            this.props.app.totalQuantity === 0
+                                ? "cursor-no-drop"
+                                : ""
+                        }`}
                         disabled={this.props.app.totalQuantity === 0}
                     >
                         Place Order

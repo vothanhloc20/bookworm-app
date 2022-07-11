@@ -50,6 +50,7 @@ class AddToCart extends React.Component {
         if (!checkCart) {
             finalCart.push(this.props.product.detail_book[0]);
             this.addNewCart(finalCart);
+            this.props.handleSumCartQuantity(finalCart);
             return;
         }
 
@@ -169,6 +170,9 @@ class AddToCart extends React.Component {
                             setQuantity={this.setQuantity}
                             handleQuantity={this.handleQuantity}
                         />
+                        <small className="text-red">
+                            <i>*Quantity limit is 8</i>
+                        </small>
                     </div>
                     <Button
                         variant="blue"
