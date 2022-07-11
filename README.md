@@ -116,7 +116,9 @@ composer install
 
 ## Site Map
 
-![Sitemap][app-site-map]
+<p align="center">
+  <img src="resources/assets/sitemap.png" alt="Site Map" width="100%" height="100%" />
+</p>
 
 <!-- LICENSE -->
 
@@ -126,12 +128,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-ThanhLocVo - [@LinkedIn](https://www.linkedin.com/in/vo-thanh-loc/) - vothanhloc20@gmail.com
+Thanh Loc Vo - [@LinkedIn](https://www.linkedin.com/in/vo-thanh-loc/) - vothanhloc20@gmail.com
 
 Project Link: [https://github.com/vothanhloc20/bookworm-app](https://github.com/vothanhloc20/bookworm-app)
 
 [app-screenshot]: resources/assets/screenshot_shop.png
-[app-site-map]: resources/assets/sitemap.png
 [laravel.com-shields]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
 [laravel.com-url]: https://laravel.com
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
