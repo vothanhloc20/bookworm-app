@@ -11,12 +11,18 @@ import {
     setIndexItem,
     setItemsTotal,
     setLoading,
+    setReset,
+    setResetFilterShop,
     setTotalPage,
 } from "../../redux/actions/shop.action.js";
+import {
+    setDataFilter,
+    setResetFilter,
+} from "../../redux/actions/filter.action.js";
 
 import bookApi from "../../api/bookApi.js";
 import filterDataApi from "../../api/filterDataApi.js";
-import { setDataFilter } from "../../redux/actions/filter.action.js";
+import { openFilterDrawer } from "../../redux/actions/drawer.action.js";
 
 export const getAllCategories = () => {
     return filterDataApi.getAllCategories();
@@ -102,5 +108,9 @@ export const mapDispatchToProps = (dispatch) => {
         setLoading: (data) => dispatch(setLoading(data)),
         setFirstLoading: (data) => dispatch(setFirstLoading(data)),
         setCurrentSort: (data) => dispatch(setCurrentSort(data)),
+        setReset: () => dispatch(setReset()),
+        setResetFilter: () => dispatch(setResetFilter()),
+        openFilterDrawer: () => dispatch(openFilterDrawer()),
+        setResetFilterShop: () => dispatch(setResetFilterShop()),
     };
 };

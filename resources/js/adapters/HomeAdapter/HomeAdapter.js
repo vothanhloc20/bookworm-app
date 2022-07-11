@@ -1,6 +1,7 @@
 import {
     setFirstLoading,
     setIsRecommended,
+    setReset,
     setTagFeaturedBooks,
     setTopTenOnSaleBooks,
 } from "../../redux/actions/home.action";
@@ -13,6 +14,7 @@ export const mapDispatchToProps = (dispatch) => {
         setTagFeaturedBooks: (data) => dispatch(setTagFeaturedBooks(data)),
         setIsRecommended: (data) => dispatch(setIsRecommended(data)),
         setFirstLoading: (data) => dispatch(setFirstLoading(data)),
+        setReset: () => dispatch(setReset()),
     };
 };
 

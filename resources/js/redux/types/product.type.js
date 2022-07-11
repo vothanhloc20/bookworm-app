@@ -18,3 +18,5 @@ export const product_CURRENT_PAGE_REVIEW = "product_CURRENT_PAGE_REVIEW";
 export const product_CURRENT_FILTER_STAR = "product_CURRENT_FILTER_STAR";
 export const product_SORT_REVIEW = "product_SORT_REVIEW";
 export const product_SET_PER_PAGE = "product_SET_PER_PAGE";
+export const product_SET_RESET = "product_SET_RESET";
+export const product_SET_PRICE_BOOK = "product_SET_PRICE_BOOK";

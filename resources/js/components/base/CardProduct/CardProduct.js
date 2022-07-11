@@ -10,7 +10,7 @@ class CardProduct extends React.Component {
     render() {
         return (
             <Link to={`/shop/${this.props.productId}`}>
-                <Card id="app-card-product" className="h-100">
+                <Card className="app-card-product h-100">
                     <div className="card-image">
                         <div className="card-image-layout">
                             <Card.Img
@@ -20,26 +20,27 @@ class CardProduct extends React.Component {
                         </div>
                     </div>
                     <Card.Body className="d-flex flex-column text-black">
-                        <Card.Title className="font-weight-bold card-title mb-auto">
+                        <p className="font-weight-bold font-18px card-title mb-auto">
                             {this.props.productName}
-                        </Card.Title>
-                        <br />
-                        <Card.Text>{this.props.productAuthor}</Card.Text>
+                        </p>
+                        <Card.Text className="font-weight-semi font-16px mt-1">
+                            {this.props.productAuthor}
+                        </Card.Text>
                     </Card.Body>
                     <Card.Footer className="text-muted">
                         {!this.props.productIsDiscount ? (
-                            <span className="text-red font-weight-bold font-20px">
+                            <span className="text-red font-weight-bold font-18px">
                                 ${this.props.productBookPrice}
                             </span>
                         ) : (
                             <>
                                 <strike>
-                                    <span className="text-grey font-weight-medium">
-                                        {this.props.productBookPrice}
+                                    <span className="text-grey font-weight-semi font-16px">
+                                        ${this.props.productBookPrice}
                                     </span>
                                 </strike>
                                 &nbsp;
-                                <span className="text-red font-weight-bold font-20px">
+                                <span className="text-red font-weight-bold font-18px">
                                     ${this.props.productDiscountPrice}
                                 </span>
                             </>

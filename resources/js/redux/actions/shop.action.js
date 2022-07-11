@@ -1,5 +1,11 @@
 import * as Type from "../types/mainTypes.js";
 
+export const setReset = () => {
+    return {
+        type: Type.shop_RESET,
+    };
+};
+
 export const setTotalPage = (data) => {
     return {
         type: Type.shop_SET_TOTAL_PAGES,
@@ -81,5 +87,11 @@ export const setCurrentSort = (data) => {
     return {
         type: Type.shop_SET_CURRENT_SORT,
         payload: data,
+    };
+};
+
+export const setResetFilterShop = () => {
+    return {
+        type: Type.shop_RESET_FILTER,
     };
 };

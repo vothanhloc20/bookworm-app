@@ -18,6 +18,7 @@ class GridSkeleton extends React.Component {
                         lg={this.props.lg}
                         md={this.props.md}
                         sm={this.props.sm}
+                        xs={this.props.xs}
                         key={index}
                         className={this.props.customClass}
                     >

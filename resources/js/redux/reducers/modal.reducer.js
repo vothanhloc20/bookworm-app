@@ -2,8 +2,6 @@ import * as Type from "../types/mainTypes.js";
 
 const initState = {
     status: false,
-    headingTitle: "Login",
-    contentButton: "Login",
 };
 
 const modal = (state = initState, action) => {

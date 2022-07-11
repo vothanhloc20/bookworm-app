@@ -15,10 +15,11 @@ class NoData extends React.Component {
                     alt="No Data"
                     width="60%"
                     height="100%"
+                    className="image-no-data"
                 />
-                <h4 className="text-blue font-weight-bold text-blue">
+                <p className="text-blue font-weight-bold font-20px text-blue">
                     Oops... No matching data
-                </h4>
+                </p>
             </div>
         );
     }

@@ -22,16 +22,29 @@ const initState = {
 
 const product = (state = initState, action) => {
     switch (action.type) {
+        case Type.product_SET_RESET:
+            return initState;
         case Type.product_SET_DETAIL_BOOK:
             return {
                 ...state,
                 detail_book: [...action.payload],
-                price_book: action.payload[0].final_price,
+            };
+        case Type.product_SET_PRICE_BOOK:
+            return {
+                ...state,
+                price_book: action.payload,
             };
         case Type.product_SET_QUANTITY_BOOK:
             return {
                 ...state,
-                quantity: action.payload,
+                detail_book: [
+                    ...state.detail_book.slice(0, 0),
+                    {
+                        ...state.detail_book[0],
+                        quantity: action.payload,
+                    },
+                    ...state.detail_book.slice(1),
+                ],
             };
         case Type.product_SET_DISCOUNT_PRICE_BOOK:
             return {
@@ -43,6 +56,7 @@ const product = (state = initState, action) => {
                         discount_price: action.payload,
                         final_price: action.payload,
                     },
+                    ...state.detail_book.slice(1),
                 ],
             };
         case Type.product_SET_MAIN_PRICE_BOOK:
@@ -55,6 +69,7 @@ const product = (state = initState, action) => {
                         book_price: action.payload,
                         final_price: action.payload,
                     },
+                    ...state.detail_book.slice(1),
                 ],
             };
         case Type.product_SET_FIRST_LOADING_REVIEW:

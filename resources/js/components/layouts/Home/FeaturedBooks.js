@@ -13,9 +13,10 @@ class FeaturedBooks extends React.Component {
                 data={this.props.data}
                 xl={3}
                 lg={4}
-                md={6}
-                sm={12}
-                customClass="p-2 align-items-stretch"
+                md={4}
+                sm={6}
+                xs={6}
+                customClass="app-card-padding align-items-stretch"
             />
         );
     }

@@ -17,6 +17,8 @@ const initState = {
 
 const shop = (state = initState, action) => {
     switch (action.type) {
+        case Type.shop_RESET:
+            return initState;
         case Type.shop_SET_TOTAL_PAGES:
             return {
                 ...state,
@@ -47,6 +49,11 @@ const shop = (state = initState, action) => {
                 ...state,
                 from: action.payload.from,
                 to: action.payload.to,
+            };
+        case Type.shop_RESET_FILTER:
+            return {
+                ...state,
+                current_filter: [],
             };
         case Type.shop_SET_CURRENT_FILTER:
             return {

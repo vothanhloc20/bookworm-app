@@ -45,6 +45,7 @@ class Book extends Model
             ->select('book.id',
                 'book.book_title',
                 'author.author_name',
+                'category.category_name',
                 'book.book_price',
                 'book.book_cover_photo',
                 'book.book_summary',
@@ -75,6 +76,7 @@ class Book extends Model
             ->groupBy('book.id',
                 'book.book_title',
                 'author.author_name',
+                'category.category_name',
                 'book.book_price',
                 'book.book_cover_photo',
                 'book.book_summary',
@@ -94,6 +96,7 @@ class Book extends Model
             ->groupBy('book.id',
                 'book.book_title',
                 'author.author_name',
+                'category.category_name',
                 'book.book_price',
                 'book.book_cover_photo',
                 'book.book_summary',
@@ -151,15 +154,12 @@ class Book extends Model
             })
             ->when($request->has('filter.rating_star'), function ($query) use ($request) {
                 $rating_star = $request->query('filter')['rating_star'];
-                $min = 0;
-                if ($rating_star > 1) {
-                    $min = $rating_star - 1 + 0.1;
-                }
+
                 $query
                     ->joinSub($this->getAverageRatingStar(), 'book_avg_rating', function ($join) {
                         $join->on('book.id', '=', 'book_avg_rating.id');
                     })
-                    ->whereBetween('book_avg_rating.average_rating_star', [$min, $rating_star]);;
+                    ->where('book_avg_rating.average_rating_star', '>=', $rating_star);
             });
     }
 }

@@ -9,7 +9,9 @@ import {
     setFromReview,
     setMainPriceBook,
     setPerPage,
+    setPriceBook,
     setQuantityBook,
+    setReset,
     setReviewData,
     setSecondLoadingReview,
     setSortReview,
@@ -20,6 +22,7 @@ import {
 
 import bookApi from "../../api/bookApi";
 import reviewApi from "../../api/reviewApi.js";
+import { setSumCartQuantity } from "../../redux/actions/app.action.js";
 
 export const getBookById = (id) => {
     return bookApi.getBookById(id);
@@ -43,6 +46,10 @@ export const getReviewByBookId = ({
     });
 };
 
+export const createNewReview = (body) => {
+    return reviewApi.createNewReview(body);
+};
+
 export const mapDispatchToProps = (dispatch) => {
     return {
         setDetailBook: (data) => dispatch(setDetailBook(data)),
@@ -63,5 +70,8 @@ export const mapDispatchToProps = (dispatch) => {
         setCurrentFilterStar: (data) => dispatch(setCurrentFilterStar(data)),
         setSortReview: (data) => dispatch(setSortReview(data)),
         setPerPage: (data) => dispatch(setPerPage(data)),
+        setReset: () => dispatch(setReset()),
+        setPriceBook: (data) => dispatch(setPriceBook(data)),
+        setSumCartQuantity: (data) => dispatch(setSumCartQuantity(data)),
     };
 };

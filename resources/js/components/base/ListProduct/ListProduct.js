@@ -21,6 +21,7 @@ class ListProduct extends React.Component {
                             lg={this.props.lg}
                             md={this.props.md}
                             sm={this.props.sm}
+                            xs={this.props.xs}
                             className={this.props.customClass}
                         >
                             <CardProduct

@@ -41,6 +41,12 @@
     z-index: 1030;
 }
 
+.app-nav-menu.filter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
 .app-nav-menu.amb-active {
     transform: translateX(0);
 }

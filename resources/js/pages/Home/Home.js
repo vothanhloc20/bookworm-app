@@ -10,6 +10,8 @@ import {
 
 import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import { FaAngleRight } from "react-icons/fa";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import RenderOnFeatured from "../../components/layouts/Home/Common/RenderOnFeatured.js";
 import RenderOnSale from "../../components/layouts/Home/Common/RenderOnSale.js";
 import { connect } from "react-redux";
@@ -20,7 +22,8 @@ class Home extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        await this.props.setReset();
         this.getOnSaleBooks();
         this.getRecommendedBooks();
     }
@@ -51,23 +54,34 @@ class Home extends React.Component {
     render() {
         return (
             <main>
+                <Helmet>
+                    <title>Home | Bookworm</title>
+                </Helmet>
+
                 <section className="mb-5">
                     <Row className="align-items-center mb-4">
-                        <Col>
-                            <h4 className="font-weight-semi">On Sale</h4>
+                        <Col xs={6} className="app-card-padding">
+                            <p className="font-weight-bold font-20px">
+                                On Sale
+                            </p>
                         </Col>
-                        <Col className="d-flex justify-content-end">
+                        <Col
+                            xs={6}
+                            className="d-flex justify-content-end app-card-padding"
+                        >
                             {this.props.home.topTenOnSaleBooks.length > 0 ? (
-                                <Button
-                                    variant="blue"
-                                    className="font-weight-semi d-flex align-items-center"
-                                >
-                                    <span className="flex-grow-1">
-                                        View All
-                                    </span>
-                                    &nbsp;
-                                    <FaAngleRight />
-                                </Button>
+                                <Link to="/shop">
+                                    <Button
+                                        variant="blue"
+                                        className="font-weight-bold font-16px d-flex align-items-center"
+                                    >
+                                        <span className="flex-grow-1">
+                                            View All
+                                        </span>
+                                        &nbsp;
+                                        <FaAngleRight />
+                                    </Button>
+                                </Link>
                             ) : (
                                 <ButtonSkeleton />
                             )}
@@ -77,9 +91,9 @@ class Home extends React.Component {
                 </section>
                 <section>
                     <div className="text-center mb-4">
-                        <h4 className="font-weight-semi mb-4">
+                        <p className="font-weight-bold font-20px mb-4">
                             Featured Books
-                        </h4>
+                        </p>
                         {!this.props.home.firstLoading ? (
                             <>
                                 <Button
@@ -88,7 +102,7 @@ class Home extends React.Component {
                                             ? "blue"
                                             : "link"
                                     }
-                                    className="font-weight-semi"
+                                    className="font-weight-bold font-16px"
                                     disabled={this.props.home.isRecommended}
                                     onClick={() => this.getRecommendedBooks()}
                                 >
@@ -101,7 +115,7 @@ class Home extends React.Component {
                                             : "blue"
                                     }
                                     disabled={!this.props.home.isRecommended}
-                                    className="font-weight-semi"
+                                    className="font-weight-bold font-16px"
                                     onClick={() => this.getPopularBooks()}
                                 >
                                     Popular

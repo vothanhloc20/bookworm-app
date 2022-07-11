@@ -1,3 +1,5 @@
+import "sweetalert2/src/sweetalert2.scss";
+
 import App from "./App.js";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";

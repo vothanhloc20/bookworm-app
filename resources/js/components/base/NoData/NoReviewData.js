@@ -15,10 +15,11 @@ class NoReviewData extends React.Component {
                     alt="No Review Data"
                     width="60%"
                     height="100%"
+                    className="image-no-data"
                 />
-                <h4 className="text-blue font-weight-bold text-blue">
+                <p className="text-blue font-weight-bold font-20px text-blue">
                     Oops... There are not any reviews yet
-                </h4>
+                </p>
             </div>
         );
     }

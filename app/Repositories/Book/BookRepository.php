@@ -58,6 +58,7 @@ class BookRepository implements BookInterface
             ->groupBy('book.id',
                 'book.book_title',
                 'author.author_name',
+                'category.category_name',
                 'book.book_price',
                 'book.book_cover_photo',
                 'book.book_summary',

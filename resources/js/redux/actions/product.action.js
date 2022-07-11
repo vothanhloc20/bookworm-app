@@ -1,5 +1,11 @@
 import * as Type from "../types/mainTypes.js";
 
+export const setReset = (data) => {
+    return {
+        type: Type.product_SET_RESET,
+    };
+};
+
 export const setDetailBook = (data) => {
     return {
         type: Type.product_SET_DETAIL_BOOK,
@@ -115,6 +121,13 @@ export const setSortReview = (data) => {
 export const setPerPage = (data) => {
     return {
         type: Type.product_SET_PER_PAGE,
+        payload: data,
+    };
+};
+
+export const setPriceBook = (data) => {
+    return {
+        type: Type.product_SET_PRICE_BOOK,
         payload: data,
     };
 };

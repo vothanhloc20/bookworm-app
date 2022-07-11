@@ -29,6 +29,8 @@ const home = (state = initState, action) => {
                 ...state,
                 firstLoading: action.payload,
             };
+        case Type.home_RESET:
+            return initState;
         default:
             return state;
     }

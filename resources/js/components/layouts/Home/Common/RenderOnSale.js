@@ -18,27 +18,45 @@ class RenderOnSale extends React.Component {
                 return 3;
             } else if (this.props.app.width >= 768) {
                 return 3;
-            } else if (this.props.app.width >= 576) {
-                return 2;
             } else {
-                return 1;
+                return 2;
             }
         };
 
         const onSaleDisplay =
             this.props.home.topTenOnSaleBooks.length === 0 ? (
-                <GridSkeleton
-                    xl={3}
-                    md={4}
-                    sm={6}
-                    quantity={quantityOnSaleSkeleton()}
-                    customClass="p-2 align-items-stretch"
-                />
+                <div
+                    className={`${
+                        this.props.home.topTenOnSaleBooks.length === 0
+                            ? "px-4 mx-1"
+                            : ""
+                    }`}
+                >
+                    <GridSkeleton
+                        xl={3}
+                        lg={4}
+                        md={4}
+                        sm={6}
+                        xs={6}
+                        quantity={quantityOnSaleSkeleton()}
+                        customClass="app-card-padding align-items-stretch"
+                    />
+                </div>
             ) : (
                 <OnSale data={this.props.home.topTenOnSaleBooks} />
             );
 
-        return <>{onSaleDisplay}</>;
+        return (
+            <div
+                className={`${
+                    this.props.app.width < 576
+                        ? ""
+                        : "p-3 app-border app-border-8px"
+                }`}
+            >
+                {onSaleDisplay}
+            </div>
+        );
     }
 }
 

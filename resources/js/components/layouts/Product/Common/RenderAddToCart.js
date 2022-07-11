@@ -10,12 +10,16 @@ class RenderAddToCart extends React.Component {
         super(props);
     }
 
+    handleSumCartQuantity = (data) => {
+        this.props.handleSumCartQuantity(data);
+    };
+
     render() {
         const addToCart =
             this.props.product.detail_book.length === 0 ? (
                 <ProductAddToCartSkeleton />
             ) : (
-                <AddToCart />
+                <AddToCart handleSumCartQuantity={this.handleSumCartQuantity} />
             );
 
         return <>{addToCart}</>;

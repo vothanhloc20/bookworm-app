@@ -17,3 +17,21 @@ export const closeDrawer = () => {
         type: Type.drawer_CLOSE_DRAWER,
     };
 };
+
+export const openFilterDrawer = () => {
+    const htmlTag = document.getElementsByTagName("html");
+    htmlTag[0].style.overflow = "hidden";
+
+    return {
+        type: Type.drawer_OPEN_FILTER_DRAWER,
+    };
+};
+
+export const closeFilterDrawer = () => {
+    const htmlTag = document.getElementsByTagName("html");
+    htmlTag[0].style.overflow = "";
+
+    return {
+        type: Type.drawer_CLOSE_FILTER_DRAWER,
+    };
+};

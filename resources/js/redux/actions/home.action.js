@@ -27,3 +27,9 @@ export const setFirstLoading = (data) => {
         payload: data,
     };
 };
+
+export const setReset = () => {
+    return {
+        type: Type.home_RESET,
+    };
+};

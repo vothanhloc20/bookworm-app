@@ -2,6 +2,8 @@ import * as React from "react";
 
 import ButtonSkeleton from "./ButtonSkeleton.js";
 import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
+import { mapStateToProps } from "../../../utils/useSelector.js";
 
 class ProductAddToCartSkeleton extends React.Component {
     constructor(props) {
@@ -10,11 +12,17 @@ class ProductAddToCartSkeleton extends React.Component {
 
     render() {
         return (
-            <Card className="app-skeleton">
+            <Card
+                className={`app-skeleton ${
+                    this.props.app.width <= 400 ? "mx-2" : ""
+                }`}
+            >
                 <Card.Header>
                     <div className="skeleton-title skeleton-animation" />
                 </Card.Header>
-                <Card.Body className="p-5">
+                <Card.Body
+                    className={`${this.props.app.width <= 400 ? "p-4" : "p-5"}`}
+                >
                     <div className="mb-5">
                         <div className="skeleton-title skeleton-animation mb-3" />
                         <ButtonSkeleton />
@@ -26,4 +34,4 @@ class ProductAddToCartSkeleton extends React.Component {
     }
 }
 
-export default ProductAddToCartSkeleton;
+export default connect(mapStateToProps, null)(ProductAddToCartSkeleton);

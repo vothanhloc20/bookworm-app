@@ -16,16 +16,27 @@ class RenderOnFeatured extends React.Component {
                 <GridSkeleton
                     xl={3}
                     lg={4}
-                    md={6}
-                    sm={12}
+                    md={4}
+                    sm={6}
+                    xs={6}
                     quantity={8}
-                    customClass="p-2 align-items-stretch"
+                    customClass="app-card-padding align-items-stretch"
                 />
             ) : (
                 <FeaturedBooks data={this.props.home.tagFeaturedBooks} />
             );
 
-        return <>{onFeaturedBooks}</>;
+        return (
+            <div
+                className={`${
+                    this.props.app.width < 576
+                        ? ""
+                        : "py-3 px-5 app-border app-border-8px"
+                }`}
+            >
+                {onFeaturedBooks}
+            </div>
+        );
     }
 }
 
