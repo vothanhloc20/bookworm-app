@@ -7,6 +7,7 @@ import {
 } from "../../adapters/ProductAdapter/ProductAdapter.js";
 
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import RenderAddToCart from "../../components/layouts/Product/Common/RenderAddToCart.js";
 import RenderCustomerReviews from "../../components/layouts/Product/Common/RenderCustomerReviews.js";
 import RenderFormReview from "../../components/layouts/Product/Common/RenderFormReview.js";
@@ -14,12 +15,14 @@ import RenderProductInformation from "../../components/layouts/Product/Common/Re
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../../adapters/ProductAdapter/ProductAdapter.js";
 import { mapStateToProps } from "../../utils/useSelector.js";
+import pageNotFound from "../../../assets/page_not_found.png";
 
 class Product extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             book_id: 0,
+            checkData: true,
         };
     }
 
@@ -28,7 +31,6 @@ class Product extends React.Component {
         const bookId = await this.getIdBook();
         this.setState({ book_id: bookId });
         this.getBookById(bookId);
-        this.getReviewByBookId(bookId);
         window.addEventListener("storage", (e) => {
             const bookId = this.getIdBook();
             this.getBookById(bookId);
@@ -42,28 +44,37 @@ class Product extends React.Component {
     getBookById = (bookId) => {
         getBookById(bookId).then((result) => {
             const { data } = result;
-            this.props.setPriceBook(data[0].final_price);
-            const checkCart = localStorage.getItem("cart");
-            if (checkCart) {
-                const cart = JSON.parse(checkCart);
-                const find = cart.find((element) => element.id === data[0].id);
-                data[0].quantity = find ? find.quantity : 1;
-                if (data[0].is_discount) {
-                    data[0].discount_price = parseFloat(
-                        (data[0].discount_price * data[0].quantity).toFixed(2)
-                    ).toString();
-                    data[0].final_price = data[0].discount_price;
+            if (!data.message) {
+                this.getReviewByBookId(bookId);
+                this.props.setPriceBook(data[0].final_price);
+                const checkCart = localStorage.getItem("cart");
+                if (checkCart) {
+                    const cart = JSON.parse(checkCart);
+                    const find = cart.find(
+                        (element) => element.id === data[0].id
+                    );
+                    data[0].quantity = find ? find.quantity : 1;
+                    if (data[0].is_discount) {
+                        data[0].discount_price = parseFloat(
+                            (data[0].discount_price * data[0].quantity).toFixed(
+                                2
+                            )
+                        ).toString();
+                        data[0].final_price = data[0].discount_price;
+                    } else {
+                        data[0].book_price = parseFloat(
+                            (data[0].book_price * data[0].quantity).toFixed(2)
+                        ).toString();
+                        data[0].final_price = data[0].book_price;
+                    }
                 } else {
-                    data[0].book_price = parseFloat(
-                        (data[0].book_price * data[0].quantity).toFixed(2)
-                    ).toString();
-                    data[0].final_price = data[0].book_price;
+                    data[0].quantity = 1;
                 }
+                this.props.setDetailBook(data);
+                this.handleCartWhenReload(data);
             } else {
-                data[0].quantity = 1;
+                this.setState({ checkData: false });
             }
-            this.props.setDetailBook(data);
-            this.handleCartWhenReload(data);
         });
     };
 
@@ -95,7 +106,6 @@ class Product extends React.Component {
                 return accumulator + current.quantity;
             }, initialValue);
         }
-        console.log(sumCartQuantity);
         this.props.setSumCartQuantity(sumCartQuantity);
     };
 
@@ -239,75 +249,103 @@ class Product extends React.Component {
                     </Helmet>
                 )}
 
-                <section>
-                    {this.props.product.detail_book.length === 0 ? (
-                        <div className="app-skeleton">
-                            <div className="skeleton-subtitle-2 skeleton-animation" />
-                        </div>
-                    ) : (
-                        <p className="font-18px font-weight-bold">
-                            Category:{" "}
-                            <span className="text-blue">
-                                {
-                                    this.props.product.detail_book[0]
-                                        .category_name
-                                }
-                            </span>
+                {this.state.checkData && (
+                    <section>
+                        {this.props.product.detail_book.length === 0 ? (
+                            <div className="app-skeleton">
+                                <div className="skeleton-subtitle-2 skeleton-animation" />
+                            </div>
+                        ) : (
+                            <p className="font-18px font-weight-bold">
+                                Category:{" "}
+                                <span className="text-blue">
+                                    {
+                                        this.props.product.detail_book[0]
+                                            .category_name
+                                    }
+                                </span>
+                            </p>
+                        )}
+                        <div className="app-divide mt-4 mb-5" />
+                        <Row className="mb-4">
+                            <Col
+                                lg={8}
+                                className={`${
+                                    this.props.app.width >= 992
+                                        ? "pl-0"
+                                        : "px-0 mb-4"
+                                }`}
+                            >
+                                <RenderProductInformation />
+                            </Col>
+                            <Col
+                                lg={4}
+                                className={`${
+                                    this.props.app.width >= 992
+                                        ? "pr-0"
+                                        : "px-0"
+                                }`}
+                            >
+                                <RenderAddToCart
+                                    handleSumCartQuantity={
+                                        this.handleSumCartQuantity
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col
+                                lg={8}
+                                className={`${
+                                    this.props.app.width >= 992
+                                        ? "pl-0"
+                                        : "px-0 mb-4"
+                                }`}
+                            >
+                                <RenderCustomerReviews
+                                    handleStateData={this.handleStateData}
+                                    handleStateAdvanced={
+                                        this.handleStateAdvanced
+                                    }
+                                    setReviews={this.setReviews}
+                                    handlePerPage={this.handlePerPage}
+                                    handleSort={this.handleSort}
+                                    handleFilter={this.handleFilter}
+                                />
+                            </Col>
+                            <Col
+                                lg={4}
+                                className={`${
+                                    this.props.app.width >= 992
+                                        ? "pr-0"
+                                        : "px-0"
+                                }`}
+                            >
+                                <RenderFormReview bookId={this.state.book_id} />
+                            </Col>
+                        </Row>
+                    </section>
+                )}
+
+                {!this.state.checkData && (
+                    <div className="text-center">
+                        <img
+                            src={pageNotFound}
+                            width={this.props.app.width <= 530 ? "100%" : "500"}
+                            height={
+                                this.props.app.width <= 530 ? "100%" : "500"
+                            }
+                            alt="404 Page Not Found"
+                        />
+                        <p className="font-20px text-blue font-weight-bold pt-4 mt-4">
+                            Oops... The book with the corresponding id could not
+                            be found. Back to{" "}
+                            <Link className="text-red" to="/">
+                                home page
+                            </Link>
                         </p>
-                    )}
-                    <div className="app-divide mt-4 mb-5" />
-                    <Row className="mb-4">
-                        <Col
-                            lg={8}
-                            className={`${
-                                this.props.app.width >= 992
-                                    ? "pl-0"
-                                    : "px-0 mb-4"
-                            }`}
-                        >
-                            <RenderProductInformation />
-                        </Col>
-                        <Col
-                            lg={4}
-                            className={`${
-                                this.props.app.width >= 992 ? "pr-0" : "px-0"
-                            }`}
-                        >
-                            <RenderAddToCart
-                                handleSumCartQuantity={
-                                    this.handleSumCartQuantity
-                                }
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col
-                            lg={8}
-                            className={`${
-                                this.props.app.width >= 992
-                                    ? "pl-0"
-                                    : "px-0 mb-4"
-                            }`}
-                        >
-                            <RenderCustomerReviews
-                                handleStateData={this.handleStateData}
-                                handleStateAdvanced={this.handleStateAdvanced}
-                                setReviews={this.setReviews}
-                                handlePerPage={this.handlePerPage}
-                                handleSort={this.handleSort}
-                                handleFilter={this.handleFilter}
-                            />
-                        </Col>
-                        <Col
-                            lg={4}
-                            className={`${
-                                this.props.app.width >= 992 ? "pr-0" : "px-0"
-                            }`}
-                        >
-                            <RenderFormReview bookId={this.state.book_id} />
-                        </Col>
-                    </Row>
-                </section>
+                    </div>
+                )}
             </main>
         );
     }
