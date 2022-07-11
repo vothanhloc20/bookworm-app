@@ -29,7 +29,7 @@ class OrderRepository implements OrderInterface
             $new_order = Order::query()->insertGetId(
                 [
                     'user_id' => $request->user_id,
-                    'order_date' => Carbon::now()->toDateTimeString(),
+                    'order_date' => Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString(),
                     'order_amount' => $request->order_amount,
                 ]
             );

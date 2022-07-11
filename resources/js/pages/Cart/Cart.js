@@ -188,7 +188,7 @@ class Cart extends React.Component {
 
         const create_cart = {
             user_id: this.props.app.user.id,
-            order_amount: this.props.app.totalQuantity,
+            order_amount: this.state.total_amount,
             cart: JSON.parse(JSON.stringify(new_cart)),
         };
 
