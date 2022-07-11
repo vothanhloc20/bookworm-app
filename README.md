@@ -1,62 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<br />
+<div align="center">
+  <a href="https://github.com/vothanhloc20/bookworm-app">
+    <img src="resources/assets/logo_64_64.png" alt="BookWorm Logo" width="64" height="64">
+  </a>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  <h3 align="center">BookWorm App</h3>
 
-## About Laravel
+  <p align="center">
+    A website for a book store that is called BookWorm
+  </p>
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<br />
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-app">About The app</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#technicals_requirement">Technical Requirements</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#site-map">Site Map</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<br />
 
-## Learning Laravel
+## About The App
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![BookWorm Screen Shot][app-screenshot]
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+BookWorm App is a full-stack sample web application that creates a storefront (and backend) for customers to shop for books. Ứng dụng được xây dựng bằng cơ chế Single Page App (SPA). You can filter, sort, look at recommendations and best sellers, manage your cart, checkout, and more.
 
-## Laravel Sponsors
+<br />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Built With
 
-### Premium Partners
+The web app uses the major frameworks/libraries below.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+-   [![React][react.js]][react.js-url]
+-   [![Laravel][laravel.com-shields]][laravel.com-url]
+-   [![Bootstrap][bootstrap.com-shields]][bootstrap.com-url]
+-   [![PostgreSQL][postgresql.org-shields]][postgresql.org-url]
 
-## Contributing
+<br />
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Getting Started
 
-## Code of Conduct
+### Technical Requirements
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   Using the Laravel v9.0 framework to build a
+    backend system that provides API endpoints.
+-   Using the ReactJs v17.0 library to build a frontend system as a single page application (SPA) for the site.
+-   Use <a href="https://laravel.com/docs/9.x/sanctum#introduction" style="color: white"><u>Laravel Sanctum</u></a> package - #SPA Authentication
+-   Using PostgreSQL for database.
+-   Using the Boostrap v4.0 framework to build
+    responsive for the site
+-   Besides using those technical requirements as
+    mandatory, you might have select others.
 
-## Security Vulnerabilities
+### Prerequisites
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```sh
+composer install
+```
+
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/vothanhloc20/bookworm-app
+    ```
+2. Configure .env:
+
+    ```env
+     DB_CONNECTION=YOUR_DATABASE_CONNECTION
+     DB_HOST=YOUR_DATABASE_HOST
+     DB_PORT=YOUR_DATABASE_PORT
+
+     DB_DATABASE=YOUR_DATABASE_NAME
+     DB_USERNAME=YOUR_DATABASE_USERNAME
+     DB_PASSWORD=YOUR_DATABASE_PASSWORD
+    ```
+
+3. Generate app key by running command:
+
+    ```sh
+    php artisan key:generate
+    ```
+
+4. Make sure Apache/Nginx & PostgreSQL are running
+   on your local machine
+5. Migrate & seed database by running command:
+    ```sh
+    php artisan migrate:fresh --seed
+    ```
+6. Running app:
+    ```sh
+    php artisan serve
+    ```
+
+<br />
+
+## Site Map
+
+![Sitemap][app-site-map]
+
+<!-- LICENSE -->
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+## Contact
+
+ThanhLocVo - [@LinkedIn](https://www.linkedin.com/in/vo-thanh-loc/) - vothanhloc20@gmail.com
+
+Project Link: [https://github.com/vothanhloc20/bookworm-app](https://github.com/vothanhloc20/bookworm-app)
+
+[app-screenshot]: resources/assets/screenshot_shop.png
+[app-site-map]: resources/assets/sitemap.png
+[laravel.com-shields]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[laravel.com-url]: https://laravel.com
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react.js-url]: https://reactjs.org/
+[bootstrap.com-shields]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[bootstrap.com-url]: https://getbootstrap.com
+[postgresql.org-shields]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[postgresql.org-url]: https://www.postgresql.org/
