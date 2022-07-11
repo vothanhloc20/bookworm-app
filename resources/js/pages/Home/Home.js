@@ -10,6 +10,7 @@ import {
 
 import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import { FaAngleRight } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import RenderOnFeatured from "../../components/layouts/Home/Common/RenderOnFeatured.js";
 import RenderOnSale from "../../components/layouts/Home/Common/RenderOnSale.js";
@@ -53,6 +54,10 @@ class Home extends React.Component {
     render() {
         return (
             <main>
+                <Helmet>
+                    <title>Home | Bookworm</title>
+                </Helmet>
+
                 <section className="mb-5">
                     <Row className="align-items-center mb-4">
                         <Col xs={6} className="app-card-padding">

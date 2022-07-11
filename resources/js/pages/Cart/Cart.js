@@ -4,10 +4,10 @@ import { Col, Row } from "react-bootstrap";
 
 import CartList from "../../components/layouts/Cart/CartList.js";
 import CartTotals from "../../components/layouts/Cart/CartTotals.js";
+import { Helmet } from "react-helmet";
 import Notiflix from "notiflix";
 import Swal from "sweetalert2";
 import { Toast } from "../../utils/toast.js";
-import { boolean } from "yup";
 import { connect } from "react-redux";
 import { deleteKeyValue } from "../../utils/deleteKeyValue.js";
 import { mapStateToProps } from "../../utils/useSelector.js";
@@ -268,6 +268,10 @@ class Cart extends React.Component {
     render() {
         return (
             <main>
+                <Helmet>
+                    <title>Cart | Bookworm</title>
+                </Helmet>
+
                 <section>
                     <p className="font-weight-bold font-20px">
                         Your Cart:{" "}

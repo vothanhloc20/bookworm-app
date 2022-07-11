@@ -6,6 +6,7 @@ import {
     getReviewByBookId,
 } from "../../adapters/ProductAdapter/ProductAdapter.js";
 
+import { Helmet } from "react-helmet";
 import RenderAddToCart from "../../components/layouts/Product/Common/RenderAddToCart.js";
 import RenderCustomerReviews from "../../components/layouts/Product/Common/RenderCustomerReviews.js";
 import RenderFormReview from "../../components/layouts/Product/Common/RenderFormReview.js";
@@ -229,6 +230,15 @@ class Product extends React.Component {
     render() {
         return (
             <main>
+                {this.props.product.detail_book.length > 0 && (
+                    <Helmet>
+                        <title>
+                            {this.props.product.detail_book[0].book_title} |
+                            Bookworm
+                        </title>
+                    </Helmet>
+                )}
+
                 <section>
                     {this.props.product.detail_book.length === 0 ? (
                         <div className="app-skeleton">

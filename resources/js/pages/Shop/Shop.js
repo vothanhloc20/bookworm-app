@@ -10,6 +10,7 @@ import ButtonSkeleton from "../../components/base/Skeleton/ButtonSkeleton.js";
 import Dropdown from "../../components/base/Dropdown/Dropdown.js";
 import { FaFilter } from "react-icons/fa";
 import FilterDrawer from "../../components/base/Drawer/FilterDrawer.js";
+import { Helmet } from "react-helmet";
 import RenderBookData from "../../components/layouts/Shop/Common/RenderBookData.js";
 import RenderCurrentValueFilter from "../../components/layouts/Shop/Common/RenderCurrentValueFilter.js";
 import RenderFilterData from "../../components/layouts/Shop/Common/RenderFilterData.js";
@@ -201,6 +202,10 @@ class Shop extends React.Component {
     render() {
         return (
             <main>
+                <Helmet>
+                    <title>Shop | Bookworm</title>
+                </Helmet>
+
                 <section>
                     <div
                         className={`d-flex ${
